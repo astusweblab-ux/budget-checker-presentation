@@ -1,352 +1,489 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Budget Checker 2.0 — Инвестиционная презентация</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #ffffff;
-            color: #1a1a2e;
-            line-height: 1.5;
-        }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: #ffffff;
+        color: #1a1a2e;
+        line-height: 1.5;
+      }
 
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 48px 24px;
-        }
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 48px 24px;
+      }
 
-        /* Типографика */
-        h1 {
-            font-size: 42px;
-            font-weight: 700;
-            margin-bottom: 16px;
-            letter-spacing: -0.02em;
-        }
+      h1 {
+        font-size: 42px;
+        font-weight: 700;
+        margin-bottom: 16px;
+        letter-spacing: -0.02em;
+      }
 
-        h2 {
-            font-size: 28px;
-            font-weight: 600;
-            margin: 48px 0 20px 0;
-            padding-bottom: 8px;
-            border-bottom: 3px solid #2c7da0;
-            display: inline-block;
-        }
+      h2 {
+        font-size: 28px;
+        font-weight: 600;
+        margin: 48px 0 20px 0;
+        padding-bottom: 8px;
+        border-bottom: 3px solid #2c7da0;
+        display: inline-block;
+      }
 
-        h3 {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 16px;
-            color: #2c7da0;
-        }
+      h3 {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 16px;
+        color: #2c7da0;
+      }
 
-        .subhead {
-            font-size: 18px;
-            color: #4a5568;
-            margin-bottom: 32px;
-            max-width: 800px;
-        }
+      .subhead {
+        font-size: 18px;
+        color: #4a5568;
+        margin-bottom: 14px;
+        max-width: 800px;
+      }
 
-        /* Компоненты */
+      .note {
+        font-size: 14px;
+        color: #64748b;
+        margin-bottom: 32px;
+        max-width: 900px;
+      }
+
+      .note a {
+        color: #2c7da0;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(44, 125, 160, 0.35);
+      }
+      .note a:hover {
+        border-bottom-color: rgba(44, 125, 160, 0.8);
+      }
+
+      .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+        margin: 32px 0;
+      }
+
+      .card {
+        background: #f8f9fa;
+        border-radius: 16px;
+        padding: 24px;
+        border: 1px solid #e2e8f0;
+      }
+
+      .card-dark {
+        background: #1a1a2e;
+        color: white;
+        border: none;
+      }
+
+      .card-dark h3 {
+        color: #61dafb;
+      }
+
+      .card-dark .text-muted {
+        color: #a0aec0;
+      }
+
+      .stat {
+        font-size: 48px;
+        font-weight: 700;
+        color: #2c7da0;
+        margin-bottom: 8px;
+      }
+
+      .stat-label {
+        font-size: 14px;
+        color: #4a5568;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .badge {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .badge-green {
+        background: #e6f7e6;
+        color: #2e7d32;
+      }
+
+      .badge-yellow {
+        background: #fff3e0;
+        color: #e65100;
+      }
+
+      .badge-blue {
+        background: #e3f2fd;
+        color: #1565c0;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 24px 0;
+      }
+
+      th,
+      td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #e2e8f0;
+      }
+
+      th {
+        background: #f1f5f9;
+        font-weight: 600;
+      }
+
+      .text-muted {
+        color: #64748b;
+        font-size: 14px;
+      }
+
+      hr {
+        margin: 48px 0;
+        border: none;
+        border-top: 1px solid #e2e8f0;
+      }
+
+      @media (max-width: 768px) {
         .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 32px;
-            margin: 32px 0;
+          grid-template-columns: 1fr;
         }
-
-        .card {
-            background: #f8f9fa;
-            border-radius: 16px;
-            padding: 24px;
-            border: 1px solid #e2e8f0;
+        h1 {
+          font-size: 32px;
         }
-
-        .card-dark {
-            background: #1a1a2e;
-            color: white;
-            border: none;
-        }
-
-        .card-dark h3 {
-            color: #61dafb;
-        }
-
-        .card-dark .text-muted {
-            color: #a0aec0;
-        }
-
-        .stat {
-            font-size: 48px;
-            font-weight: 700;
-            color: #2c7da0;
-            margin-bottom: 8px;
-        }
-
-        .stat-label {
-            font-size: 14px;
-            color: #4a5568;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .badge-green {
-            background: #e6f7e6;
-            color: #2e7d32;
-        }
-
-        .badge-yellow {
-            background: #fff3e0;
-            color: #e65100;
-        }
-
-        .badge-blue {
-            background: #e3f2fd;
-            color: #1565c0;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 24px 0;
-        }
-
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        th {
-            background: #f1f5f9;
-            font-weight: 600;
-        }
-
-        .text-muted {
-            color: #64748b;
-            font-size: 14px;
-        }
-
-        hr {
-            margin: 48px 0;
-            border: none;
-            border-top: 1px solid #e2e8f0;
-        }
-
-        @media (max-width: 768px) {
-            .grid-2 {
-                grid-template-columns: 1fr;
-            }
-            h1 {
-                font-size: 32px;
-            }
-        }
+      }
     </style>
-</head>
-<body>
-<div class="container">
-
-    <!-- Шапка -->
-    <h1>Budget Checker 2.0</h1>
-    <div class="subhead">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Budget Checker 2.0</h1>
+      <div class="subhead">
         Платформа для автоматической проверки строительных смет и сравнения цен.
-        <br>Прозрачность рынка стройматериалов и услуг.
-    </div>
+        <br />
+        Прозрачность рынка стройматериалов и услуг.
+      </div>
+      <div class="note">
+        Это «живой» статус проекта: обновляйте блоки “Что уже сделано” и дату — чтобы презентация отражала реальный
+        прогресс. Публичная версия:
+        <a href="https://astusweblab-ux.github.io/budget-checker-presentation/" target="_blank" rel="noopener noreferrer"
+          >astusweblab-ux.github.io/budget-checker-presentation/</a
+        >
+      </div>
 
-    <!-- СУТЬ ПРОЕКТА — что это -->
-    <h2>Что это за проект</h2>
-    <div class="grid-2">
+      <h2>Что это за проект</h2>
+      <div class="grid-2">
         <div class="card">
-            <h3>Проблема</h3>
-            <p style="margin-bottom: 16px;">Любой, кто делает ремонт или строит дом, сталкивается с:</p>
-            <ul style="padding-left: 20px; color: #2d3748;">
-                <li>Непрозрачные сметы от подрядчиков — непонятно, реальная цена или завышена</li>
-                <li>Сравнение цен в магазинах вручную занимает 3-6 часов на одну смету</li>
-                <li>Нет инструмента, который показывает рыночную цену на конкретную позицию</li>
-                <li>Поставщики теряют клиентов, потому что их невозможно сравнить с конкурентами</li>
-            </ul>
+          <h3>Проблема</h3>
+          <p style="margin-bottom: 16px">Любой, кто делает ремонт или строит дом, сталкивается с:</p>
+          <ul style="padding-left: 20px; color: #2d3748">
+            <li>Непрозрачные сметы от подрядчиков — непонятно, реальная цена или завышена</li>
+            <li>Сравнение цен в магазинах вручную занимает 3-6 часов на одну смету</li>
+            <li>Нет инструмента, который показывает рыночную цену на конкретную позицию</li>
+            <li>Поставщики теряют клиентов, потому что их невозможно сравнить с конкурентами</li>
+          </ul>
         </div>
         <div class="card card-dark">
-            <h3>Решение</h3>
-            <p style="margin-bottom: 16px;">Budget Checker 2.0 — автоматическая система:</p>
-            <ul style="padding-left: 20px;">
-                <li>Загрузил смету (Excel, CSV, PDF) → система распознала строки → нашла цены в реальных магазинах</li>
-                <li>Показывает: где цена завышена, где можно сэкономить, какие позиции спорные</li>
-                <li>Объясняет каждое совпадение — почему выбран именно этот товар</li>
-                <li>Магазины получают канал продаж — их предложения видят тысячи пользователей</li>
-            </ul>
+          <h3>Решение</h3>
+          <p style="margin-bottom: 16px">Budget Checker 2.0 — автоматическая система:</p>
+          <ul style="padding-left: 20px">
+            <li>
+              Загрузил смету (Excel/CSV сейчас; PDF/OCR — по roadmap) → система распознала строки → нашла цены в реальных
+              магазинах
+            </li>
+            <li>Показывает: где цена завышена, где можно сэкономить, какие позиции спорные</li>
+            <li>Объясняет каждое совпадение — почему выбран именно этот товар</li>
+            <li>Магазины получают канал продаж — их предложения видят целевые пользователи</li>
+          </ul>
         </div>
-    </div>
+      </div>
 
-    <!-- КОМУ ЭТО НУЖНО -->
-    <h2>Кому это нужно</h2>
-    <table>
+      <h2>Кому это нужно</h2>
+      <table>
         <thead>
-            <tr><th>Кто</th><th>Проблема</th><th>Что даёт Budget Checker</th></tr>
+          <tr>
+            <th>Кто</th>
+            <th>Проблема</th>
+            <th>Что даёт Budget Checker</th>
+          </tr>
         </thead>
         <tbody>
-            <tr><td>Частные лица (ремонт/стройка)</td><td>Не знают реальных цен, переплачивают</td><td>Проверяют смету за 2 минуты, видят где экономия</td></tr>
-            <tr><td>Подрядчики (строительные бригады)</td><td>Клиенты не доверяют сметам</td><td>Подтверждают свои цены рыночными данными → доверие</td></tr>
-            <tr><td>Застройщики / девелоперы</td><td>Тендеры и закупки — ручной ад</td><td>Автоматическое сравнение поставщиков</td></tr>
-            <tr><td>Магазины стройматериалов</td><td>Трафик падает, клиенты уходят в другие сети</td><td>Канал привлечения — их цены видят целевые покупатели</td></tr>
+          <tr>
+            <td>Частные лица (ремонт/стройка)</td>
+            <td>Не знают реальных цен, переплачивают</td>
+            <td>Проверяют смету за минуты, видят где экономия и альтернативы</td>
+          </tr>
+          <tr>
+            <td>Подрядчики (строительные бригады)</td>
+            <td>Клиенты не доверяют сметам</td>
+            <td>Подтверждают свои расчёты рыночными данными → доверие</td>
+          </tr>
+          <tr>
+            <td>Застройщики / девелоперы</td>
+            <td>Тендеры и закупки — ручной ад</td>
+            <td>Быстрое сравнение поставщиков и контроль цен по позициям</td>
+          </tr>
+          <tr>
+            <td>Магазины стройматериалов</td>
+            <td>Трафик падает, клиенты уходят в другие сети</td>
+            <td>Канал привлечения — их цены видят целевые покупатели</td>
+          </tr>
         </tbody>
-    </table>
+      </table>
 
-    <!-- РЫНОК — цифры -->
-    <h2>Рынок и возможность</h2>
-    <div class="grid-2">
+      <h2>Рынок и возможность</h2>
+      <div class="grid-2">
         <div class="card">
-            <div class="stat">800 000+</div>
-            <div class="stat-label">ремонтов и строек в Украине в год (оценка)</div>
-            <p class="text-muted" style="margin-top: 16px;">Каждый — потенциальный пользователь</p>
+          <div class="stat">800 000+</div>
+          <div class="stat-label">ремонтов и строек в Украине в год (оценка)</div>
+          <p class="text-muted" style="margin-top: 16px">Каждый — потенциальный пользователь</p>
         </div>
         <div class="card">
-            <div class="stat">50-200 тыс. грн</div>
-            <div class="stat-label">средний чек на материалы для ремонта</div>
-            <p class="text-muted" style="margin-top: 16px;">Потенциальная экономия 15-30%</p>
+          <div class="stat">50-200 тыс. грн</div>
+          <div class="stat-label">средний чек на материалы для ремонта</div>
+          <p class="text-muted" style="margin-top: 16px">Потенциальная экономия 15-30%</p>
         </div>
         <div class="card">
-            <div class="stat">30-60 млрд грн</div>
-            <div class="stat-label">розничный рынок стройматериалов (год)</div>
-            <p class="text-muted" style="margin-top: 16px;">2-3% комиссия с транзакций → ₴600-1800 млн рынок</p>
+          <div class="stat">30-60 млрд грн</div>
+          <div class="stat-label">розничный рынок стройматериалов (год, оценка)</div>
+          <p class="text-muted" style="margin-top: 16px">2-3% комиссия с транзакций → ₴600-1800 млн рынок</p>
         </div>
         <div class="card">
-            <div class="stat">Epicentr + Nova Liniya</div>
-            <div class="stat-label">первые интеграции (50%+ рынка)</div>
-            <p class="text-muted" style="margin-top: 16px;">Остальные сети подключатся за ними</p>
+          <div class="stat">Epicentr + Nova Liniya</div>
+          <div class="stat-label">первые интеграции (строительный фокус)</div>
+          <p class="text-muted" style="margin-top: 16px">Остальные сети подключатся за ними</p>
         </div>
-    </div>
+      </div>
 
-    <!-- ЧТО УЖЕ СДЕЛАНО -->
-    <h2>Что уже сделано (текущий статус)</h2>
-    <div class="card" style="margin-bottom: 24px;">
-        <p><span class="badge badge-green" style="margin-right: 12px;">ГОТОВО</span> <strong>Технический фундамент</strong> — Backend (FastAPI), Frontend (Next.js), база данных, миграции</p>
-        <p><span class="badge badge-green" style="margin-right: 12px;">ГОТОВО</span> <strong>Auth и роли</strong> — регистрация, email-верификация, RBAC, организации, аудит</p>
-        <p><span class="badge badge-green" style="margin-right: 12px;">ГОТОВО</span> <strong>Материальный каталог</strong> — магазины могут загружать каталоги (CSV/XLSX)</p>
-        <p><span class="badge badge-green" style="margin-right: 12px;">ГОТОВО</span> <strong>Compare-движок</strong> — сравнение материалов, explainability, флаг "спорная строка"</p>
-        <p><span class="badge badge-yellow" style="margin-right: 12px;">В РАБОТЕ</span> <strong>Интеграции</strong> — Epicentr (адаптер готов), Nova Liniya (в плане)</p>
-        <p><span class="badge badge-blue" style="margin-right: 12px;">В ПЛАНЕ</span> <strong>Услуги подрядчиков, аналитика, монетизация</strong></p>
-    </div>
+      <h2>Что уже сделано (текущий статус)</h2>
+      <div class="card" style="margin-bottom: 24px">
+        <p>
+          <span class="badge badge-green" style="margin-right: 12px">ГОТОВО</span>
+          <strong>Технический фундамент</strong> — Backend (FastAPI), Frontend (Next.js), база данных, миграции
+        </p>
+        <p>
+          <span class="badge badge-green" style="margin-right: 12px">ГОТОВО</span>
+          <strong>Auth и роли</strong> — регистрация, email-верификация, RBAC, организации, аудит
+        </p>
+        <p>
+          <span class="badge badge-green" style="margin-right: 12px">ГОТОВО</span>
+          <strong>Материальный каталог</strong> — магазины могут загружать каталоги (CSV/XLSX), есть price snapshots и
+          currency rates
+        </p>
+        <p>
+          <span class="badge badge-green" style="margin-right: 12px">ГОТОВО</span>
+          <strong>Compare-движок</strong> — сравнение материалов, explainability, флаг "спорная строка"
+        </p>
+        <p>
+          <span class="badge badge-yellow" style="margin-right: 12px">В РАБОТЕ</span>
+          <strong>Интеграции</strong> — Epicentr (адаптер готов), Nova Liniya (в плане)
+        </p>
+        <p>
+          <span class="badge badge-blue" style="margin-right: 12px">В ПЛАНЕ</span>
+          <strong>Услуги подрядчиков, аналитика, монетизация</strong>
+        </p>
+      </div>
 
-    <!-- СРАВНЕНИЕ С КОНКУРЕНТАМИ -->
-    <h2>Почему мы, а не аналоги</h2>
-    <table>
+      <h2>Почему мы, а не аналоги</h2>
+      <table>
         <thead>
-            <tr><th>Продукт</th><th>Что умеет</th><th>Чего НЕ умеет</th></tr>
+          <tr>
+            <th>Продукт</th>
+            <th>Что умеет</th>
+            <th>Чего НЕ умеет</th>
+          </tr>
         </thead>
         <tbody>
-            <tr><td><strong>Budget Checker</strong></td><td>Сметы целиком, любые списки, объяснение совпадений</td><td>—</td></tr>
-            <tr><td>Hotline / Price.ua</td><td>Сравнение конкретных товаров</td><td>Не работают со сметами, не видят контекст</td></tr>
-            <tr><td>Ручной Excel</td><td>—</td><td>Требует часов ручной работы, ошибки неизбежны</td></tr>
-            <tr><td>Сметные программы (АВК, Иліодор)</td><td>Расчёт по нормативам</td><td>Не показывают реальные цены в магазинах</td></tr>
+          <tr>
+            <td><strong>Budget Checker</strong></td>
+            <td>Сметы целиком, любые списки, объяснение совпадений</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>Hotline / Price.ua</td>
+            <td>Сравнение конкретных товаров</td>
+            <td>Не работают со сметами, не видят контекст</td>
+          </tr>
+          <tr>
+            <td>Ручной Excel</td>
+            <td>—</td>
+            <td>Требует часов ручной работы, ошибки неизбежны</td>
+          </tr>
+          <tr>
+            <td>Сметные программы (АВК и аналоги)</td>
+            <td>Расчёт по нормативам</td>
+            <td>Не показывают реальные цены в магазинах</td>
+          </tr>
         </tbody>
-    </table>
+      </table>
 
-    <!-- БИЗНЕС-МОДЕЛЬ — за что платят -->
-    <h2>Бизнес-модель (за что платят)</h2>
-    <div class="grid-2">
+      <h2>Бизнес-модель (за что платят)</h2>
+      <div class="grid-2">
         <div class="card">
-            <h3>1. Магазины и сети</h3>
-            <p>Подписка за размещение каталога + оплата за переходы/лиды (CPL/CPC).</p>
-            <p class="text-muted" style="margin-top: 8px;">Пример: Epicentr платит ₴1-3 за переход на карточку товара. 100 000 переходов в месяц → ₴100-300 тыс.</p>
+          <h3>1. Магазины и сети</h3>
+          <p>Подписка за размещение каталога + оплата за переходы/лиды (CPL/CPC).</p>
+          <p class="text-muted" style="margin-top: 8px">
+            Пример: партнер платит за переход на карточку товара. 100 000 переходов в месяц → существенный доход.
+          </p>
         </div>
         <div class="card">
-            <h3>2. Подрядчики</h3>
-            <p>Платный доступ к аналитике + продвижение в сравнении услуг.</p>
-            <p class="text-muted" style="margin-top: 8px;">Подписка от ₴1000/мес за регион.</p>
+          <h3>2. Подрядчики</h3>
+          <p>Платный доступ к аналитике + продвижение в сравнении услуг.</p>
+          <p class="text-muted" style="margin-top: 8px">Подписка от ₴1000/мес за регион.</p>
         </div>
         <div class="card">
-            <h3>3. Пользователи (Freemium)</h3>
-            <p>Базовые проверки — бесплатно. Расширенные отчёты, сохранение истории, API доступ — подписка.</p>
-            <p class="text-muted" style="margin-top: 8px;">₴200-500/мес или ₴10-30/отчёт.</p>
+          <h3>3. Пользователи (Freemium)</h3>
+          <p>Базовые проверки — бесплатно. Расширенные отчёты, сохранение истории, API доступ — подписка.</p>
+          <p class="text-muted" style="margin-top: 8px">₴200-500/мес или ₴10-30/отчёт.</p>
         </div>
         <div class="card">
-            <h3>4. B2B / Застройщики</h3>
-            <p>Корпоративные тарифы для тендерных отделов и служб закупок.</p>
-            <p class="text-muted" style="margin-top: 8px;">От ₴10 000/мес за аккаунт на компанию.</p>
+          <h3>4. B2B / Застройщики</h3>
+          <p>Корпоративные тарифы для тендерных отделов и служб закупок.</p>
+          <p class="text-muted" style="margin-top: 8px">От ₴10 000/мес за аккаунт на компанию.</p>
         </div>
-    </div>
+      </div>
 
-    <!-- ФИНАНСОВЫЙ ПЛАН (примерный) -->
-    <h2>Финансовый план (оценка)</h2>
-    <table>
-        <thead><tr><th>Показатель</th><th>Год 1 (после запуска)</th><th>Год 2</th><th>Год 3</th></tr></thead>
+      <h2>Финансовый план (оценка)</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Показатель</th>
+            <th>Год 1 (после запуска)</th>
+            <th>Год 2</th>
+            <th>Год 3</th>
+          </tr>
+        </thead>
         <tbody>
-            <tr><td>Пользователей (активных)</td><td>50 000</td><td>200 000</td><td>500 000</td></tr>
-            <tr><td>Магазинов/подрядчиков</td><td>50</td><td>200</td><td>500</td></tr>
-            <tr><td>Средний доход с пользователя (ARPU)</td><td>₴50</td><td>₴80</td><td>₴100</td></tr>
-            <tr><td>Средний доход с бизнеса</td><td>₴5000/мес</td><td>₴7000/мес</td><td>₴10 000/мес</td></tr>
-            <tr><td><strong>Годовой доход (оценка)</strong></td><td><strong>~₴6 млн</strong></td><td><strong>~₴24 млн</strong></td><td><strong>~₴72 млн</strong></td></tr>
+          <tr>
+            <td>Пользователей (активных)</td>
+            <td>50 000</td>
+            <td>200 000</td>
+            <td>500 000</td>
+          </tr>
+          <tr>
+            <td>Магазинов/подрядчиков</td>
+            <td>50</td>
+            <td>200</td>
+            <td>500</td>
+          </tr>
+          <tr>
+            <td>Средний доход с пользователя (ARPU)</td>
+            <td>₴50</td>
+            <td>₴80</td>
+            <td>₴100</td>
+          </tr>
+          <tr>
+            <td>Средний доход с бизнеса</td>
+            <td>₴5000/мес</td>
+            <td>₴7000/мес</td>
+            <td>₴10 000/мес</td>
+          </tr>
+          <tr>
+            <td><strong>Годовой доход (оценка)</strong></td>
+            <td><strong>~₴6 млн</strong></td>
+            <td><strong>~₴24 млн</strong></td>
+            <td><strong>~₴72 млн</strong></td>
+          </tr>
         </tbody>
-    </table>
-    <p class="text-muted">*Оценка консервативная, без учёта B2B-контрактов и комиссии с транзакций.</p>
+      </table>
+      <p class="text-muted">*Оценка консервативная, без учёта B2B-контрактов и комиссии с транзакций.</p>
 
-    <!-- ЧТО НУЖНО ДЛЯ ЗАПУСКА -->
-    <h2>Что нужно для запуска (инвестиции)</h2>
-    <div class="grid-2">
+      <h2>Что нужно для запуска (инвестиции)</h2>
+      <div class="grid-2">
         <div class="card">
-            <h3>Ближайший блокер (Фаза 5)</h3>
-            <p>Compare-движок готов. Нужны <strong>минимум 2 реальных источника предложений</strong>.</p>
-            <p style="margin-top: 12px;">Epicentr — адаптер готов, нужен доступ к feed/API.</p>
-            <p>Nova Liniya — нужен доступ к API.</p>
-            <p class="text-muted" style="margin-top: 16px;">Срок: 4-6 недель при наличии доступа.</p>
+          <h3>Ближайший блокер (Фаза 5)</h3>
+          <p>Compare-движок готов. Нужны <strong>минимум 2 реальных источника предложений</strong>.</p>
+          <p style="margin-top: 12px">Epicentr — адаптер готов, нужен доступ к feed/API.</p>
+          <p>Nova Liniya — нужен доступ к API.</p>
+          <p class="text-muted" style="margin-top: 16px">Срок: 4-6 недель при наличии доступа.</p>
         </div>
         <div class="card">
-            <h3>Что нужно от инвесторов</h3>
-            <ul style="padding-left: 20px;">
-                <li>Доступ к API/фидам Epicentr, Nova Liniya (партнёрство)</li>
-                <li>Финансирование: ₴500 000 - 1 000 000 на масштабирование интеграций и маркетинг</li>
-                <li>Пилотные проекты с застройщиками для B2B-тестирования</li>
-            </ul>
+          <h3>Что нужно от инвесторов</h3>
+          <ul style="padding-left: 20px">
+            <li>Доступ к API/фидам Epicentr, Nova Liniya (партнёрство)</li>
+            <li>Финансирование: ₴500 000 - 1 000 000 на масштабирование интеграций и маркетинг</li>
+            <li>Пилотные проекты с застройщиками для B2B-тестирования</li>
+          </ul>
         </div>
-    </div>
+      </div>
 
-    <!-- КЛЮЧЕВЫЕ РИСКИ -->
-    <h2>Ключевые риски и как мы их решаем</h2>
-    <table>
-        <thead><tr><th>Риск</th><th>Вероятность</th><th>Решение</th></tr></thead>
+      <h2>Ключевые риски и как мы их решаем</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Риск</th>
+            <th>Вероятность</th>
+            <th>Решение</th>
+          </tr>
+        </thead>
         <tbody>
-            <tr><td>Сети не дают доступ к API</td><td>Средняя</td><td>Crawl как fallback + публичный кабинет для загрузки каталогов</td></tr>
-            <tr><td>Нет пользователей</td><td>Низкая</td><td>Проблема есть у всех, кто делает ремонт → органический трафик + SEO под запросы по сметам</td></tr>
-            <tr><td>Конкуренты сделают быстрее</td><td>Низкая</td><td>Сравнение смет — сложная задача. У нас готовый движок и архитектура.</td></tr>
-            <tr><td>Качество данных от магазинов</td><td>Средняя</td><td>Валидация, suspicious-флаги, модерация админом</td></tr>
+          <tr>
+            <td>Сети не дают доступ к API</td>
+            <td>Средняя</td>
+            <td>Crawl как fallback + кабинет для загрузки каталогов</td>
+          </tr>
+          <tr>
+            <td>Нет пользователей</td>
+            <td>Низкая</td>
+            <td>Проблема массовая → органический трафик + партнерские пилоты</td>
+          </tr>
+          <tr>
+            <td>Качество данных от магазинов</td>
+            <td>Средняя</td>
+            <td>Валидация, suspicious-флаги, модерация админом</td>
+          </tr>
         </tbody>
-    </table>
+      </table>
 
-    <hr>
+      <hr />
 
-    <!-- КОНТАКТЫ И ССЫЛКИ -->
-    <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 24px;">
+      <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 24px">
         <div>
-            <h3 style="margin-bottom: 8px;">Документация проекта</h3>
-            <p><a href="#" style="color: #2c7da0;">MASTER_TZ.md</a> — полное техническое задание<br>
-            <a href="#" style="color: #2c7da0;">ROADMAP.md</a> — план по фазам<br>
-            <a href="#" style="color: #2c7da0;">SECURITY_BASELINE.md</a> — безопасность</p>
+          <h3 style="margin-bottom: 8px">Документация проекта</h3>
+          <p>
+            <a href="MASTER_TZ.md" target="_blank" rel="noopener noreferrer" style="color: #2c7da0">MASTER_TZ.md</a> —
+            полное техническое задание<br />
+            <a href="ROADMAP.md" target="_blank" rel="noopener noreferrer" style="color: #2c7da0">ROADMAP.md</a> — план
+            по фазам<br />
+            <a
+              href="SECURITY_BASELINE.md"
+              target="_blank"
+              rel="noopener noreferrer"
+              style="color: #2c7da0"
+              >SECURITY_BASELINE.md</a
+            >
+            — безопасность
+          </p>
         </div>
         <div>
-            <h3 style="margin-bottom: 8px;">Статус</h3>
-            <p>Актуально на: 13 апреля 2026<br>
-            Текущая фаза: 5 — Интеграции торговых сетей<br>
-            Готовность: ~55%</p>
+          <h3 style="margin-bottom: 8px">Статус</h3>
+          <p>
+            Актуально на: 13 апреля 2026<br />
+            Текущая фаза: 5 — Интеграции торговых сетей<br />
+            Готовность: ~55%
+          </p>
         </div>
+      </div>
     </div>
-
-</div>
-</body>
+  </body>
 </html>
+
