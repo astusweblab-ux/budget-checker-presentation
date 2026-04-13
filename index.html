@@ -41,8 +41,8 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background: #ffffff;
-            color: #1a1a2e;
+            background: #0d1117;
+            color: #e6edf3;
             line-height: 1.6;
         }
 
@@ -73,16 +73,16 @@
             font-size: 21px;
             font-weight: 600;
             margin-bottom: 14px;
-            color: #2c7da0;
+            color: #58a6ff;
         }
 
         p {
-            color: #334155;
+            color: #c9d1d9;
         }
 
         .subhead {
             font-size: 19px;
-            color: #475569;
+            color: #8b949e;
             margin-bottom: 24px;
             max-width: 880px;
         }
@@ -95,8 +95,8 @@
             display: inline-block;
             padding: 8px 14px;
             border-radius: 999px;
-            background: #eaf4f8;
-            color: #1d5e7c;
+            background: #1c3040;
+            color: #58a6ff;
             font-size: 12px;
             font-weight: 700;
             letter-spacing: 0.08em;
@@ -105,8 +105,8 @@
         }
 
         .hero-summary {
-            background: linear-gradient(135deg, #f7fbfd 0%, #eef6fb 100%);
-            border: 1px solid #d7e8f1;
+            background: linear-gradient(135deg, #161b22 0%, #1c2940 100%);
+            border: 1px solid #21262d;
             border-radius: 20px;
             padding: 24px;
             margin-top: 28px;
@@ -114,6 +114,7 @@
 
         .hero-summary p {
             font-size: 17px;
+            color: #c9d1d9;
         }
 
         .grid-2 {
@@ -138,16 +139,16 @@
         }
 
         .card {
-            background: #f8fafc;
+            background: #161b22;
             border-radius: 18px;
             padding: 24px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid #30363d;
         }
 
         .card-dark {
-            background: #1a1a2e;
-            color: #ffffff;
-            border: none;
+            background: #010409;
+            color: #e6edf3;
+            border: 1px solid #30363d;
         }
 
         .card-dark h3 {
@@ -156,29 +157,30 @@
 
         .card-dark p,
         .card-dark li {
-            color: #dbeafe;
+            color: #c9d1d9;
         }
 
         .card-accent {
-            background: #fff7f2;
-            border: 1px solid #f4d6c6;
+            background: #1c1810;
+            border: 1px solid #3d2b1a;
         }
 
         .card-soft {
-            background: #f4f8fb;
+            background: #1c2128;
+            border: 1px solid #30363d;
         }
 
         .stat {
             font-size: 42px;
             font-weight: 700;
-            color: #2c7da0;
+            color: #58a6ff;
             margin-bottom: 8px;
             line-height: 1.05;
         }
 
         .stat-label {
             font-size: 14px;
-            color: #4a5568;
+            color: #8b949e;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
@@ -193,18 +195,18 @@
         }
 
         .badge-green {
-            background: #e6f7e6;
-            color: #2e7d32;
+            background: #0d2418;
+            color: #3fb950;
         }
 
         .badge-yellow {
-            background: #fff3e0;
-            color: #e65100;
+            background: #2d1f0d;
+            color: #f0883e;
         }
 
         .badge-blue {
-            background: #e3f2fd;
-            color: #1565c0;
+            background: #0d2040;
+            color: #58a6ff;
         }
 
         .status-list p {
@@ -218,8 +220,8 @@
         }
 
         .step {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
+            background: #161b22;
+            border: 1px solid #30363d;
             border-radius: 18px;
             padding: 20px;
         }
@@ -240,7 +242,7 @@
 
         ul {
             padding-left: 20px;
-            color: #334155;
+            color: #c9d1d9;
         }
 
         li + li {
@@ -251,7 +253,7 @@
             width: 100%;
             border-collapse: collapse;
             margin: 24px 0;
-            border: 1px solid #e2e8f0;
+            border: 1px solid #30363d;
             border-radius: 18px;
             overflow: hidden;
         }
@@ -260,14 +262,15 @@
         td {
             padding: 14px 12px;
             text-align: left;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid #30363d;
             vertical-align: top;
+            color: #c9d1d9;
         }
 
         th {
-            background: #f1f5f9;
+            background: #161b22;
             font-weight: 700;
-            color: #1e293b;
+            color: #e6edf3;
         }
 
         tr:last-child td {
@@ -276,12 +279,12 @@
 
         .section-text {
             max-width: 980px;
-            color: #475569;
+            color: #8b949e;
             font-size: 17px;
         }
 
         .text-muted {
-            color: #64748b;
+            color: #8b949e;
             font-size: 14px;
         }
 
@@ -294,7 +297,7 @@
         }
 
         a {
-            color: #2c7da0;
+            color: #58a6ff;
             text-decoration: none;
         }
 
@@ -305,7 +308,52 @@
         hr {
             margin: 48px 0;
             border: none;
-            border-top: 1px solid #e2e8f0;
+            border-top: 1px solid #30363d;
+        }
+
+        /* ── Progress bar: development phases ── */
+        .phases {
+            display: grid;
+            gap: 10px;
+            margin: 24px 0;
+        }
+
+        .phase-row {
+            display: grid;
+            grid-template-columns: 270px 1fr;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .phase-label {
+            font-size: 13px;
+            color: #8b949e;
+        }
+
+        .phase-bar-track {
+            height: 26px;
+            background: #21262d;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .phase-fill {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+            border-radius: 6px;
+        }
+
+        .phase-done   { background: #238636; color: #ffffff; }
+        .phase-active { background: #1f6feb; color: #ffffff; }
+        .phase-planned {
+            background: #21262d;
+            color: #6e7681;
+            width: 100% !important;
         }
 
         @media (max-width: 900px) {
@@ -327,6 +375,11 @@
 
             h2 {
                 font-size: 26px;
+            }
+
+            .phase-row {
+                grid-template-columns: 1fr;
+                gap: 6px;
             }
         }
     </style>
@@ -351,6 +404,50 @@
             </p>
         </div>
     </section>
+
+    <h2>Прогресс разработки</h2>
+    <div class="phases">
+        <div class="phase-row">
+            <span class="phase-label">Фаза 0 — Продуктовый контракт</span>
+            <div class="phase-bar-track"><div class="phase-fill phase-done" style="width:100%">✅ 100% — завершена</div></div>
+        </div>
+        <div class="phase-row">
+            <span class="phase-label">Фаза 1 — Технический фундамент</span>
+            <div class="phase-bar-track"><div class="phase-fill phase-done" style="width:100%">✅ 100% — завершена</div></div>
+        </div>
+        <div class="phase-row">
+            <span class="phase-label">Фаза 2 — Auth, роли и кабинеты</span>
+            <div class="phase-bar-track"><div class="phase-fill phase-done" style="width:100%">✅ 100% — завершена</div></div>
+        </div>
+        <div class="phase-row">
+            <span class="phase-label">Фаза 3 — Материальный каталог V1</span>
+            <div class="phase-bar-track"><div class="phase-fill phase-done" style="width:100%">✅ 100% — завершена</div></div>
+        </div>
+        <div class="phase-row">
+            <span class="phase-label">Фаза 4 — Матчинг и compare материалов</span>
+            <div class="phase-bar-track"><div class="phase-fill phase-done" style="width:100%">✅ 100% — baseline готов</div></div>
+        </div>
+        <div class="phase-row">
+            <span class="phase-label">Фаза 5 — Интеграции торговых сетей</span>
+            <div class="phase-bar-track"><div class="phase-fill phase-active" style="width:35%">🔄 35%</div></div>
+        </div>
+        <div class="phase-row">
+            <span class="phase-label">Фаза 6 — Каталог услуг и compare работ</span>
+            <div class="phase-bar-track"><div class="phase-fill phase-planned">⬜ запланировано</div></div>
+        </div>
+        <div class="phase-row">
+            <span class="phase-label">Фаза 7 — Полная админка</span>
+            <div class="phase-bar-track"><div class="phase-fill phase-planned">⬜ запланировано</div></div>
+        </div>
+        <div class="phase-row">
+            <span class="phase-label">Фаза 8 — Отчёты, лиды и аналитика</span>
+            <div class="phase-bar-track"><div class="phase-fill phase-planned">⬜ запланировано</div></div>
+        </div>
+        <div class="phase-row">
+            <span class="phase-label">Фаза 9 — Production hardening</span>
+            <div class="phase-bar-track"><div class="phase-fill phase-planned">⬜ запланировано</div></div>
+        </div>
+    </div>
 
     <h2>Что это за проект</h2>
     <p class="section-text">
@@ -669,7 +766,7 @@
         <p><span class="badge badge-green">ГОТОВО</span> <strong>Загрузка каталогов магазинов</strong> — уже работает загрузка CSV/XLSX с ценами, наличием и ссылками на товары.</p>
         <p><span class="badge badge-green">ГОТОВО</span> <strong>Сравнение материалов</strong> — пользователь уже может загрузить смету, увидеть найденные позиции, спорные строки и ручную корректировку.</p>
         <p><span class="badge badge-green">ГОТОВО</span> <strong>Первый живой пользовательский сценарий</strong> — есть публичная страница проверки сметы, partner import page и admin page для модерации магазинов.</p>
-        <p><span class="badge badge-yellow">В РАБОТЕ</span> <strong>Автоматические интеграции</strong> — выбран первый приоритет: Epicentr и Nova Liniya. Для Epicentr уже есть адаптер и техническая основа синхронизации.</p>
+        <p><span class="badge badge-yellow">В РАБОТЕ</span> <strong>Автоматические интеграции</strong> — уже собрана техническая основа для Epicentr и Nova Liniya: есть адаптеры, роуты синхронизации, фоновые задачи и тестовые фикстуры. Следующий шаг — подключить реальные источники данных и довести обновления до стабильной работы.</p>
         <p><span class="badge badge-blue">СЛЕДУЮЩИЙ ЭТАП</span> <strong>Сравнение стоимости работ</strong> — после материалов проект расширяется на прайсы подрядчиков и сравнение услуг.</p>
         <p><span class="badge badge-blue">СЛЕДУЮЩИЙ ЭТАП</span> <strong>Коммерческий контур</strong> — платные кабинеты, аналитика, лиды, отчёты и B2B-сценарии.</p>
         <p><span class="badge badge-blue">СЛЕДУЮЩИЙ ЭТАП</span> <strong>Production hardening</strong> — мониторинг, стабильность, отчётность, операционные панели и полный контур эксплуатации.</p>
@@ -861,9 +958,9 @@
         </div>
         <div>
             <h3 style="margin-bottom: 8px;">Текущий статус</h3>
-            <p>Актуально на: 13 апреля 2026</p>
-            <p>Текущая фаза: 5 — интеграции торговых сетей</p>
-            <p>Состояние проекта: рабочее ядро уже собрано, следующий шаг — масштабирование данных и коммерческий запуск</p>
+            <p>Актуально на: 14 апреля 2026</p>
+            <p>Текущая фаза: 5 — интеграции торговых сетей 🔄</p>
+            <p>Завершено фаз: 0–4 (50% плана). В Phase 5 уже есть foundation для Epicentr и Nova Liniya, следующий шаг — реальные данные, стабильные обновления и первые коммерческие пилоты.</p>
         </div>
     </div>
 
