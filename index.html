@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Budget Checker 2.0 — Презентация и Статус</title>
+    <meta
+      name="description"
+      content="Короткая презентация Budget Checker 2.0, текущая стадия разработки, что сделано и что осталось."
+    />
+    <style>
+      :root {
+        --bg0: #0b1220;
+        --bg1: #0f1a30;
+        --card: rgba(255, 255, 255, 0.06);
+        --card2: rgba(255, 255, 255, 0.04);
+        --text: rgba(255, 255, 255, 0.92);
+        --muted: rgba(255, 255, 255, 0.72);
+        --muted2: rgba(255, 255, 255, 0.56);
+        --line: rgba(255, 255, 255, 0.1);
+        --good: #49d17c;
+        --warn: #f1c65d;
+        --todo: #a7b1ff;
+        --danger: #ff6b6b;
+        --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
+          monospace;
+        --body: "Segoe UI Variable", "Segoe UI", system-ui, -apple-system, sans-serif;
+        --title: Georgia, "Times New Roman", Times, serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        font-family: var(--body);
+        color: var(--text);
+        background: radial-gradient(1200px 600px at 20% 0%, rgba(73, 209, 124, 0.18), transparent 60%),
+          radial-gradient(900px 500px at 85% 10%, rgba(167, 177, 255, 0.22), transparent 55%),
+          radial-gradient(800px 500px at 70% 90%, rgba(241, 198, 93, 0.14), transparent 60%),
+          linear-gradient(180deg, var(--bg0), var(--bg1));
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+      }
+      a:hover {
+        border-bottom-color: rgba(255, 255, 255, 0.5);
+      }
+
+      .page {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 28px 18px 56px;
+      }
+
+      header {
+        display: grid;
+        gap: 12px;
+        padding: 22px 22px;
+        border: 1px solid var(--line);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.04));
+        border-radius: 18px;
+      }
+
+      header h1 {
+        margin: 0;
+        font-family: var(--title);
+        font-weight: 700;
+        letter-spacing: 0.2px;
+        font-size: 34px;
+        line-height: 1.1;
+      }
+
+      header p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.5;
+        max-width: 78ch;
+      }
+
+      .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+        margin-top: 6px;
+      }
+
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1;
+        white-space: nowrap;
+      }
+
+      .tag strong {
+        color: var(--text);
+        font-weight: 700;
+      }
+
+      .tag.done strong {
+        color: var(--good);
+      }
+      .tag.progress strong {
+        color: var(--warn);
+      }
+      .tag.next strong {
+        color: var(--todo);
+      }
+
+      main {
+        display: grid;
+        gap: 14px;
+        margin-top: 14px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 14px;
+      }
+
+      @media (max-width: 960px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .card {
+        border: 1px solid var(--line);
+        background: var(--card);
+        border-radius: 18px;
+        padding: 18px 18px;
+      }
+
+      .card h2 {
+        margin: 0 0 10px;
+        font-size: 16px;
+        letter-spacing: 0.2px;
+      }
+
+      .card p {
+        margin: 0 0 10px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      ul {
+        margin: 10px 0 0;
+        padding-left: 18px;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      code {
+        font-family: var(--mono);
+        font-size: 0.95em;
+        color: rgba(255, 255, 255, 0.88);
+        background: rgba(0, 0, 0, 0.25);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        padding: 2px 6px;
+        border-radius: 8px;
+      }
+
+      .kv {
+        display: grid;
+        grid-template-columns: 160px 1fr;
+        gap: 8px 12px;
+        margin-top: 10px;
+      }
+      .kv div {
+        padding: 10px 12px;
+        border: 1px solid var(--line);
+        background: var(--card2);
+        border-radius: 14px;
+      }
+      .kv .k {
+        color: var(--muted2);
+        font-size: 13px;
+      }
+      .kv .v {
+        color: var(--text);
+        font-weight: 600;
+      }
+      .kv .mono {
+        font-family: var(--mono);
+        font-weight: 600;
+      }
+
+      details {
+        border: 1px solid var(--line);
+        background: rgba(0, 0, 0, 0.16);
+        border-radius: 16px;
+        padding: 12px 12px;
+      }
+      details + details {
+        margin-top: 10px;
+      }
+      summary {
+        cursor: pointer;
+        list-style: none;
+        display: flex;
+        gap: 10px;
+        align-items: baseline;
+      }
+      summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .phase-title {
+        font-weight: 700;
+      }
+      .phase-state {
+        font-size: 12px;
+        color: var(--muted2);
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 2px 8px;
+        white-space: nowrap;
+      }
+      .phase-state.done {
+        color: rgba(73, 209, 124, 0.95);
+        border-color: rgba(73, 209, 124, 0.35);
+      }
+      .phase-state.progress {
+        color: rgba(241, 198, 93, 0.95);
+        border-color: rgba(241, 198, 93, 0.35);
+      }
+      .phase-state.todo {
+        color: rgba(167, 177, 255, 0.95);
+        border-color: rgba(167, 177, 255, 0.35);
+      }
+
+      .small {
+        font-size: 13px;
+        color: var(--muted2);
+        line-height: 1.6;
+      }
+
+      footer {
+        margin-top: 16px;
+        color: var(--muted2);
+        font-size: 13px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      @media print {
+        body {
+          background: #ffffff;
+          color: #111111;
+        }
+        a {
+          border: 0;
+          text-decoration: underline;
+        }
+        .card,
+        header,
+        details {
+          background: #ffffff;
+          border-color: rgba(0, 0, 0, 0.14);
+        }
+        .tag {
+          background: #ffffff;
+          border-color: rgba(0, 0, 0, 0.14);
+          color: #333333;
+        }
+        code {
+          background: #f5f5f5;
+          border-color: rgba(0, 0, 0, 0.12);
+          color: #111111;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header>
+        <h1>Budget Checker 2.0</h1>
+        <p>
+          Платформа для проверки смет и списков материалов: пользователь загружает файл или вводит строки, система
+          находит реальные предложения магазинов и показывает explainability (почему матч случился) + помечает спорные
+          строки.
+        </p>
+
+        <div class="meta">
+          <span class="tag progress"><strong>Текущая фаза:</strong> 5 — Интеграции торговых сетей</span>
+          <span class="tag done"><strong>Feature-ready:</strong> upload → compare → результат</span>
+          <span class="tag next"><strong>Блокер критерия Фазы 4:</strong> нужны 2 реальные сети</span>
+        </div>
+      </header>
+
+      <main>
+        <div class="grid">
+          <section class="card">
+            <h2>Коротко о продукте</h2>
+            <p>
+              Ценность: быстро понять «сколько реально стоит» список материалов/работ по рынку, и в каких местах смета
+              неочевидна (needs_review).
+            </p>
+            <ul>
+              <li>Публичный сценарий: загрузка сметы → polling статуса → результаты с explainability.</li>
+              <li>Merchant сценарий: загрузка каталога офферов (CSV/XLSX / ingestion adapters) → офферы участвуют в compare.</li>
+              <li>Ops/Admin сценарий: верификация магазинов и модерация статусов с audit trail.</li>
+            </ul>
+          </section>
+
+          <section class="card">
+            <h2>Текущая стадия</h2>
+            <div class="kv">
+              <div class="k">Статус</div>
+              <div class="v">Фаза 5 в работе (Epicentr first)</div>
+              <div class="k">Последний апдейт</div>
+              <div class="v mono">2026-04-13</div>
+              <div class="k">Документы</div>
+              <div class="v">
+                <a href="./ROADMAP.md">ROADMAP</a>, <a href="./MASTER_TZ.md">MASTER_TZ</a>,
+                <a href="./SECURITY_BASELINE.md">SECURITY_BASELINE</a>
+              </div>
+              <div class="k">Dev навигация</div>
+              <div class="v"><code>/dev/routes</code> + файл <a href="./DEV_ROUTES.md">DEV_ROUTES.md</a></div>
+            </div>
+            <p class="small" style="margin-top: 10px">
+              Примечание: compare-слой уже работает, но критерий готовности Фазы 4 требует минимум 2 источника с реальными
+              предложениями. Поэтому сейчас фокус — интеграции.
+            </p>
+          </section>
+        </div>
+
+        <section class="card">
+          <h2>Сквозной demo-flow (локально)</h2>
+          <ul>
+            <li>Запуск: <code>start_project.bat</code>.</li>
+            <li>Открыть: <code>http://localhost:3000/dev/routes</code> (живые URL + demo-логины).</li>
+            <li>Merchant: импорт каталога → admin: verify shop → публичный upload сметы → compare результат.</li>
+          </ul>
+        </section>
+
+        <section class="card">
+          <h2>Фазы: что сделано и что осталось</h2>
+
+          <details open>
+            <summary>
+              <span class="phase-title">Фаза 0 — Документация</span>
+              <span class="phase-state done">DONE</span>
+            </summary>
+            <ul>
+              <li>MASTER_TZ / ROADMAP / SECURITY_BASELINE зафиксированы как источник правды.</li>
+              <li>Вынесены отложенные вопросы в <code>docs/DECISIONS_PENDING.md</code>.</li>
+            </ul>
+          </details>
+
+          <details open>
+            <summary>
+              <span class="phase-title">Фаза 1 — Технический фундамент</span>
+              <span class="phase-state done">DONE</span>
+            </summary>
+            <ul>
+              <li>Backend foundation (FastAPI, SQLAlchemy, Alembic naming conventions, config, CORS).</li>
+              <li>Celery foundation (UTC, time limits) + eager-mode для dev.</li>
+              <li>Frontend foundation (Next.js по ADR 001), генерация типов из OpenAPI.</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>
+              <span class="phase-title">Фаза 2 — Auth, роли и организации</span>
+              <span class="phase-state done">DONE</span>
+            </summary>
+            <ul>
+              <li>Auth: register/login, email verification tokens + resend limits, refresh token rotation, sessions.</li>
+              <li>RBAC: system roles + org roles, guard-ы от privilege escalation и IDOR.</li>
+              <li>Организации: members, invites по email, audit trail для admin действий.</li>
+              <li>Merchant: Shop/Branch + <code>verification_status</code>, ContractorProfile foundation.</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>
+              <span class="phase-title">Фаза 3 — Материальный каталог V1</span>
+              <span class="phase-state done">DONE</span>
+            </summary>
+            <ul>
+              <li>Material catalog: categories/items + merchant retail offers.</li>
+              <li>Import pipeline: ImportJob/ImportJobRow, idempotency по <code>external_id</code> в рамках branch.</li>
+              <li>Валюта: <code>currency_rates</code>, <code>requires_currency_rate</code>, <code>price_uah</code>.</li>
+              <li>История цен: <code>retail_offer_price_snapshots</code> (пишем только при реальном изменении).</li>
+              <li>UI: partner import page + admin shop verification page.</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>
+              <span class="phase-title">Фаза 4 — Матчинг и compare материалов</span>
+              <span class="phase-state progress">FEATURE-READY / DATA-BLOCKED</span>
+            </summary>
+            <ul>
+              <li>Async-ready compare jobs + snapshot результата + TTL.</li>
+              <li>Explainability: machine-readable <code>match_reason</code>, <code>confidence_score</code>, <code>needs_review</code>.</li>
+              <li>Estimate upload/polling/correction + UI: <code>/</code> и <code>/estimates/[jobId]</code>.</li>
+              <li>Критерий готовности: нужен минимум 2 источника реальных предложений (закрывается в Фазе 5).</li>
+            </ul>
+          </details>
+
+          <details open>
+            <summary>
+              <span class="phase-title">Фаза 5 — Интеграции торговых сетей</span>
+              <span class="phase-state progress">IN PROGRESS</span>
+            </summary>
+            <ul>
+              <li>Выбор источников: Epicentr + Nova Liniya (зафиксировано в ROADMAP).</li>
+              <li>Foundation: BranchIntegrationConfig (конфиг на branch, без feed_url в body).</li>
+              <li>Epicentr adapter: парсер + фикстура + unit tests, sync через существующий import pipeline.</li>
+              <li>Осталось: подключить реальный partner feed/API, расписание sync, метрики качества, Nova Liniya адаптер.</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>
+              <span class="phase-title">Фаза 6 — Каталог услуг и compare работ</span>
+              <span class="phase-state todo">TODO</span>
+            </summary>
+            <ul>
+              <li>Импорт прайсов подрядчиков + compare по услугам.</li>
+              <li>Региональная логика и диапазоны рынка.</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>
+              <span class="phase-title">Фаза 7 — Полная админка и операционный контур</span>
+              <span class="phase-state todo">TODO</span>
+            </summary>
+            <ul>
+              <li>Очереди модерации, dashboards здоровья источников, мониторинг импортов, инструменты инцидентов.</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>
+              <span class="phase-title">Фаза 8 — Отчёты, лиды и коммерческий контур</span>
+              <span class="phase-state todo">TODO</span>
+            </summary>
+            <ul>
+              <li>Трекинг переходов, отчёты спроса, аналитика, первые monetization hooks.</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>
+              <span class="phase-title">Фаза 9 — Production hardening</span>
+              <span class="phase-state todo">TODO</span>
+            </summary>
+            <ul>
+              <li>Perf/rate limits, backup/restore, alerting, abuse protection, runbooks, compliance checks.</li>
+            </ul>
+          </details>
+
+          <p class="small" style="margin-top: 12px">
+            Definition of Done (см. ROADMAP): фаза считается закрытой только когда есть код, доки, миграции, тесты,
+            метрики/логи и критерии ручной приёмки, без критичных дыр по безопасности.
+          </p>
+        </section>
+      </main>
+
+      <footer>
+        <span>Файл: <code>docs/PROJECT_PRESENTATION.html</code></span>
+        <span class="small">Поддерживайте актуальность: обновляйте «Последний апдейт» при крупных изменениях.</span>
+      </footer>
+    </div>
+  </body>
+</html>
+
