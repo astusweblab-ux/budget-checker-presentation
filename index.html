@@ -1,586 +1,352 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Budget Checker 2.0 — Презентация и Статус</title>
-    <meta
-      name="description"
-      content="Короткая презентация Budget Checker 2.0, текущая стадия разработки, что сделано и что осталось."
-    />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Checker 2.0 — Инвестиционная презентация</title>
     <style>
-      :root {
-        --bg0: #0b1220;
-        --bg1: #0f1a30;
-        --card: rgba(255, 255, 255, 0.06);
-        --card2: rgba(255, 255, 255, 0.04);
-        --text: rgba(255, 255, 255, 0.92);
-        --muted: rgba(255, 255, 255, 0.72);
-        --muted2: rgba(255, 255, 255, 0.56);
-        --line: rgba(255, 255, 255, 0.1);
-        --good: #49d17c;
-        --warn: #f1c65d;
-        --todo: #a7b1ff;
-        --danger: #ff6b6b;
-        --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
-          monospace;
-        --body: "Segoe UI Variable", "Segoe UI", system-ui, -apple-system, sans-serif;
-        --title: Georgia, "Times New Roman", Times, serif;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      html,
-      body {
-        height: 100%;
-      }
-
-      body {
-        margin: 0;
-        font-family: var(--body);
-        color: var(--text);
-        background: radial-gradient(1200px 600px at 20% 0%, rgba(73, 209, 124, 0.18), transparent 60%),
-          radial-gradient(900px 500px at 85% 10%, rgba(167, 177, 255, 0.22), transparent 55%),
-          radial-gradient(800px 500px at 70% 90%, rgba(241, 198, 93, 0.14), transparent 60%),
-          linear-gradient(180deg, var(--bg0), var(--bg1));
-      }
-
-      a {
-        color: inherit;
-        text-decoration: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.22);
-      }
-      a:hover {
-        border-bottom-color: rgba(255, 255, 255, 0.5);
-      }
-
-      .page {
-        max-width: 1120px;
-        margin: 0 auto;
-        padding: 28px 18px 56px;
-      }
-
-      header {
-        display: grid;
-        gap: 12px;
-        padding: 22px 22px;
-        border: 1px solid var(--line);
-        background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.04));
-        border-radius: 18px;
-      }
-
-      header h1 {
-        margin: 0;
-        font-family: var(--title);
-        font-weight: 700;
-        letter-spacing: 0.2px;
-        font-size: 34px;
-        line-height: 1.1;
-      }
-
-      header p {
-        margin: 0;
-        color: var(--muted);
-        line-height: 1.5;
-        max-width: 78ch;
-      }
-
-      .meta {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        align-items: center;
-        margin-top: 6px;
-      }
-
-      .tag {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 6px 10px;
-        border-radius: 999px;
-        border: 1px solid var(--line);
-        background: rgba(255, 255, 255, 0.04);
-        color: var(--muted);
-        font-size: 13px;
-        line-height: 1;
-        white-space: nowrap;
-      }
-
-      .tag strong {
-        color: var(--text);
-        font-weight: 700;
-      }
-
-      .tag.done strong {
-        color: var(--good);
-      }
-      .tag.progress strong {
-        color: var(--warn);
-      }
-      .tag.next strong {
-        color: var(--todo);
-      }
-
-      main {
-        display: grid;
-        gap: 14px;
-        margin-top: 14px;
-      }
-
-      .grid {
-        display: grid;
-        grid-template-columns: 1.2fr 0.8fr;
-        gap: 14px;
-      }
-
-      @media (max-width: 960px) {
-        .grid {
-          grid-template-columns: 1fr;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-      }
 
-      .card {
-        border: 1px solid var(--line);
-        background: var(--card);
-        border-radius: 18px;
-        padding: 18px 18px;
-      }
-
-      .card h2 {
-        margin: 0 0 10px;
-        font-size: 16px;
-        letter-spacing: 0.2px;
-      }
-
-      .card p {
-        margin: 0 0 10px;
-        color: var(--muted);
-        line-height: 1.6;
-      }
-
-      ul {
-        margin: 10px 0 0;
-        padding-left: 18px;
-        color: var(--muted);
-        line-height: 1.65;
-      }
-
-      code {
-        font-family: var(--mono);
-        font-size: 0.95em;
-        color: rgba(255, 255, 255, 0.88);
-        background: rgba(0, 0, 0, 0.25);
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        padding: 2px 6px;
-        border-radius: 8px;
-      }
-
-      .kv {
-        display: grid;
-        grid-template-columns: 160px 1fr;
-        gap: 8px 12px;
-        margin-top: 10px;
-      }
-      .kv div {
-        padding: 10px 12px;
-        border: 1px solid var(--line);
-        background: var(--card2);
-        border-radius: 14px;
-      }
-      .kv .k {
-        color: var(--muted2);
-        font-size: 13px;
-      }
-      .kv .v {
-        color: var(--text);
-        font-weight: 600;
-      }
-      .kv .mono {
-        font-family: var(--mono);
-        font-weight: 600;
-      }
-
-      details {
-        border: 1px solid var(--line);
-        background: rgba(0, 0, 0, 0.16);
-        border-radius: 16px;
-        padding: 12px 12px;
-      }
-      details + details {
-        margin-top: 10px;
-      }
-      summary {
-        cursor: pointer;
-        list-style: none;
-        display: flex;
-        gap: 10px;
-        align-items: baseline;
-      }
-      summary::-webkit-details-marker {
-        display: none;
-      }
-
-      .phase-title {
-        font-weight: 700;
-      }
-      .phase-state {
-        font-size: 12px;
-        color: var(--muted2);
-        border: 1px solid var(--line);
-        border-radius: 999px;
-        padding: 2px 8px;
-        white-space: nowrap;
-      }
-      .phase-state.done {
-        color: rgba(73, 209, 124, 0.95);
-        border-color: rgba(73, 209, 124, 0.35);
-      }
-      .phase-state.progress {
-        color: rgba(241, 198, 93, 0.95);
-        border-color: rgba(241, 198, 93, 0.35);
-      }
-      .phase-state.todo {
-        color: rgba(167, 177, 255, 0.95);
-        border-color: rgba(167, 177, 255, 0.35);
-      }
-
-      .small {
-        font-size: 13px;
-        color: var(--muted2);
-        line-height: 1.6;
-      }
-
-      footer {
-        margin-top: 16px;
-        color: var(--muted2);
-        font-size: 13px;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        align-items: center;
-        justify-content: space-between;
-      }
-
-      @media print {
         body {
-          background: #ffffff;
-          color: #111111;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #ffffff;
+            color: #1a1a2e;
+            line-height: 1.5;
         }
-        a {
-          border: 0;
-          text-decoration: underline;
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 48px 24px;
         }
-        .card,
-        header,
-        details {
-          background: #ffffff;
-          border-color: rgba(0, 0, 0, 0.14);
+
+        /* Типографика */
+        h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
         }
-        .tag {
-          background: #ffffff;
-          border-color: rgba(0, 0, 0, 0.14);
-          color: #333333;
+
+        h2 {
+            font-size: 28px;
+            font-weight: 600;
+            margin: 48px 0 20px 0;
+            padding-bottom: 8px;
+            border-bottom: 3px solid #2c7da0;
+            display: inline-block;
         }
-        code {
-          background: #f5f5f5;
-          border-color: rgba(0, 0, 0, 0.12);
-          color: #111111;
+
+        h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #2c7da0;
         }
-      }
+
+        .subhead {
+            font-size: 18px;
+            color: #4a5568;
+            margin-bottom: 32px;
+            max-width: 800px;
+        }
+
+        /* Компоненты */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin: 32px 0;
+        }
+
+        .card {
+            background: #f8f9fa;
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .card-dark {
+            background: #1a1a2e;
+            color: white;
+            border: none;
+        }
+
+        .card-dark h3 {
+            color: #61dafb;
+        }
+
+        .card-dark .text-muted {
+            color: #a0aec0;
+        }
+
+        .stat {
+            font-size: 48px;
+            font-weight: 700;
+            color: #2c7da0;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #4a5568;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-green {
+            background: #e6f7e6;
+            color: #2e7d32;
+        }
+
+        .badge-yellow {
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        .badge-blue {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background: #f1f5f9;
+            font-weight: 600;
+        }
+
+        .text-muted {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        hr {
+            margin: 48px 0;
+            border: none;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            h1 {
+                font-size: 32px;
+            }
+        }
     </style>
-  </head>
-  <body>
-    <div class="page">
-      <header>
-        <h1>Budget Checker 2.0</h1>
-        <p>
-          Платформа для проверки смет и списков материалов: пользователь загружает файл или вводит строки, система
-          находит реальные предложения магазинов и показывает explainability (почему матч случился) + помечает спорные
-          строки.
-        </p>
+</head>
+<body>
+<div class="container">
 
-        <div class="meta">
-          <span class="tag progress"><strong>Текущая фаза:</strong> 5 — Интеграции торговых сетей</span>
-          <span class="tag done"><strong>Готовность функций:</strong> загрузка → сравнение → результат</span>
-          <span class="tag next"><strong>Блокер критерия Фазы 4:</strong> нужны 2 реальные сети</span>
-        </div>
-
-        <p class="small">
-          Правило: это «живой» статус проекта. Чтобы видеть реальный прогресс, обновляйте эту страницу при закрытии
-          deliverables/фаз и публикуйте обновление в публичную версию.
-        </p>
-      </header>
-
-      <main>
-        <div class="grid">
-          <section class="card">
-            <h2>Коротко о продукте</h2>
-            <p>
-              Ценность: быстро понять «сколько реально стоит» список материалов/работ по рынку, и в каких местах смета
-              неочевидна (needs_review).
-            </p>
-            <ul>
-              <li>Публичный сценарий: загрузка сметы → polling статуса → результаты с explainability.</li>
-              <li>Merchant сценарий: загрузка каталога офферов (CSV/XLSX / ingestion adapters) → офферы участвуют в compare.</li>
-              <li>Ops/Admin сценарий: верификация магазинов и модерация статусов с audit trail.</li>
-            </ul>
-          </section>
-
-          <section class="card">
-            <h2>Текущая стадия</h2>
-            <div class="kv">
-              <div class="k">Статус</div>
-              <div class="v">Фаза 5 в работе (Epicentr first)</div>
-              <div class="k">Последний апдейт</div>
-              <div class="v mono">2026-04-13</div>
-              <div class="k">Документы</div>
-              <div class="v">
-                <code>docs/ROADMAP.md</code>, <code>docs/MASTER_TZ.md</code>, <code>docs/SECURITY_BASELINE.md</code>
-              </div>
-              <div class="k">Dev навигация</div>
-              <div class="v"><code>/dev/routes</code> + файл <code>docs/DEV_ROUTES.md</code></div>
-            </div>
-            <p class="small" style="margin-top: 10px">
-              Примечание: compare-слой уже работает, но критерий готовности Фазы 4 требует минимум 2 источника с реальными
-              предложениями. Поэтому сейчас фокус — интеграции.
-            </p>
-          </section>
-        </div>
-
-        <div class="grid">
-          <section class="card">
-            <h2>Проблема</h2>
-            <ul>
-              <li>Сметы на ремонт/строительство сложно проверять: позиции размыты, а итоговая стоимость непрозрачна.</li>
-              <li>Цены на материалы сильно отличаются по магазинам и регионам — ручное сравнение занимает часы.</li>
-              <li>Подрядчики могут «прятать» маржу в материалах и работах, а клиент не видит, где переплата.</li>
-              <li>Магазины и подрядчики получают много холодного трафика и мало доверия, потому что нет прозрачного сравнения.</li>
-            </ul>
-          </section>
-
-          <section class="card">
-            <h2>Решение</h2>
-            <ul>
-              <li>Пользователь загружает смету (сейчас: <code>CSV/XLSX</code>) или вставляет список строк.</li>
-              <li>Система находит реальные предложения магазинов и показывает альтернативы, цены и диапазоны.</li>
-              <li>Каждая строка получает <code>confidence_score</code> и <code>match_reason</code>, спорные — <code>needs_review</code>.</li>
-              <li>Партнёры загружают каталог через кабинет (CSV/XLSX) или через интеграции (feed/API) и проходят верификацию.</li>
-              <li>Результат фиксируется snapshot-ом: пользователь видит расчёт «как было» на момент проверки.</li>
-            </ul>
-          </section>
-        </div>
-
-        <section class="card">
-          <h2>Как это работает (упрощённо)</h2>
-          <ul>
-            <li>Данные: нормализованный каталог (<code>material_items</code>/<code>service_items</code>) + реальные офферы партнёров.</li>
-            <li>Ingestion: импорт в офферы + история цен (<code>retail_offer_price_snapshots</code>) + валюты (<code>currency_rates</code>).</li>
-            <li>Compare pipeline: <code>POST</code> создаёт job → обработка → <code>GET</code> polling → UI показывает результат.</li>
-            <li>Матчинг: baseline-алгоритм с explainability (токены/числа/категории) и порогом уверенности.</li>
-            <li>Доступ: RBAC, проверки границ организации, audit trail для модерации и критичных действий.</li>
-          </ul>
-        </section>
-
-        <div class="grid">
-          <section class="card">
-            <h2>Ценность для пользователя</h2>
-            <ul>
-              <li>Быстро понять «сколько это должно стоить» по рынку и где есть альтернативы.</li>
-              <li>Видеть спорные строки и править их вручную, вместо слепого доверия «чёрному ящику».</li>
-              <li>Сравнить закупку по магазинам/филиалам с учётом локации и наличия.</li>
-              <li>Снизить риск переплаты и получить понятный отчёт для принятия решения.</li>
-            </ul>
-          </section>
-
-          <section class="card">
-            <h2>Ценность для партнёров</h2>
-            <ul>
-              <li>Высокоинтентный трафик: пользователь уже имеет список материалов и готов к покупке.</li>
-              <li>Прозрачная витрина: верификация магазина повышает доверие и качество сравнения.</li>
-              <li>Автосинхронизация каталога через интеграции снижает операционные затраты.</li>
-              <li>В перспективе: отчёты спроса, качество данных, лиды и аналитика по регионам.</li>
-            </ul>
-          </section>
-        </div>
-
-        <section class="card">
-          <h2>Монетизация (план)</h2>
-          <ul>
-            <li>CPA / revenue share: клики и переходы к партнёрам, заявки, покупки.</li>
-            <li>Подписка для партнёров: интеграции, автосинк, отчёты качества каталога, аналитика спроса.</li>
-            <li>Платные пакеты для подрядчиков: лиды и benchmark по рынку (на базе прайс-листов).</li>
-            <li>Enterprise: отчёты/интеграции под крупные сети и девелоперов.</li>
-          </ul>
-          <p class="small">
-            Монетизация — фаза 8 по <code>docs/ROADMAP.md</code>. Сейчас фокус: данные, качество и интеграции 2 сетей.
-          </p>
-        </section>
-
-        <section class="card">
-          <h2>Почему мы отличаемся</h2>
-          <ul>
-            <li>В центре продукта — реальные офферы рынка, а не ограниченный «core-список» позиций.</li>
-            <li>Explainability по каждой строке: видно, почему совпало и насколько уверенно.</li>
-            <li>Async-ready архитектура: pipeline готов к росту объёма строк и офферов.</li>
-            <li>Snapshot результата: воспроизводимость, аудит и отсутствие «переезда» цен задним числом.</li>
-            <li>Security baseline встроен в архитектуру: RBAC, audit trail, разделение публичного и admin контуров.</li>
-          </ul>
-        </section>
-
-        <section class="card">
-          <h2>Ближайшие вехи (90 дней)</h2>
-          <ul>
-            <li>Epicentr: довести structured feed ingestion до реального партнёрского режима + регулярная синхронизация.</li>
-            <li>Nova Liniya: второй адаптер (partner API) и тот же pipeline офферов.</li>
-            <li>Метрики качества источников: ошибки импорта, свежесть данных, health/status.</li>
-            <li>Golden test set для матчинга и улучшение ранжирования без регрессий.</li>
-            <li>Первые пилоты с 1–2 партнёрами и реальными каталогами.</li>
-          </ul>
-        </section>
-
-        <section class="card">
-          <h2>Сквозной demo-flow (локально)</h2>
-          <ul>
-            <li>Запуск: <code>start_project.bat</code>.</li>
-            <li>Открыть: <code>http://localhost:3000/dev/routes</code> (живые URL + demo-логины).</li>
-            <li>Merchant: импорт каталога → admin: verify shop → публичный upload сметы → compare результат.</li>
-          </ul>
-        </section>
-
-        <section class="card">
-          <h2>Фазы: что сделано и что осталось</h2>
-
-          <details open>
-            <summary>
-              <span class="phase-title">Фаза 0 — Документация</span>
-              <span class="phase-state done">ГОТОВО</span>
-            </summary>
-            <ul>
-              <li>MASTER_TZ / ROADMAP / SECURITY_BASELINE зафиксированы как источник правды.</li>
-              <li>Вынесены отложенные вопросы в <code>docs/DECISIONS_PENDING.md</code>.</li>
-            </ul>
-          </details>
-
-          <details open>
-            <summary>
-              <span class="phase-title">Фаза 1 — Технический фундамент</span>
-              <span class="phase-state done">ГОТОВО</span>
-            </summary>
-            <ul>
-              <li>Backend foundation (FastAPI, SQLAlchemy, Alembic naming conventions, config, CORS).</li>
-              <li>Celery foundation (UTC, time limits) + eager-mode для dev.</li>
-              <li>Frontend foundation (Next.js по ADR 001), генерация типов из OpenAPI.</li>
-            </ul>
-          </details>
-
-          <details>
-            <summary>
-              <span class="phase-title">Фаза 2 — Auth, роли и организации</span>
-              <span class="phase-state done">ГОТОВО</span>
-            </summary>
-            <ul>
-              <li>Auth: register/login, email verification tokens + resend limits, refresh token rotation, sessions.</li>
-              <li>RBAC: system roles + org roles, guard-ы от privilege escalation и IDOR.</li>
-              <li>Организации: members, invites по email, audit trail для admin действий.</li>
-              <li>Merchant: Shop/Branch + <code>verification_status</code>, ContractorProfile foundation.</li>
-            </ul>
-          </details>
-
-          <details>
-            <summary>
-              <span class="phase-title">Фаза 3 — Материальный каталог V1</span>
-              <span class="phase-state done">ГОТОВО</span>
-            </summary>
-            <ul>
-              <li>Material catalog: categories/items + merchant retail offers.</li>
-              <li>Import pipeline: ImportJob/ImportJobRow, idempotency по <code>external_id</code> в рамках branch.</li>
-              <li>Валюта: <code>currency_rates</code>, <code>requires_currency_rate</code>, <code>price_uah</code>.</li>
-              <li>История цен: <code>retail_offer_price_snapshots</code> (пишем только при реальном изменении).</li>
-              <li>UI: partner import page + admin shop verification page.</li>
-            </ul>
-          </details>
-
-          <details>
-            <summary>
-              <span class="phase-title">Фаза 4 — Матчинг и compare материалов</span>
-              <span class="phase-state progress">ФУНКЦИИ ГОТОВЫ / НЕТ ДАННЫХ</span>
-            </summary>
-            <ul>
-              <li>Async-ready compare jobs + snapshot результата + TTL.</li>
-              <li>Explainability: machine-readable <code>match_reason</code>, <code>confidence_score</code>, <code>needs_review</code>.</li>
-              <li>Estimate upload/polling/correction + UI: <code>/</code> и <code>/estimates/[jobId]</code>.</li>
-              <li>Критерий готовности: нужен минимум 2 источника реальных предложений (закрывается в Фазе 5).</li>
-            </ul>
-          </details>
-
-          <details open>
-            <summary>
-              <span class="phase-title">Фаза 5 — Интеграции торговых сетей</span>
-              <span class="phase-state progress">В РАБОТЕ</span>
-            </summary>
-            <ul>
-              <li>Выбор источников: Epicentr + Nova Liniya (зафиксировано в ROADMAP).</li>
-              <li>Foundation: BranchIntegrationConfig (конфиг на branch, без feed_url в body).</li>
-              <li>Epicentr adapter: парсер + фикстура + unit tests, sync через существующий import pipeline.</li>
-              <li>Осталось: подключить реальный partner feed/API, расписание sync, метрики качества, Nova Liniya адаптер.</li>
-            </ul>
-          </details>
-
-          <details>
-            <summary>
-              <span class="phase-title">Фаза 6 — Каталог услуг и compare работ</span>
-              <span class="phase-state todo">В ПЛАНЕ</span>
-            </summary>
-            <ul>
-              <li>Импорт прайсов подрядчиков + compare по услугам.</li>
-              <li>Региональная логика и диапазоны рынка.</li>
-            </ul>
-          </details>
-
-          <details>
-            <summary>
-              <span class="phase-title">Фаза 7 — Полная админка и операционный контур</span>
-              <span class="phase-state todo">В ПЛАНЕ</span>
-            </summary>
-            <ul>
-              <li>Очереди модерации, dashboards здоровья источников, мониторинг импортов, инструменты инцидентов.</li>
-            </ul>
-          </details>
-
-          <details>
-            <summary>
-              <span class="phase-title">Фаза 8 — Отчёты, лиды и коммерческий контур</span>
-              <span class="phase-state todo">В ПЛАНЕ</span>
-            </summary>
-            <ul>
-              <li>Трекинг переходов, отчёты спроса, аналитика, первые monetization hooks.</li>
-            </ul>
-          </details>
-
-          <details>
-            <summary>
-              <span class="phase-title">Фаза 9 — Production hardening</span>
-              <span class="phase-state todo">В ПЛАНЕ</span>
-            </summary>
-            <ul>
-              <li>Perf/rate limits, backup/restore, alerting, abuse protection, runbooks, compliance checks.</li>
-            </ul>
-          </details>
-
-          <p class="small" style="margin-top: 12px">
-            Definition of Done (см. ROADMAP): фаза считается закрытой только когда есть код, доки, миграции, тесты,
-            метрики/логи и критерии ручной приёмки, без критичных дыр по безопасности.
-          </p>
-        </section>
-      </main>
-
-      <footer>
-        <span>Файл: <code>docs/PROJECT_PRESENTATION.html</code></span>
-        <span class="small">Поддерживайте актуальность: обновляйте «Последний апдейт» и публикуйте обновление в GitHub Pages.</span>
-      </footer>
+    <!-- Шапка -->
+    <h1>Budget Checker 2.0</h1>
+    <div class="subhead">
+        Платформа для автоматической проверки строительных смет и сравнения цен.
+        <br>Прозрачность рынка стройматериалов и услуг.
     </div>
-  </body>
+
+    <!-- СУТЬ ПРОЕКТА — что это -->
+    <h2>Что это за проект</h2>
+    <div class="grid-2">
+        <div class="card">
+            <h3>Проблема</h3>
+            <p style="margin-bottom: 16px;">Любой, кто делает ремонт или строит дом, сталкивается с:</p>
+            <ul style="padding-left: 20px; color: #2d3748;">
+                <li>Непрозрачные сметы от подрядчиков — непонятно, реальная цена или завышена</li>
+                <li>Сравнение цен в магазинах вручную занимает 3-6 часов на одну смету</li>
+                <li>Нет инструмента, который показывает рыночную цену на конкретную позицию</li>
+                <li>Поставщики теряют клиентов, потому что их невозможно сравнить с конкурентами</li>
+            </ul>
+        </div>
+        <div class="card card-dark">
+            <h3>Решение</h3>
+            <p style="margin-bottom: 16px;">Budget Checker 2.0 — автоматическая система:</p>
+            <ul style="padding-left: 20px;">
+                <li>Загрузил смету (Excel, CSV, PDF) → система распознала строки → нашла цены в реальных магазинах</li>
+                <li>Показывает: где цена завышена, где можно сэкономить, какие позиции спорные</li>
+                <li>Объясняет каждое совпадение — почему выбран именно этот товар</li>
+                <li>Магазины получают канал продаж — их предложения видят тысячи пользователей</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- КОМУ ЭТО НУЖНО -->
+    <h2>Кому это нужно</h2>
+    <table>
+        <thead>
+            <tr><th>Кто</th><th>Проблема</th><th>Что даёт Budget Checker</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>Частные лица (ремонт/стройка)</td><td>Не знают реальных цен, переплачивают</td><td>Проверяют смету за 2 минуты, видят где экономия</td></tr>
+            <tr><td>Подрядчики (строительные бригады)</td><td>Клиенты не доверяют сметам</td><td>Подтверждают свои цены рыночными данными → доверие</td></tr>
+            <tr><td>Застройщики / девелоперы</td><td>Тендеры и закупки — ручной ад</td><td>Автоматическое сравнение поставщиков</td></tr>
+            <tr><td>Магазины стройматериалов</td><td>Трафик падает, клиенты уходят в другие сети</td><td>Канал привлечения — их цены видят целевые покупатели</td></tr>
+        </tbody>
+    </table>
+
+    <!-- РЫНОК — цифры -->
+    <h2>Рынок и возможность</h2>
+    <div class="grid-2">
+        <div class="card">
+            <div class="stat">800 000+</div>
+            <div class="stat-label">ремонтов и строек в Украине в год (оценка)</div>
+            <p class="text-muted" style="margin-top: 16px;">Каждый — потенциальный пользователь</p>
+        </div>
+        <div class="card">
+            <div class="stat">50-200 тыс. грн</div>
+            <div class="stat-label">средний чек на материалы для ремонта</div>
+            <p class="text-muted" style="margin-top: 16px;">Потенциальная экономия 15-30%</p>
+        </div>
+        <div class="card">
+            <div class="stat">30-60 млрд грн</div>
+            <div class="stat-label">розничный рынок стройматериалов (год)</div>
+            <p class="text-muted" style="margin-top: 16px;">2-3% комиссия с транзакций → ₴600-1800 млн рынок</p>
+        </div>
+        <div class="card">
+            <div class="stat">Epicentr + Nova Liniya</div>
+            <div class="stat-label">первые интеграции (50%+ рынка)</div>
+            <p class="text-muted" style="margin-top: 16px;">Остальные сети подключатся за ними</p>
+        </div>
+    </div>
+
+    <!-- ЧТО УЖЕ СДЕЛАНО -->
+    <h2>Что уже сделано (текущий статус)</h2>
+    <div class="card" style="margin-bottom: 24px;">
+        <p><span class="badge badge-green" style="margin-right: 12px;">ГОТОВО</span> <strong>Технический фундамент</strong> — Backend (FastAPI), Frontend (Next.js), база данных, миграции</p>
+        <p><span class="badge badge-green" style="margin-right: 12px;">ГОТОВО</span> <strong>Auth и роли</strong> — регистрация, email-верификация, RBAC, организации, аудит</p>
+        <p><span class="badge badge-green" style="margin-right: 12px;">ГОТОВО</span> <strong>Материальный каталог</strong> — магазины могут загружать каталоги (CSV/XLSX)</p>
+        <p><span class="badge badge-green" style="margin-right: 12px;">ГОТОВО</span> <strong>Compare-движок</strong> — сравнение материалов, explainability, флаг "спорная строка"</p>
+        <p><span class="badge badge-yellow" style="margin-right: 12px;">В РАБОТЕ</span> <strong>Интеграции</strong> — Epicentr (адаптер готов), Nova Liniya (в плане)</p>
+        <p><span class="badge badge-blue" style="margin-right: 12px;">В ПЛАНЕ</span> <strong>Услуги подрядчиков, аналитика, монетизация</strong></p>
+    </div>
+
+    <!-- СРАВНЕНИЕ С КОНКУРЕНТАМИ -->
+    <h2>Почему мы, а не аналоги</h2>
+    <table>
+        <thead>
+            <tr><th>Продукт</th><th>Что умеет</th><th>Чего НЕ умеет</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>Budget Checker</strong></td><td>Сметы целиком, любые списки, объяснение совпадений</td><td>—</td></tr>
+            <tr><td>Hotline / Price.ua</td><td>Сравнение конкретных товаров</td><td>Не работают со сметами, не видят контекст</td></tr>
+            <tr><td>Ручной Excel</td><td>—</td><td>Требует часов ручной работы, ошибки неизбежны</td></tr>
+            <tr><td>Сметные программы (АВК, Иліодор)</td><td>Расчёт по нормативам</td><td>Не показывают реальные цены в магазинах</td></tr>
+        </tbody>
+    </table>
+
+    <!-- БИЗНЕС-МОДЕЛЬ — за что платят -->
+    <h2>Бизнес-модель (за что платят)</h2>
+    <div class="grid-2">
+        <div class="card">
+            <h3>1. Магазины и сети</h3>
+            <p>Подписка за размещение каталога + оплата за переходы/лиды (CPL/CPC).</p>
+            <p class="text-muted" style="margin-top: 8px;">Пример: Epicentr платит ₴1-3 за переход на карточку товара. 100 000 переходов в месяц → ₴100-300 тыс.</p>
+        </div>
+        <div class="card">
+            <h3>2. Подрядчики</h3>
+            <p>Платный доступ к аналитике + продвижение в сравнении услуг.</p>
+            <p class="text-muted" style="margin-top: 8px;">Подписка от ₴1000/мес за регион.</p>
+        </div>
+        <div class="card">
+            <h3>3. Пользователи (Freemium)</h3>
+            <p>Базовые проверки — бесплатно. Расширенные отчёты, сохранение истории, API доступ — подписка.</p>
+            <p class="text-muted" style="margin-top: 8px;">₴200-500/мес или ₴10-30/отчёт.</p>
+        </div>
+        <div class="card">
+            <h3>4. B2B / Застройщики</h3>
+            <p>Корпоративные тарифы для тендерных отделов и служб закупок.</p>
+            <p class="text-muted" style="margin-top: 8px;">От ₴10 000/мес за аккаунт на компанию.</p>
+        </div>
+    </div>
+
+    <!-- ФИНАНСОВЫЙ ПЛАН (примерный) -->
+    <h2>Финансовый план (оценка)</h2>
+    <table>
+        <thead><tr><th>Показатель</th><th>Год 1 (после запуска)</th><th>Год 2</th><th>Год 3</th></tr></thead>
+        <tbody>
+            <tr><td>Пользователей (активных)</td><td>50 000</td><td>200 000</td><td>500 000</td></tr>
+            <tr><td>Магазинов/подрядчиков</td><td>50</td><td>200</td><td>500</td></tr>
+            <tr><td>Средний доход с пользователя (ARPU)</td><td>₴50</td><td>₴80</td><td>₴100</td></tr>
+            <tr><td>Средний доход с бизнеса</td><td>₴5000/мес</td><td>₴7000/мес</td><td>₴10 000/мес</td></tr>
+            <tr><td><strong>Годовой доход (оценка)</strong></td><td><strong>~₴6 млн</strong></td><td><strong>~₴24 млн</strong></td><td><strong>~₴72 млн</strong></td></tr>
+        </tbody>
+    </table>
+    <p class="text-muted">*Оценка консервативная, без учёта B2B-контрактов и комиссии с транзакций.</p>
+
+    <!-- ЧТО НУЖНО ДЛЯ ЗАПУСКА -->
+    <h2>Что нужно для запуска (инвестиции)</h2>
+    <div class="grid-2">
+        <div class="card">
+            <h3>Ближайший блокер (Фаза 5)</h3>
+            <p>Compare-движок готов. Нужны <strong>минимум 2 реальных источника предложений</strong>.</p>
+            <p style="margin-top: 12px;">Epicentr — адаптер готов, нужен доступ к feed/API.</p>
+            <p>Nova Liniya — нужен доступ к API.</p>
+            <p class="text-muted" style="margin-top: 16px;">Срок: 4-6 недель при наличии доступа.</p>
+        </div>
+        <div class="card">
+            <h3>Что нужно от инвесторов</h3>
+            <ul style="padding-left: 20px;">
+                <li>Доступ к API/фидам Epicentr, Nova Liniya (партнёрство)</li>
+                <li>Финансирование: ₴500 000 - 1 000 000 на масштабирование интеграций и маркетинг</li>
+                <li>Пилотные проекты с застройщиками для B2B-тестирования</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- КЛЮЧЕВЫЕ РИСКИ -->
+    <h2>Ключевые риски и как мы их решаем</h2>
+    <table>
+        <thead><tr><th>Риск</th><th>Вероятность</th><th>Решение</th></tr></thead>
+        <tbody>
+            <tr><td>Сети не дают доступ к API</td><td>Средняя</td><td>Crawl как fallback + публичный кабинет для загрузки каталогов</td></tr>
+            <tr><td>Нет пользователей</td><td>Низкая</td><td>Проблема есть у всех, кто делает ремонт → органический трафик + SEO под запросы по сметам</td></tr>
+            <tr><td>Конкуренты сделают быстрее</td><td>Низкая</td><td>Сравнение смет — сложная задача. У нас готовый движок и архитектура.</td></tr>
+            <tr><td>Качество данных от магазинов</td><td>Средняя</td><td>Валидация, suspicious-флаги, модерация админом</td></tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <!-- КОНТАКТЫ И ССЫЛКИ -->
+    <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 24px;">
+        <div>
+            <h3 style="margin-bottom: 8px;">Документация проекта</h3>
+            <p><a href="#" style="color: #2c7da0;">MASTER_TZ.md</a> — полное техническое задание<br>
+            <a href="#" style="color: #2c7da0;">ROADMAP.md</a> — план по фазам<br>
+            <a href="#" style="color: #2c7da0;">SECURITY_BASELINE.md</a> — безопасность</p>
+        </div>
+        <div>
+            <h3 style="margin-bottom: 8px;">Статус</h3>
+            <p>Актуально на: 13 апреля 2026<br>
+            Текущая фаза: 5 — Интеграции торговых сетей<br>
+            Готовность: ~55%</p>
+        </div>
+    </div>
+
+</div>
+</body>
 </html>
