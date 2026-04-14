@@ -245,7 +245,7 @@
 - цена, наличие и ссылка проходят валидацию;
 - обновления не зависят от ручного шаманства.
 
-## 8. Фаза 6. Каталог услуг и compare работ 🔄 в процессе
+## 8. Фаза 6. Каталог услуг и compare работ ✅ завершена
 
 ### Цель
 
@@ -275,7 +275,17 @@
 - на фронте уже есть публичный UI compare работ:
   - `/services`;
   - `/services/{job_id}`;
+- contractor service offers уже получают market/anomaly flags:
+  - absolute low/high price checks;
+  - deviation from market median по похожим услугам;
+  - non-UAH prices явно помечаются как риск для compare totals;
+- suspicious flags уже видны и в contractor import UI, и в public compare result по услугам;
 - dev seed теперь поднимает demo contractor account и demo contractor organization для ручного тестирования;
+- **смешанные сметы**: `POST /api/v1/estimates/upload` теперь матчит строки сразу на материалы и работы:
+  - `classifier.py` — keyword-based классификатор строк (монтаж, укладка, штукатурка и др.);
+  - `line_type` сохраняется на каждой строке (`"material"` / `"service"`);
+  - result screen разделён на две секции: «Материалы» и «Работы»;
+  - snapshot считает `material_lines_count` и `service_lines_count`;
 - покрыто интеграционными тестами.
 
 ### Deliverables
@@ -291,7 +301,7 @@
 - пользователь видит сравнение по работам;
 - система считает отклонение от рынка.
 
-## 9. Фаза 7. Полная админка и операционный контур ⬜ запланировано
+## 9. Фаза 7. Полная админка и операционный контур 🔄 в процессе
 
 ### Цель
 
@@ -306,6 +316,20 @@
 - security event review;
 - partner verification;
 - incident tools.
+
+### Что уже есть
+
+- `GET /admin/moderation-queue` — очередь на верификацию: все pending shops + contractor profiles в одном запросе, сортировка по дате создания;
+- `GET /admin/import-jobs` — список последних N import jobs по всем магазинам с org/shop/branch контекстом и лимитом;
+- `GET /admin/audit-events` — лента security/audit событий с email актора, изменениями before/after и reason;
+- `GET /admin/security-events` — security event review по auth-событиям: failed login / blocked login, IP, user-agent, severity;
+- `PATCH /admin/shops/{id}/verification` + `PATCH /admin/contractor-profiles/{id}/verification` — ручная верификация партнёров с записью в audit;
+- `AuditEvent` модель + `write_audit_event()` — каждое ручное действие в админке фиксируется;
+- `SecurityEvent` модель + запись событий из `auth/service.py` — неуспешные логины и blocked login теперь не прячутся в исключениях, а попадают в отдельную ленту;
+- import quality summary — `GET /admin/import-quality-summary` с integration health counts и recent_problem_jobs;
+- frontend screen `/dashboard/admin/operations` — один ops-экран с polling по moderation queue, import jobs, audit events и security events;
+- shop branches integration configs management — `GET/PUT /admin/shop-branches/{id}/integrations/{type}`;
+- currency rates management — `GET/POST /admin/currency-rates`.
 
 ### Deliverables
 
