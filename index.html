@@ -767,7 +767,7 @@
             </div>
             <div class="phase-row">
                 <span class="phase-label" data-i18n="phase8">Фаза 8 — Звіти, ліди та аналітика</span>
-                <div class="phase-bar-track"><div class="phase-fill phase-planned">⬜ <span data-i18n="phase8_status">заплановано</span></div></div>
+                <div class="phase-bar-track"><div class="phase-fill phase-active" style="width:20%">🔄 20% — <span data-i18n="phase8_status">foundation: трекінг кліків, аналітика партнерів</span></div></div>
             </div>
             <div class="phase-row">
                 <span class="phase-label" data-i18n="phase9">Фаза 9 — Підготовка до промислової експлуатації</span>
@@ -1039,7 +1039,7 @@
             <p><span class="badge badge-yellow" data-i18n="badge_in_progress">В РОБОТІ</span> <strong data-i18n="done8_title">Автоматичні інтеграції</strong> <span data-i18n="done8_text">— уже зібрано технічну основу для Епіцентру та Нової Лінії: є адаптери, маршрути синхронізації, фонові завдання, основа для планувальника синхронізації, статус здоров'я для адмінки, зведення про якість та аномалії імпортів, а також тестові дані. Наступний крок — підключити реальні джерела даних і довести оновлення до стабільної роботи.</span></p>
             <p><span class="badge badge-green" data-i18n="badge_done">ГОТОВО</span> <strong data-i18n="done9_title">Порівняння вартості робіт + спільний сценарій оцінки</strong> <span data-i18n="done9_text">— працює API порівняння за послугами, імпорт прайсів підрядників, публічний інтерфейс порівняння робіт, ринкові прапорці аномалій. Головне: один кошторис тепер зіставляє і матеріали, і роботи одночасно — рядки з ключовими словами (монтаж, укладання, штукатурка...) йдуть у двигун зіставлення послуг, решта — у двигун зіставлення матеріалів. Результат на одному екрані з двома секціями.</span></p>
             <p><span class="badge badge-green" data-i18n="badge_done">ГОТОВО</span> <strong data-i18n="done10_title">Повна операційна панель адміністратора</strong> <span data-i18n="done10_text">— черга модерації з верифікацією/блокуванням прямо з рядка, перезапуск упавших import jobs, фільтри та пагінація, журнал аудиту, security-стрічка, єдиний екран операцій та source health dashboard для всіх інтеграцій.</span></p>
-            <p><span class="badge badge-blue" data-i18n="badge_next_stage">НАСТУПНИЙ ЕТАП</span> <strong data-i18n="done11_title">Комерційний контур</strong> <span data-i18n="done11_text">— платні кабінети, аналітика, ліди, звіти та B2B-сценарії.</span></p>
+            <p><span class="badge badge-yellow" data-i18n="badge_in_progress">В РОБОТІ</span> <strong data-i18n="done11_title">Комерційний контур (Phase 8)</strong> <span data-i18n="done11_text">— foundation запущено: трекінг кліків на оффери, партнерська аналітика (топ-5 позицій, загальна кількість переходів), кнопки «Перейти в магазин» та «Зв'язатись з підрядником» у результатах порівняння.</span></p>
             <p><span class="badge badge-blue" data-i18n="badge_next_stage">НАСТУПНИЙ ЕТАП</span> <strong data-i18n="done12_title">Підготовка до промислової експлуатації</strong> <span data-i18n="done12_text">— моніторинг, стабільність, звітність, операційні панелі та повний контур експлуатації.</span></p>
         </div>
 
@@ -1160,8 +1160,8 @@
             <div>
                 <h3 style="margin-bottom: 8px;" data-i18n="status_title">Поточний статус</h3>
                 <p data-i18n="status_date">Актуально на: 15 квітня 2026</p>
-                <p data-i18n="status_phase">Фази 0–4, 6, 7 завершені ✅; Фаза 5 в роботі</p>
-                <p data-i18n="status_desc">Повністю завершені фази 0–4, 6, 7. Phase 6 закрита: API порівняння послуг, імпорт підрядників, ринкові прапорці аномалій, mixed-estimate flow. Phase 7 закрита: черга модерації, ручна верифікація, перезапуск jobs, журнал аудиту, події безпеки, source health dashboard — 132 backend tests зелені. У Phase 5 ще доводимо реальні feed/API торгових мереж.</p>
+                <p data-i18n="status_phase">Фази 0–4, 6, 7 завершені ✅; Фази 5 і 8 в роботі</p>
+                <p data-i18n="status_desc">Повністю завершені фази 0–4, 6, 7. Phase 6 закрита: API порівняння послуг, імпорт підрядників, ринкові прапорці аномалій, mixed-estimate flow. Phase 7 закрита: черга модерації, ручна верифікація, перезапуск jobs, журнал аудиту, події безпеки, source health dashboard — 139 backend tests зелені. Phase 8 розпочата: трекінг кліків, партнерська аналітика. У Phase 5 ще доводимо реальні feed/API торгових мереж.</p>
             </div>
         </div>
 
@@ -1205,7 +1205,7 @@
         phase7: "Фаза 7 — Повна панель адміністратора",
         phase7_status: "завершено: черга модерації, ручна верифікація, моніторинг імпортів, журнал аудиту, події безпеки, source health dashboard",
         phase8: "Фаза 8 — Звіти, ліди та аналітика",
-        phase8_status: "заплановано",
+        phase8_status: "foundation: трекінг кліків, аналітика партнерів",
         phase9: "Фаза 9 — Підготовка до промислової експлуатації",
         phase9_status: "заплановано",
         what_is_title: "Що це за проєкт",
@@ -1338,8 +1338,8 @@
         done9_text: "— працює API порівняння за послугами, імпорт прайсів підрядників, публічний інтерфейс порівняння робіт, ринкові прапорці аномалій. Головне: один кошторис тепер зіставляє і матеріали, і роботи одночасно — рядки з ключовими словами (монтаж, укладання, штукатурка...) йдуть у двигун зіставлення послуг, решта — у двигун зіставлення матеріалів. Результат на одному екрані з двома секціями.",
         done10_title: "Повна операційна панель адміністратора",
         done10_text: "— черга модерації з верифікацією/блокуванням прямо з рядка, перезапуск упавших import jobs, фільтри та пагінація, журнал аудиту, security-стрічка, єдиний екран операцій та source health dashboard для всіх інтеграцій.",
-        done11_title: "Комерційний контур",
-        done11_text: "— платні кабінети, аналітика, ліди, звіти та B2B-сценарії.",
+        done11_title: "Комерційний контур (Phase 8) — розпочато",
+        done11_text: "— foundation запущено: трекінг кліків на оффери, партнерська аналітика (топ-5 позицій, загальна кількість переходів), кнопки «Перейти в магазин» та «Зв'язатись з підрядником» у результатах порівняння.",
         done12_title: "Підготовка до промислової експлуатації",
         done12_text: "— моніторинг, стабільність, звітність, операційні панелі та повний контур експлуатації.",
         next_steps_title: "Що потрібно зробити далі по порядку",
@@ -1347,10 +1347,10 @@
         next1: "Довести 2 реальні мережі до стабільного автоматичного завантаження даних.",
         next2: "Покращити якість і регулярність оновлення пропозицій, додати повноцінний контур ручної перевірки для ризикованих пропозицій.",
         next3: "Запустити перші комерційні пілоти з магазинами та B2B-клієнтами.",
-        next4: "Розпочати Phase 8: аналітика переходів, ліди та перші монетизаційні сценарії.",
+        next4: "Продовжити Phase 8: лід-мітки, партнерські звіти по попиту та перші монетизаційні сценарії.",
         next_steps2_title: "Наступний великий етап",
         next5: "Увімкнути платні сценарії: підписки, платні звіти, лідогенерацію та корпоративні тарифи.",
-        next6: "Розширити Phase 8: партнерська аналітика, звіти по попиту та регіональні інсайти.",
+        next6: "Завершити Phase 8: регіональні інсайти, аналітика попиту, звіти для партнерів.",
         next7: "Розширити аналітику, звітність та операційні інструменти.",
         next8: "Підготувати продукт до повноцінної роботи в промисловому середовищі.",
         advantages_title: "Чому ми сильніші за аналоги",
@@ -1425,8 +1425,8 @@
         docs3: "правила безпеки, доступу та роботи з даними",
         status_title: "Поточний статус",
         status_date: "Актуально на: 15 квітня 2026",
-        status_phase: "Фази 0–4, 6, 7 завершені ✅; Фаза 5 в роботі",
-        status_desc: "Повністю завершені фази 0–4, 6, 7. Фаза 6 закрита: API порівняння послуг, імпорт підрядників, ринкові прапорці, змішаний кошторис. Фаза 7 закрита: черга модерації, ручна верифікація, перезапуск jobs, журнал аудиту, події безпеки, source health dashboard — 132 backend тести зелені. У Фазі 5 ще доводимо реальні feed/API торгових мереж."
+        status_phase: "Фази 0–4, 6, 7 завершені ✅; Фази 5 і 8 в роботі",
+        status_desc: "Повністю завершені фази 0–4, 6, 7. Фаза 6 закрита: API порівняння послуг, імпорт підрядників, ринкові прапорці, змішаний кошторис. Фаза 7 закрита: черга модерації, ручна верифікація, перезапуск jobs, журнал аудиту, події безпеки, source health dashboard — 139 backend тести зелені. Фаза 8 розпочата: трекінг кліків, партнерська аналітика. У Фазі 5 ще доводимо реальні feed/API торгових мереж."
     },
     en: {
         modal_title: "Choose language",
@@ -1450,7 +1450,7 @@
         phase7: "Phase 7 — Full admin panel",
         phase7_status: "completed: moderation queue, manual verification, import monitoring, audit log, security events, source health dashboard",
         phase8: "Phase 8 — Reports, leads and analytics",
-        phase8_status: "planned",
+        phase8_status: "foundation: click tracking, partner analytics",
         phase9: "Phase 9 — Production hardening",
         phase9_status: "planned",
         what_is_title: "What is this project",
@@ -1595,8 +1595,8 @@
         done9_text: "— service comparison API, contractor price import, public UI for work comparison, market anomaly flags work. The main thing: one estimate now matches both materials and work simultaneously — lines with keywords (installation, laying, plastering...) go to the ServiceMatchEngine, the rest go to the MaterialMatchEngine. Result on one screen with two sections.",
         done10_title: "Full operational admin panel",
         done10_text: "— moderation queue with one-click verify/suspend per row, failed import job reprocess, filters and pagination across all sections, audit log, security events stream, unified admin operations screen with polling and source health dashboard for all integrations.",
-        done11_title: "Commercial circuit",
-        done11_text: "— paid offices, analytics, leads, reports and B2B scenarios.",
+        done11_title: "Commercial circuit (Phase 8) — started",
+        done11_text: "— foundation launched: click tracking on offers, partner analytics (top-5 positions, total click count), 'Go to store' and 'Contact contractor' buttons in compare results.",
         done12_title: "Production hardening",
         done12_text: "— monitoring, stability, reporting, operational panels and full operation circuit.",
         next_steps_title: "What needs to be done next in order",
@@ -1604,10 +1604,10 @@
         next1: "Bring 2 real networks to stable automatic data loading.",
         next2: "Improve the quality and regularity of offer updates, then add a full manual review circuit for the riskiest offers.",
         next3: "Launch first commercial pilots with stores and B2B clients.",
-        next4: "Start Phase 8: click tracking, leads and first monetisation scenarios.",
+        next4: "Continue Phase 8: lead labels, partner demand reports and first monetisation scenarios.",
         next_steps2_title: "Next big stage",
         next5: "Enable paid scenarios: subscriptions, paid reports, lead generation and corporate tariffs.",
-        next6: "Expand Phase 8: partner analytics, demand reports and regional insights.",
+        next6: "Complete Phase 8: regional insights, demand analytics, partner reports.",
         next7: "Expand analytics, reporting and operational tools.",
         next8: "Prepare the product for full-fledged production operation.",
         advantages_title: "Why we are stronger than analogues",
@@ -1682,8 +1682,8 @@
         docs3: "security, access and data handling rules",
         status_title: "Current status",
         status_date: "Updated: April 15, 2026",
-        status_phase: "Phases 0–4, 6, 7 completed ✅; Phase 5 in progress",
-        status_desc: "Phases 0–4, 6, 7 are fully complete. Phase 6 closed: service compare API, contractor import, market anomaly flags, mixed-estimate flow. Phase 7 closed: moderation queue, manual verification, failed job reprocess, audit log, security events, source health dashboard — 132 backend tests green. Phase 5 still needs real retail feed/API rollout."
+        status_phase: "Phases 0–4, 6, 7 completed ✅; Phases 5 and 8 in progress",
+        status_desc: "Phases 0–4, 6, 7 are fully complete. Phase 6 closed: service compare API, contractor import, market anomaly flags, mixed-estimate flow. Phase 7 closed: moderation queue, manual verification, failed job reprocess, audit log, security events, source health dashboard — 139 backend tests green. Phase 8 started: click tracking, partner analytics. Phase 5 still needs real retail feed/API rollout."
     },
     ru: {
         modal_title: "Выберите язык",
@@ -1707,7 +1707,7 @@
         phase7: "Фаза 7 — Полная панель администратора",
         phase7_status: "завершена: очередь модерации, ручная верификация, мониторинг импортов, журнал аудита, события безопасности, source health dashboard",
         phase8: "Фаза 8 — Отчёты, лиды и аналитика",
-        phase8_status: "запланировано",
+        phase8_status: "foundation: трекинг кликов, аналитика партнёров",
         phase9: "Фаза 9 — Подготовка к промышленной эксплуатации",
         phase9_status: "запланировано",
         what_is_title: "Что это за проект",
@@ -1840,8 +1840,8 @@
         done9_text: "— работает API сравнения по услугам, импорт прайсов подрядчиков, публичный интерфейс сравнения работ, рыночные флаги аномалий. Главное: одна смета теперь сопоставляет и материалы, и работы одновременно — строки с ключевыми словами (монтаж, укладка, штукатурка...) идут в движок сопоставления услуг, остальные — в движок сопоставления материалов. Результат на одном экране с двумя секциями.",
         done10_title: "Полная операционная панель администратора",
         done10_text: "— очередь модерации с верификацией/блокировкой прямо в строке, перезапуск упавших import jobs, фильтры и пагинация, журнал аудита, security-лента, единый экран операций с polling и source health dashboard для всех интеграций.",
-        done11_title: "Коммерческий контур",
-        done11_text: "— платные кабинеты, аналитика, лиды, отчёты и B2B-сценарии.",
+        done11_title: "Коммерческий контур (Phase 8) — начат",
+        done11_text: "— foundation запущен: трекинг кликов на офферы, партнёрская аналитика (топ-5 позиций, общее число переходов), кнопки «Перейти в магазин» и «Связаться с подрядчиком» в результатах сравнения.",
         done12_title: "Подготовка к промышленной эксплуатации",
         done12_text: "— мониторинг, стабильность, отчётность, операционные панели и полный контур эксплуатации.",
         next_steps_title: "Что предстоит сделать дальше по порядку",
@@ -1849,10 +1849,10 @@
         next1: "Довести 2 реальные сети до стабильной автоматической загрузки данных.",
         next2: "Улучшить качество и регулярность обновления предложений, добавить полноценный контур ручной проверки для рискованных предложений.",
         next3: "Запустить первые коммерческие пилоты с магазинами и B2B-клиентами.",
-        next4: "Начать Phase 8: трекинг переходов, лиды и первые монетизационные сценарии.",
+        next4: "Продолжить Phase 8: лид-метки, партнёрские отчёты по спросу и первые монетизационные сценарии.",
         next_steps2_title: "Следующий большой этап",
         next5: "Включить платные сценарии: подписки, платные отчёты, лидогенерацию и корпоративные тарифы.",
-        next6: "Расширить Phase 8: партнёрская аналитика, отчёты по спросу и региональные инсайты.",
+        next6: "Завершить Phase 8: региональные инсайты, аналитика спроса, отчёты для партнёров.",
         next7: "Расширить аналитику, отчётность и операционные инструменты.",
         next8: "Подготовить продукт к полноценной работе в промышленной среде.",
         advantages_title: "Почему мы сильнее аналогов",
@@ -1927,8 +1927,8 @@
         docs3: "правила безопасности, доступа и работы с данными",
         status_title: "Текущий статус",
         status_date: "Актуально на: 15 апреля 2026",
-        status_phase: "Фазы 0–4, 6, 7 завершены ✅; Фаза 5 в работе",
-        status_desc: "Полностью завершены фазы 0–4, 6, 7. Фаза 6 закрыта: API сравнения услуг, импорт подрядчиков, рыночные флаги аномалий, смешанная смета. Фаза 7 закрыта: очередь модерации, ручная верификация, перезапуск jobs, журнал аудита, события безопасности, source health dashboard — 132 backend теста зелёные. В Фазе 5 ещё доводим реальные feed/API торговых сетей.",
+        status_phase: "Фазы 0–4, 6, 7 завершены ✅; Фазы 5 и 8 в работе",
+        status_desc: "Полностью завершены фазы 0–4, 6, 7. Фаза 6 закрыта: API сравнения услуг, импорт подрядчиков, рыночные флаги аномалий, смешанная смета. Фаза 7 закрыта: очередь модерации, ручная верификация, перезапуск jobs, журнал аудита, события безопасности, source health dashboard — 139 backend тестов зелёные. Фаза 8 начата: трекинг кликов, партнёрская аналитика. В Фазе 5 ещё доводим реальные feed/API торговых сетей.",
         page_title: "Budget Checker 2.0 — Инвестиционная презентация",
         switch_uk: "🇺🇦 UA",
         switch_en: "🇬🇧 EN",
