@@ -1038,7 +1038,7 @@
             <p><span class="badge badge-green" data-i18n="badge_done">ГОТОВО</span> <strong data-i18n="done7_title">Перший живий користувацький сценарій</strong> <span data-i18n="done7_text">— є публічна сторінка перевірки кошторису, партнерська сторінка імпорту та сторінка адміністратора для модерації магазинів.</span></p>
             <p><span class="badge badge-yellow" data-i18n="badge_in_progress">В РОБОТІ</span> <strong data-i18n="done8_title">Автоматичні інтеграції</strong> <span data-i18n="done8_text">— уже зібрано технічну основу для Епіцентру та Нової Лінії: є адаптери, маршрути синхронізації, фонові завдання, основа для планувальника синхронізації, статус здоров'я для адмінки, зведення про якість та аномалії імпортів, а також тестові дані. Наступний крок — підключити реальні джерела даних і довести оновлення до стабільної роботи.</span></p>
             <p><span class="badge badge-green" data-i18n="badge_done">ГОТОВО</span> <strong data-i18n="done9_title">Порівняння вартості робіт + спільний сценарій оцінки</strong> <span data-i18n="done9_text">— працює API порівняння за послугами, імпорт прайсів підрядників, публічний інтерфейс порівняння робіт, ринкові прапорці аномалій. Головне: один кошторис тепер зіставляє і матеріали, і роботи одночасно — рядки з ключовими словами (монтаж, укладання, штукатурка...) йдуть у двигун зіставлення послуг, решта — у двигун зіставлення матеріалів. Результат на одному екрані з двома секціями.</span></p>
-            <p><span class="badge badge-yellow" data-i18n="badge_in_progress">В РОБОТІ</span> <strong data-i18n="done10_title">Повна операційна панель адміністратора</strong> <span data-i18n="done10_text">— черга модерації з кнопками верифікувати/заблокувати прямо з рядка, перезапуск упавших import jobs, фільтри і пагінація по всіх секціях, журнал аудиту, security-стрічка і єдиний екран `/dashboard/admin/operations` з polling вже є. Залишилося: source health dashboard у окремому екрані.</span></p>
+            <p><span class="badge badge-green" data-i18n="badge_done">ГОТОВО</span> <strong data-i18n="done10_title">Повна операційна панель адміністратора</strong> <span data-i18n="done10_text">— черга модерації з верифікацією/блокуванням прямо з рядка, перезапуск упавших import jobs, фільтри та пагінація, журнал аудиту, security-стрічка, єдиний екран операцій та source health dashboard для всіх інтеграцій.</span></p>
             <p><span class="badge badge-blue" data-i18n="badge_next_stage">НАСТУПНИЙ ЕТАП</span> <strong data-i18n="done11_title">Комерційний контур</strong> <span data-i18n="done11_text">— платні кабінети, аналітика, ліди, звіти та B2B-сценарії.</span></p>
             <p><span class="badge badge-blue" data-i18n="badge_next_stage">НАСТУПНИЙ ЕТАП</span> <strong data-i18n="done12_title">Підготовка до промислової експлуатації</strong> <span data-i18n="done12_text">— моніторинг, стабільність, звітність, операційні панелі та повний контур експлуатації.</span></p>
         </div>
@@ -1058,7 +1058,7 @@
                 <h3 data-i18n="next_steps2_title">Наступний великий етап</h3>
                 <ul>
                     <li data-i18n="next5">Увімкнути платні сценарії: підписки, платні звіти, лідогенерацію та корпоративні тарифи.</li>
-                    <li data-i18n="next6">Завершити Фазу 7 повністю: manual review workflow, incident tools, фільтрація та пагінація для ops-контурів.</li>
+                    <li data-i18n="next6">Розширити Phase 8: партнерська аналітика, звіти по попиту та регіональні інсайти.</li>
                     <li data-i18n="next7">Розширити аналітику, звітність та операційні інструменти.</li>
                     <li data-i18n="next8">Підготувати продукт до повноцінної роботи в промисловому середовищі.</li>
                 </ul>
@@ -1337,7 +1337,7 @@
         done9_title: "Порівняння вартості робіт + спільний сценарій оцінки",
         done9_text: "— працює API порівняння за послугами, імпорт прайсів підрядників, публічний інтерфейс порівняння робіт, ринкові прапорці аномалій. Головне: один кошторис тепер зіставляє і матеріали, і роботи одночасно — рядки з ключовими словами (монтаж, укладання, штукатурка...) йдуть у двигун зіставлення послуг, решта — у двигун зіставлення матеріалів. Результат на одному екрані з двома секціями.",
         done10_title: "Повна операційна панель адміністратора",
-        done10_text: "— черга модерації з кнопками верифікувати/заблокувати прямо з рядка, перезапуск упавших import jobs, фільтри і пагінація по всіх секціях, журнал аудиту, security-стрічка і єдиний екран `/dashboard/admin/operations` з polling вже є. Залишилося: source health dashboard у окремому екрані.",
+        done10_text: "— черга модерації з верифікацією/блокуванням прямо з рядка, перезапуск упавших import jobs, фільтри та пагінація, журнал аудиту, security-стрічка, єдиний екран операцій та source health dashboard для всіх інтеграцій.",
         done11_title: "Комерційний контур",
         done11_text: "— платні кабінети, аналітика, ліди, звіти та B2B-сценарії.",
         done12_title: "Підготовка до промислової експлуатації",
@@ -1347,10 +1347,10 @@
         next1: "Довести 2 реальні мережі до стабільного автоматичного завантаження даних.",
         next2: "Покращити якість і регулярність оновлення пропозицій, додати повноцінний контур ручної перевірки для ризикованих пропозицій.",
         next3: "Запустити перші комерційні пілоти з магазинами та B2B-клієнтами.",
-        next4: "Дожати Phase 7: source health dashboard у окремому ops-екрані.",
+        next4: "Розпочати Phase 8: аналітика переходів, ліди та перші монетизаційні сценарії.",
         next_steps2_title: "Наступний великий етап",
         next5: "Увімкнути платні сценарії: підписки, платні звіти, лідогенерацію та корпоративні тарифи.",
-        next6: "Завершити Фазу 7 повністю: процес ручного перегляду, інструменти для інцидентів, фільтрація та пагінація для ops-контурів.",
+        next6: "Розширити Phase 8: партнерська аналітика, звіти по попиту та регіональні інсайти.",
         next7: "Розширити аналітику, звітність та операційні інструменти.",
         next8: "Підготувати продукт до повноцінної роботи в промисловому середовищі.",
         advantages_title: "Чому ми сильніші за аналоги",
@@ -1425,8 +1425,8 @@
         docs3: "правила безпеки, доступу та роботи з даними",
         status_title: "Поточний статус",
         status_date: "Актуально на: 15 квітня 2026",
-        status_phase: "Активні фази: 5 і 7 в роботі, 6 закрита ✅",
-        status_desc: "Повністю завершені фази 0–4. Фаза 6 за продуктом закрита: API порівняння послуг, імпорт підрядників, ринкові прапорці аномалій, змішаний потік кошторису та екран результату з двома секціями працюють. У Фазі 5 ще доводимо реальні feed/API торгових мереж. Phase 7 доведена приблизно до 90%: черга модерації, ручна верифікація/блокування з черги, перезапуск упавших jobs, журнал аудиту, події безпеки та екран операцій вже є — 131 backend тести зелені, перевірка типів фронтенду теж зелена."
+        status_phase: "Фази 0–4, 6, 7 завершені ✅; Фаза 5 в роботі",
+        status_desc: "Повністю завершені фази 0–4, 6, 7. Фаза 7 закрита: черга модерації, ручна верифікація, перезапуск jobs, журнал аудиту, події безпеки, source health dashboard — 132 backend тести зелені. Фаза 6 закрита: API порівняння послуг, імпорт підрядників, ринкові прапорці, змішаний кошторис. У Фазі 5 ще доводимо реальні feed/API торгових мереж."
     },
     en: {
         modal_title: "Choose language",
@@ -1594,7 +1594,7 @@
         done9_title: "Work cost comparison + mixed-estimate flow",
         done9_text: "— service comparison API, contractor price import, public UI for work comparison, market anomaly flags work. The main thing: one estimate now matches both materials and work simultaneously — lines with keywords (installation, laying, plastering...) go to the ServiceMatchEngine, the rest go to the MaterialMatchEngine. Result on one screen with two sections.",
         done10_title: "Full operational admin panel",
-        done10_text: "— moderation queue with one-click verify/suspend per row, failed import job reprocess, filters and pagination across all sections, audit log, security events stream and unified admin operations screen with polling all exist. Remaining: source health dashboard in a dedicated ops screen.",
+        done10_text: "— moderation queue with one-click verify/suspend per row, failed import job reprocess, filters and pagination across all sections, audit log, security events stream, unified admin operations screen with polling and source health dashboard for all integrations.",
         done11_title: "Commercial circuit",
         done11_text: "— paid offices, analytics, leads, reports and B2B scenarios.",
         done12_title: "Production hardening",
@@ -1604,10 +1604,10 @@
         next1: "Bring 2 real networks to stable automatic data loading.",
         next2: "Improve the quality and regularity of offer updates, then add a full manual review circuit for the riskiest offers.",
         next3: "Launch first commercial pilots with stores and B2B clients.",
-        next4: "Close Phase 7: source health dashboard in a dedicated ops screen.",
+        next4: "Start Phase 8: click tracking, leads and first monetisation scenarios.",
         next_steps2_title: "Next big stage",
         next5: "Enable paid scenarios: subscriptions, paid reports, lead generation and corporate tariffs.",
-        next6: "Close Phase 7 honestly: manual review workflow, incident tools, filtering and pagination for ops circuits.",
+        next6: "Expand Phase 8: partner analytics, demand reports and regional insights.",
         next7: "Expand analytics, reporting and operational tools.",
         next8: "Prepare the product for full-fledged production operation.",
         advantages_title: "Why we are stronger than analogues",
@@ -1705,7 +1705,7 @@
         phase6: "Фаза 6 — Каталог услуг и сравнение работ",
         phase6_status: "завершена: API сравнения, импорт, интерфейс, рыночные флаги, общий сценарий оценки",
         phase7: "Фаза 7 — Полная панель администратора",
-        phase7_status: "очередь модерации, мониторинг импортов, журнал аудита, события безопасности, интерфейс операций",
+        phase7_status: "завершена: очередь модерации, ручная верификация, мониторинг импортов, журнал аудита, события безопасности, source health dashboard",
         phase8: "Фаза 8 — Отчёты, лиды и аналитика",
         phase8_status: "запланировано",
         phase9: "Фаза 9 — Подготовка к промышленной эксплуатации",
@@ -1839,7 +1839,7 @@
         done9_title: "Сравнение стоимости работ + общий сценарий оценки",
         done9_text: "— работает API сравнения по услугам, импорт прайсов подрядчиков, публичный интерфейс сравнения работ, рыночные флаги аномалий. Главное: одна смета теперь сопоставляет и материалы, и работы одновременно — строки с ключевыми словами (монтаж, укладка, штукатурка...) идут в движок сопоставления услуг, остальные — в движок сопоставления материалов. Результат на одном экране с двумя секциями.",
         done10_title: "Полная операционная панель администратора",
-        done10_text: "— очередь модерации с кнопками верифицировать/заблокировать прямо в строке, перезапуск упавших import jobs, фильтры и пагинация по всем секциям, журнал аудита, security-лента и единый экран `/dashboard/admin/operations` с polling уже есть. Осталось: source health dashboard в отдельном ops-экране.",
+        done10_text: "— очередь модерации с верификацией/блокировкой прямо в строке, перезапуск упавших import jobs, фильтры и пагинация, журнал аудита, security-лента, единый экран операций с polling и source health dashboard для всех интеграций.",
         done11_title: "Коммерческий контур",
         done11_text: "— платные кабинеты, аналитика, лиды, отчёты и B2B-сценарии.",
         done12_title: "Подготовка к промышленной эксплуатации",
@@ -1849,10 +1849,10 @@
         next1: "Довести 2 реальные сети до стабильной автоматической загрузки данных.",
         next2: "Улучшить качество и регулярность обновления предложений, добавить полноценный контур ручной проверки для рискованных предложений.",
         next3: "Запустить первые коммерческие пилоты с магазинами и B2B-клиентами.",
-        next4: "Дожать Phase 7: source health dashboard в отдельном ops-экране.",
+        next4: "Начать Phase 8: трекинг переходов, лиды и первые монетизационные сценарии.",
         next_steps2_title: "Следующий большой этап",
         next5: "Включить платные сценарии: подписки, платные отчёты, лидогенерацию и корпоративные тарифы.",
-        next6: "Завершить Фазу 7 полностью: процесс ручного просмотра, инструменты для инцидентов, фильтрация и пагинация для ops-контуров.",
+        next6: "Расширить Phase 8: партнёрская аналитика, отчёты по спросу и региональные инсайты.",
         next7: "Расширить аналитику, отчётность и операционные инструменты.",
         next8: "Подготовить продукт к полноценной работе в промышленной среде.",
         advantages_title: "Почему мы сильнее аналогов",
@@ -1927,8 +1927,8 @@
         docs3: "правила безопасности, доступа и работы с данными",
         status_title: "Текущий статус",
         status_date: "Актуально на: 15 апреля 2026",
-        status_phase: "Активные фазы: 5 и 7 в работе, 6 закрыта ✅",
-        status_desc: "Полностью завершены фазы 0–4. Фаза 6 по продукту закрыта: API сравнения по услугам, импорт подрядчиков, рыночные флаги аномалий, смешанный поток сметы и экран результата с двумя секциями работают. В Фазе 5 ещё доводим реальные feed/API торговых сетей. Phase 7 доведена примерно до 90%: очередь модерации, ручная верификация/блокировка из очереди, перезапуск упавших jobs, журнал аудита, события безопасности и экран операций уже есть — 131 backend тест зелёные, проверка типов фронтенда тоже зелёная.",
+        status_phase: "Фазы 0–4, 6, 7 завершены ✅; Фаза 5 в работе",
+        status_desc: "Полностью завершены фазы 0–4, 6, 7. Фаза 7 закрыта: очередь модерации, ручная верификация, перезапуск jobs, журнал аудита, события безопасности, source health dashboard — 132 backend теста зелёные. Фаза 6 закрыта: API сравнения услуг, импорт подрядчиков, рыночные флаги аномалий, смешанная смета. В Фазе 5 ещё доводим реальные feed/API торговых сетей.",
         page_title: "Budget Checker 2.0 — Инвестиционная презентация",
         switch_uk: "🇺🇦 UA",
         switch_en: "🇬🇧 EN",
