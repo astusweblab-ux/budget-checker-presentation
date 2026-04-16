@@ -523,20 +523,27 @@
 
         .phase-row {
             display: grid;
-            grid-template-columns: 220px 1fr;
-            align-items: center;
+            grid-template-columns: 240px 1fr;
+            align-items: start;
             gap: 12px;
         }
 
         .phase-label {
-            font-size: 12px;
-            color: #64748b;
+            font-size: 13px;
+            color: #475569;
+            font-weight: 600;
+            line-height: 1.45;
+            padding-top: 6px;
+        }
+
+        .phase-content {
+            min-width: 0;
         }
 
         .phase-bar-track {
-            height: 24px;
+            height: 28px;
             background: #ece3d7;
-            border-radius: 8px;
+            border-radius: 10px;
             overflow: hidden;
         }
 
@@ -544,11 +551,25 @@
             height: 100%;
             display: flex;
             align-items: center;
-            padding: 0 8px;
-            font-size: 11px;
+            padding: 0 10px;
+            font-size: 12px;
             font-weight: 700;
             white-space: nowrap;
-            border-radius: 8px;
+            border-radius: 10px;
+        }
+
+        .phase-percent {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .phase-status {
+            margin-top: 8px;
+            font-size: 13px;
+            line-height: 1.5;
+            color: #475569;
+            word-break: break-word;
         }
 
         .phase-done   { background: #238636; color: #ffffff; }
@@ -595,16 +616,26 @@
             
             .phase-row {
                 grid-template-columns: 1fr;
-                gap: 5px;
+                gap: 8px;
             }
             
             .phase-label {
-                font-size: 11px;
+                font-size: 12px;
+                padding-top: 0;
+            }
+            
+            .phase-bar-track {
+                height: 26px;
             }
             
             .phase-fill {
-                font-size: 10px;
-                padding: 0 6px;
+                font-size: 11px;
+                padding: 0 8px;
+            }
+
+            .phase-status {
+                font-size: 12px;
+                margin-top: 6px;
             }
             
             .card {
@@ -735,43 +766,72 @@
         <div class="phases">
             <div class="phase-row">
                 <span class="phase-label" data-i18n="phase0">Фаза 0 — Продуктовий контракт</span>
-                <div class="phase-bar-track"><div class="phase-fill phase-done" style="width:100%">✅ 100% — <span data-i18n="phase0_status">завершено</span></div></div>
+                <div class="phase-content">
+                    <div class="phase-bar-track"><div class="phase-fill phase-done" style="width:100%"><span class="phase-percent">✅ 100%</span></div></div>
+                    <div class="phase-status" data-i18n="phase0_status">завершено</div>
+                </div>
             </div>
             <div class="phase-row">
                 <span class="phase-label" data-i18n="phase1">Фаза 1 — Технічний фундамент</span>
-                <div class="phase-bar-track"><div class="phase-fill phase-done" style="width:100%">✅ 100% — <span data-i18n="phase1_status">завершено</span></div></div>
+                <div class="phase-content">
+                    <div class="phase-bar-track"><div class="phase-fill phase-done" style="width:100%"><span class="phase-percent">✅ 100%</span></div></div>
+                    <div class="phase-status" data-i18n="phase1_status">завершено</div>
+                </div>
             </div>
             <div class="phase-row">
                 <span class="phase-label" data-i18n="phase2">Фаза 2 — Реєстрація, ролі та кабінети</span>
-                <div class="phase-bar-track"><div class="phase-fill phase-done" style="width:100%">✅ 100% — <span data-i18n="phase2_status">завершено</span></div></div>
+                <div class="phase-content">
+                    <div class="phase-bar-track"><div class="phase-fill phase-done" style="width:100%"><span class="phase-percent">✅ 100%</span></div></div>
+                    <div class="phase-status" data-i18n="phase2_status">завершено</div>
+                </div>
             </div>
             <div class="phase-row">
                 <span class="phase-label" data-i18n="phase3">Фаза 3 — Каталог матеріалів (перша версія)</span>
-                <div class="phase-bar-track"><div class="phase-fill phase-done" style="width:100%">✅ 100% — <span data-i18n="phase3_status">завершено</span></div></div>
+                <div class="phase-content">
+                    <div class="phase-bar-track"><div class="phase-fill phase-done" style="width:100%"><span class="phase-percent">✅ 100%</span></div></div>
+                    <div class="phase-status" data-i18n="phase3_status">завершено</div>
+                </div>
             </div>
             <div class="phase-row">
                 <span class="phase-label" data-i18n="phase4">Фаза 4 — Зіставлення та порівняння матеріалів</span>
-                <div class="phase-bar-track"><div class="phase-fill phase-done" style="width:100%">✅ 100% — <span data-i18n="phase4_status">базова версія готова</span></div></div>
+                <div class="phase-content">
+                    <div class="phase-bar-track"><div class="phase-fill phase-done" style="width:100%"><span class="phase-percent">✅ 100%</span></div></div>
+                    <div class="phase-status" data-i18n="phase4_status">базова версія готова</div>
+                </div>
             </div>
             <div class="phase-row">
                 <span class="phase-label" data-i18n="phase5">Фаза 5 — Інтеграції з торговими мережами</span>
-                <div class="phase-bar-track"><div class="phase-fill phase-active" style="width:80%">🔄 80%</div></div>
+                <div class="phase-content">
+                    <div class="phase-bar-track"><div class="phase-fill phase-active" style="width:80%"><span class="phase-percent">🔄 80%</span></div></div>
+                </div>
             </div>
             <div class="phase-row">
                 <span class="phase-label" data-i18n="phase6">Фаза 6 — Каталог послуг і порівняння робіт</span>
-                <div class="phase-bar-track"><div class="phase-fill phase-done" style="width:100%">✅ 100% — <span data-i18n="phase6_status">завершено: API порівняння, імпорт, інтерфейс, ринкові прапорці, спільний сценарій оцінки</span></div></div>
+                <div class="phase-content">
+                    <div class="phase-bar-track"><div class="phase-fill phase-done" style="width:100%"><span class="phase-percent">✅ 100%</span></div></div>
+                    <div class="phase-status" data-i18n="phase6_status">завершено: API порівняння, імпорт, інтерфейс, ринкові прапорці, спільний сценарій оцінки</div>
+                </div>
             </div>
             <div class="phase-row">
                 <span class="phase-label" data-i18n="phase7">Фаза 7 — Повна панель адміністратора</span>
-                <div class="phase-bar-track"><div class="phase-fill phase-done" style="width:100%">✅ 100% — <span data-i18n="phase7_status">черга модерації, ручна перевірка партнерів, перезапуск завдань, журнал аудиту, події безпеки та панель стану джерел даних</span></div></div>
+                <div class="phase-content">
+                    <div class="phase-bar-track"><div class="phase-fill phase-done" style="width:100%"><span class="phase-percent">✅ 100%</span></div></div>
+                    <div class="phase-status" data-i18n="phase7_status">черга модерації, ручна перевірка партнерів, перезапуск завдань, журнал аудиту, події безпеки та панель стану джерел даних</div>
+                </div>
             </div>
             <div class="phase-row">
                 <span class="phase-label" data-i18n="phase8">Фаза 8 — Звіти, ліди та аналітика</span>
-                <div class="phase-bar-track"><div class="phase-fill phase-done" style="width:100%">✅ 100% — <span data-i18n="phase8_status">базовий етап завершено: відстеження кліків, партнерська аналітика, позначки лідів, звіт за попитом і партнерська панель; розширення винесено на окреме рішення</span></div></div>
+                <div class="phase-content">
+                    <div class="phase-bar-track"><div class="phase-fill phase-done" style="width:100%"><span class="phase-percent">✅ 100%</span></div></div>
+                    <div class="phase-status" data-i18n="phase8_status">базовий етап завершено: відстеження кліків, партнерська аналітика, позначки лідів, звіт за попитом і партнерська панель; розширення винесено на окреме рішення</div>
+                </div>
             </div>
             <div class="phase-row">
                 <span class="phase-label" data-i18n="phase9">Фаза 9 — Підготовка до промислової експлуатації</span>
-                <div class="phase-bar-track"><div class="phase-fill phase-active" style="width:20%">🔄 20% — <span data-i18n="phase9_status">базова підготовка до стабільного запуску: обмеження частоти запитів, перевірка готовності системи, базова конфігурація робочого середовища</span></div></div>
+                <div class="phase-content">
+                    <div class="phase-bar-track"><div class="phase-fill phase-active" style="width:20%"><span class="phase-percent">🔄 20%</span></div></div>
+                    <div class="phase-status" data-i18n="phase9_status">базова підготовка до стабільного запуску: обмеження частоти запитів, перевірка готовності системи, базова конфігурація робочого середовища</div>
+                </div>
             </div>
         </div>
 
