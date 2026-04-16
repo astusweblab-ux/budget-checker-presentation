@@ -632,6 +632,41 @@
             width: 100% !important;
         }
 
+        .cta-pilot {
+            margin-top: 24px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .cta-pilot a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #ffffff;
+            color: #1f3052;
+            font-weight: 700;
+            font-size: 15px;
+            padding: 12px 24px;
+            border-radius: 999px;
+            border: none;
+            text-decoration: none;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.18);
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        .cta-pilot a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 26px rgba(0,0,0,0.22);
+            border-bottom: none;
+        }
+
+        .cta-pilot-note {
+            font-size: 13px;
+            color: rgba(255,255,255,0.7);
+        }
+
         /* Мобильная адаптация */
         @media (max-width: 900px) {
             .grid-2,
@@ -831,6 +866,13 @@
                 <p data-i18n="hero_summary">
                     Це проєкт не про "ще один каталог товарів", а про більш цінне завдання: допомогти людині, підряднику або закупівельнику швидко зрозуміти реальну вартість ремонту чи будівництва. Для користувача це економія та прозорість. Для магазинів і підрядників — потік цільових клієнтів. Для інвестора — платформа з кількома джерелами доходу та зрозумілою точкою зростання.
                 </p>
+            </div>
+
+            <div class="cta-pilot">
+                <a href="https://budcheck.pp.ua/" target="_blank" rel="noopener">
+                    ▶ <span data-i18n="cta_pilot_btn">Переглянути пілот проєкту</span>
+                </a>
+                <span class="cta-pilot-note" data-i18n="cta_pilot_note">budcheck.pp.ua — живий робочий продукт</span>
             </div>
         </section>
 
@@ -1309,6 +1351,7 @@
                 <h3 style="margin-bottom: 8px;" data-i18n="status_title">Поточний статус</h3>
                 <p data-i18n="status_date">Актуально на: 16 квітня 2026</p>
                 <p data-i18n="status_phase">Технічно продукт готовий до запуску ✅</p>
+                <p style="margin-top: 10px;"><a href="https://budcheck.pp.ua/" target="_blank" rel="noopener" data-i18n="status_pilot_link">▶ Переглянути пілот: budcheck.pp.ua</a></p>
                 <p data-i18n="status_desc">Наступні кроки вже не про код, а про бізнес-операції: домовитись про доступ до реальних фідів Епіцентру та Нової Лінії й підключити їх через готові адаптери; оформити стандартний Pull Request у main та провести фінальний review перед production-деплоєм; підготувати production-інфраструктуру (PostgreSQL, Redis, SMTP, S3) за .env.example; провести онбординг щонайменше одного магазину, верифікацію в адмінці та перший реальний імпорт каталогу.</p>
             </div>
         </div>
@@ -1580,6 +1623,9 @@
         docs2: "поетапний план розробки та розвитку",
         docs3: "правила безпеки, доступу та роботи з даними",
         status_title: "Поточний статус",
+        cta_pilot_btn: "Переглянути пілот проєкту",
+        cta_pilot_note: "budcheck.pp.ua — живий робочий продукт",
+        status_pilot_link: "▶ Переглянути пілот: budcheck.pp.ua",
         status_date: "Актуально на: 16 квітня 2026",
         status_phase: "Технічно продукт готовий до запуску ✅",
         status_desc: "Наступні кроки вже не про код, а про бізнес-операції: домовитись про доступ до реальних фідів Епіцентру та Нової Лінії й підключити їх через готові адаптери; оформити стандартний Pull Request у main та провести фінальний review перед production-деплоєм; підготувати production-інфраструктуру (PostgreSQL, Redis, SMTP, S3) за .env.example; провести онбординг щонайменше одного магазину, верифікацію в адмінці та перший реальний імпорт каталогу.",
@@ -1845,6 +1891,9 @@
         docs2: "phased development and growth plan",
         docs3: "security, access and data handling rules",
         status_title: "Current status",
+        cta_pilot_btn: "View the pilot project",
+        cta_pilot_note: "budcheck.pp.ua — live working product",
+        status_pilot_link: "▶ View pilot: budcheck.pp.ua",
         status_date: "Updated: April 16, 2026",
         status_phase: "The product is technically ready for launch ✅",
         status_desc: "The next steps are no longer core coding tasks, but business operations: secure access to real Epicentr and Nova Liniya feeds and connect them through existing adapters; open a standard PR to main and complete a final review before production deploy; prepare production infrastructure (PostgreSQL, Redis, SMTP, S3) using .env.example; onboard at least one real store, verify it in admin, and run the first real catalog import.",
@@ -2098,6 +2147,9 @@
         docs2: "поэтапный план разработки и развития",
         docs3: "правила безопасности, доступа и работы с данными",
         status_title: "Текущий статус",
+        cta_pilot_btn: "Посмотреть пилот проекта",
+        cta_pilot_note: "budcheck.pp.ua — живой рабочий продукт",
+        status_pilot_link: "▶ Посмотреть пилот: budcheck.pp.ua",
         status_date: "Актуально на: 16 апреля 2026",
         status_phase: "Технически продукт готов к запуску ✅",
         status_desc: "Следующие шаги уже не про код, а про бизнес и операционку: связаться с Эпицентром и Новой Линией, получить доступ к реальным фидам и подключить их через готовые адаптеры; оформить стандартный Pull Request в main и провести финальный review перед production-деплоем; подготовить production-инфраструктуру (PostgreSQL, Redis, SMTP, S3) по .env.example; провести онбординг хотя бы одного магазина, верификацию в админке и первый реальный импорт каталога.",
