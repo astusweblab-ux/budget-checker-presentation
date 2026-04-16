@@ -1308,8 +1308,8 @@
             <div>
                 <h3 style="margin-bottom: 8px;" data-i18n="status_title">Поточний статус</h3>
                 <p data-i18n="status_date">Актуально на: 16 квітня 2026</p>
-                <p data-i18n="status_phase">Фази 0–4, 6, 7 і 9 завершені ✅; Фаза 8 завершена як foundation; Фаза 5 — у роботі</p>
-                <p data-i18n="status_desc">Повністю завершені фази 0–4, 6, 7 і 9, а Фазу 8 закрито як foundation. У Фазі 9 закрито базову підготовку до стабільного запуску: обмеження частоти запитів, перевірку готовності системи, контроль підключення до бази даних, перелік вимог до запуску та інструкції на випадок збоїв. Розширення Фази 8 — регіональна аналітика, розширені інструменти монетизації та деталізований інтерфейс — винесено в окремий пакет рішень. У Фазі 5 ще триває підключення реальних автоматичних джерел даних торгових мереж.</p>
+                <p data-i18n="status_phase">Технічно продукт готовий до запуску ✅</p>
+                <p data-i18n="status_desc">Наступні кроки вже не про код, а про бізнес-операції: домовитись про доступ до реальних фідів Епіцентру та Нової Лінії й підключити їх через готові адаптери; оформити стандартний Pull Request у main та провести фінальний review перед production-деплоєм; підготувати production-інфраструктуру (PostgreSQL, Redis, SMTP, S3) за .env.example; провести онбординг щонайменше одного магазину, верифікацію в адмінці та перший реальний імпорт каталогу.</p>
             </div>
         </div>
 
@@ -1581,8 +1581,8 @@
         docs3: "правила безпеки, доступу та роботи з даними",
         status_title: "Поточний статус",
         status_date: "Актуально на: 16 квітня 2026",
-        status_phase: "Фази 0–4, 6, 7 і 9 завершені ✅; Фаза 8 завершена як foundation; Фаза 5 — у роботі",
-        status_desc: "Повністю завершені фази 0–4, 6, 7 і 9, а Фазу 8 закрито як foundation. У Фазі 9 закрито базову підготовку до стабільного запуску: обмеження частоти запитів, перевірку готовності системи, контроль підключення до бази даних, перелік вимог до запуску та інструкції на випадок збоїв. Розширення Фази 8 — регіональна аналітика, розширені інструменти монетизації та деталізований інтерфейс — винесено в окремий пакет рішень. У Фазі 5 ще триває підключення реальних автоматичних джерел даних торгових мереж.",
+        status_phase: "Технічно продукт готовий до запуску ✅",
+        status_desc: "Наступні кроки вже не про код, а про бізнес-операції: домовитись про доступ до реальних фідів Епіцентру та Нової Лінії й підключити їх через готові адаптери; оформити стандартний Pull Request у main та провести фінальний review перед production-деплоєм; підготувати production-інфраструктуру (PostgreSQL, Redis, SMTP, S3) за .env.example; провести онбординг щонайменше одного магазину, верифікацію в адмінці та перший реальний імпорт каталогу.",
     },
     en: {
         modal_title: "Choose language",
@@ -1846,8 +1846,8 @@
         docs3: "security, access and data handling rules",
         status_title: "Current status",
         status_date: "Updated: April 16, 2026",
-        status_phase: "Phases 0–4, 6, 7, and 9 completed ✅; Phase 8 is completed as foundation; Phase 5 in progress",
-        status_desc: "Phases 0–4, 6, 7, 8 (foundation), and 9 are fully complete. Phase 9 closes minimum production hardening: slowapi rate limiting, readiness probe with DB check, production checklist, and incident runbooks. The Phase 8 extension remains in DECISIONS_PENDING (regional analytics, monetisation hooks, lead drill-down UI). Phase 5 still needs real retail feed/API rollout.",
+        status_phase: "The product is technically ready for launch ✅",
+        status_desc: "The next steps are no longer core coding tasks, but business operations: secure access to real Epicentr and Nova Liniya feeds and connect them through existing adapters; open a standard PR to main and complete a final review before production deploy; prepare production infrastructure (PostgreSQL, Redis, SMTP, S3) using .env.example; onboard at least one real store, verify it in admin, and run the first real catalog import.",
     },
     ru: {
         modal_title: "Выберите язык",
@@ -2099,8 +2099,8 @@
         docs3: "правила безопасности, доступа и работы с данными",
         status_title: "Текущий статус",
         status_date: "Актуально на: 16 апреля 2026",
-        status_phase: "Фазы 0–4, 6, 7 и 9 завершены ✅; Фаза 8 закрыта как foundation; Фаза 5 — в работе",
-        status_desc: "Полностью завершены фазы 0–4, 6, 7 и 9, а Фаза 8 закрыта как foundation. В Фазе 9 закрыта базовая подготовка к стабильному запуску: ограничение частоты запросов, проверка готовности системы, контроль подключения к базе данных, перечень требований к запуску и инструкции на случай сбоев. Расширение Фазы 8 — региональная аналитика, расширенные инструменты монетизации и более детальный интерфейс — вынесено в отдельный пакет решений. В Фазе 5 ещё продолжается подключение реальных автоматических источников данных торговых сетей.",
+        status_phase: "Технически продукт готов к запуску ✅",
+        status_desc: "Следующие шаги уже не про код, а про бизнес и операционку: связаться с Эпицентром и Новой Линией, получить доступ к реальным фидам и подключить их через готовые адаптеры; оформить стандартный Pull Request в main и провести финальный review перед production-деплоем; подготовить production-инфраструктуру (PostgreSQL, Redis, SMTP, S3) по .env.example; провести онбординг хотя бы одного магазина, верификацию в админке и первый реальный импорт каталога.",
         page_title: "Budget Checker 2.0 — Инвестиционная презентация",
         switch_uk: "🇺🇦 UA",
         switch_en: "🇬🇧 EN",
