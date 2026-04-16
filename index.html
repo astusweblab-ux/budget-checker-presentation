@@ -771,7 +771,7 @@
             </div>
             <div class="phase-row">
                 <span class="phase-label" data-i18n="phase9">Фаза 9 — Підготовка до промислової експлуатації</span>
-                <div class="phase-bar-track"><div class="phase-fill phase-planned">⬜ <span data-i18n="phase9_status">заплановано</span></div></div>
+                <div class="phase-bar-track"><div class="phase-fill phase-active" style="width:20%">🔄 20% — <span data-i18n="phase9_status">мінімальний hardening baseline: rate limiting, readiness probe, production env baseline</span></div></div>
             </div>
         </div>
 
@@ -1040,7 +1040,7 @@
             <p><span class="badge badge-green" data-i18n="badge_done">ГОТОВО</span> <strong data-i18n="done9_title">Порівняння вартості робіт + спільний сценарій оцінки</strong> <span data-i18n="done9_text">— працює API порівняння за послугами, імпорт прайсів підрядників, публічний інтерфейс порівняння робіт, ринкові прапорці аномалій. Головне: один кошторис тепер зіставляє і матеріали, і роботи одночасно — рядки з ключовими словами (монтаж, укладання, штукатурка...) йдуть у двигун зіставлення послуг, решта — у двигун зіставлення матеріалів. Результат на одному екрані з двома секціями.</span></p>
             <p><span class="badge badge-green" data-i18n="badge_done">ГОТОВО</span> <strong data-i18n="done10_title">Повна операційна панель адміністратора</strong> <span data-i18n="done10_text">— черга модерації з верифікацією/блокуванням прямо з рядка, перезапуск упавших import jobs, фільтри та пагінація, журнал аудиту, security-стрічка, єдиний екран операцій та source health dashboard для всіх інтеграцій.</span></p>
             <p><span class="badge badge-green" data-i18n="badge_done">ГОТОВО</span> <strong data-i18n="done11_title">Комерційний контур (Phase 8 foundation)</strong> <span data-i18n="done11_text">— foundation закрито: трекінг кліків на оффери, партнерська аналітика, lead-мітки (estimate/compare), звіт по попиту з estimate_lines + compare jobs, окрема partner dashboard сторінка та кнопки «Перейти в магазин» і «Зв'язатись з підрядником» у результатах порівняння. Регіональна аналітика, monetization hooks і drill-down UI винесені в DECISIONS_PENDING як Phase 8 extension.</span></p>
-            <p><span class="badge badge-blue" data-i18n="badge_next_stage">НАСТУПНИЙ ЕТАП</span> <strong data-i18n="done12_title">Підготовка до промислової експлуатації</strong> <span data-i18n="done12_text">— моніторинг, стабільність, звітність, операційні панелі та повний контур експлуатації.</span></p>
+            <p><span class="badge badge-yellow" data-i18n="badge_in_progress">В РОБОТІ</span> <strong data-i18n="done12_title">Підготовка до промислової експлуатації (Phase 9) — розпочато</strong> <span data-i18n="done12_text">— мінімальний hardening baseline уже в роботі: rate limiting на критичних POST-ендпоінтах, readiness probe з перевіркою БД, production env baseline (DATABASE_URL/REDIS_URL/SENTRY_DSN). Далі: backup/restore, alerting, runbooks, abuse protection.</span></p>
         </div>
 
         <h2 data-i18n="next_steps_title">Що потрібно зробити далі по порядку</h2>
@@ -1060,7 +1060,7 @@
                     <li data-i18n="next5">Увімкнути платні сценарії: підписки, платні звіти, лідогенерацію та корпоративні тарифи.</li>
                     <li data-i18n="next6">Повернутись до Phase 8 extension після production launch: регіональна аналітика, drill-down лідів, платні сценарії для партнерів.</li>
                     <li data-i18n="next7">Розширити аналітику, звітність та операційні інструменти.</li>
-                    <li data-i18n="next8">Підготувати продукт до повноцінної роботи в промисловому середовищі.</li>
+                    <li data-i18n="next8">Продовжити Phase 9: backup/restore, alerting, runbooks, abuse protection та performance profiling.</li>
                 </ul>
             </div>
         </div>
@@ -1160,8 +1160,8 @@
             <div>
                 <h3 style="margin-bottom: 8px;" data-i18n="status_title">Поточний статус</h3>
                 <p data-i18n="status_date">Актуально на: 16 квітня 2026</p>
-                <p data-i18n="status_phase">Фази 0–4, 6, 7, 8 (foundation) завершені ✅; Фаза 5 в роботі; Фаза 9 — наступна</p>
-                <p data-i18n="status_desc">Повністю завершені фази 0–4, 6, 7 і 8 (foundation). Фаза 6 закрита: API порівняння послуг, імпорт підрядників, ринкові прапорці аномалій, mixed-estimate flow. Фаза 7 закрита: черга модерації, ручна верифікація, перезапуск jobs, журнал аудиту, події безпеки, source health dashboard — повний backend test suite зелений. Фаза 8 (foundation) закрита: трекінг кліків, партнерська аналітика, lead-мітки, звіт по попиту, partner dashboard; 10 тестів Phase 8 зелені. Регіональна аналітика, monetization hooks і drill-down UI винесені в DECISIONS_PENDING як Phase 8 extension. У Фазі 5 ще доводимо реальні feed/API торгових мереж, паралельно готуємо старт Фази 9.</p>
+                <p data-i18n="status_phase">Фази 0–4, 6, 7, 8 (foundation) завершені ✅; Фази 5 і 9 в роботі</p>
+                <p data-i18n="status_desc">Повністю завершені фази 0–4, 6, 7 і 8 (foundation). Фаза 8 закрита як foundation: трекінг кліків, партнерська аналітика, lead-мітки, звіт по попиту, partner dashboard; 10 тестів Phase 8 зелені. Phase 8 extension винесено в DECISIONS_PENDING (регіональна аналітика, monetization hooks, drill-down UI). Фаза 9 розпочата: підключено slowapi rate limiting (upload 10/h, compare materials/services 30/h, auth token 20/h), readiness probe перевіряє DB connection і повертає ok/degraded, оновлено production env baseline (DATABASE_URL/REDIS_URL/SENTRY_DSN). У Фазі 5 ще доводимо реальні feed/API торгових мереж.</p>
             </div>
         </div>
 
@@ -1207,7 +1207,7 @@
         phase8: "Фаза 8 — Звіти, ліди та аналітика",
         phase8_status: "foundation завершено: трекінг кліків, партнерська аналітика, lead-мітки, звіт по попиту, dashboard; extension винесено в DECISIONS_PENDING",
         phase9: "Фаза 9 — Підготовка до промислової експлуатації",
-        phase9_status: "заплановано",
+        phase9_status: "в процесі: мінімальний hardening baseline (rate limiting, readiness probe, production env baseline)",
         what_is_title: "Що це за проєкт",
         what_is_text: "Budget Checker 2.0 — це сервіс, який перетворює кошторис із незрозумілого документа на зрозумілий фінансовий інструмент. Замість ручного обходу сайтів, дзвінків у магазини та суперечок із підрядником користувач отримує один екран, де видно: які матеріали знайдено, скільки вони коштують у реальних магазинах, де є спірні позиції, де можна заощадити, а де поки бракує даних.",
         problem_title: "Яку проблему ми вирішуємо",
@@ -1340,8 +1340,8 @@
         done10_text: "— черга модерації з верифікацією/блокуванням прямо з рядка, перезапуск упавших import jobs, фільтри та пагінація, журнал аудиту, security-стрічка, єдиний екран операцій та source health dashboard для всіх інтеграцій.",
         done11_title: "Комерційний контур (Phase 8 foundation) — завершено",
         done11_text: "— foundation закрито: трекінг кліків на оффери, партнерська аналітика, lead-мітки (estimate/compare), звіт по попиту з estimate_lines + compare jobs, окрема partner dashboard сторінка та кнопки «Перейти в магазин» і «Зв'язатись з підрядником» у результатах порівняння. Регіональна аналітика, monetization hooks і drill-down UI винесені в DECISIONS_PENDING як Phase 8 extension.",
-        done12_title: "Підготовка до промислової експлуатації",
-        done12_text: "— моніторинг, стабільність, звітність, операційні панелі та повний контур експлуатації.",
+        done12_title: "Підготовка до промислової експлуатації (Phase 9) — розпочато",
+        done12_text: "— мінімальний hardening baseline уже в роботі: rate limiting на критичних POST-ендпоінтах, readiness probe з перевіркою БД, production env baseline (DATABASE_URL/REDIS_URL/SENTRY_DSN). Далі: backup/restore, alerting, runbooks, abuse protection.",
         next_steps_title: "Що потрібно зробити далі по порядку",
         next_steps1_title: "Найближчі кроки",
         next1: "Довести 2 реальні мережі до стабільного автоматичного завантаження даних.",
@@ -1352,7 +1352,7 @@
         next5: "Увімкнути платні сценарії: підписки, платні звіти, лідогенерацію та корпоративні тарифи.",
         next6: "Повернутись до Phase 8 extension після production launch: регіональна аналітика, drill-down лідів, платні сценарії для партнерів.",
         next7: "Розширити аналітику, звітність та операційні інструменти.",
-        next8: "Підготувати продукт до повноцінної роботи в промисловому середовищі.",
+        next8: "Продовжити Phase 9: backup/restore, alerting, runbooks, abuse protection та performance profiling.",
         advantages_title: "Чому ми сильніші за аналоги",
         adv_who: "Хто на ринку",
         adv_what: "Що вміє",
@@ -1425,8 +1425,8 @@
         docs3: "правила безпеки, доступу та роботи з даними",
         status_title: "Поточний статус",
         status_date: "Актуально на: 16 квітня 2026",
-        status_phase: "Фази 0–4, 6, 7, 8 (foundation) завершені ✅; Фаза 5 в роботі; Фаза 9 — наступна",
-        status_desc: "Повністю завершені фази 0–4, 6, 7 і 8 (foundation). Фаза 6 закрита: API порівняння послуг, імпорт підрядників, ринкові прапорці, змішаний кошторис. Фаза 7 закрита: черга модерації, ручна верифікація, перезапуск jobs, журнал аудиту, події безпеки, source health dashboard — повний backend test suite зелений. Фаза 8 (foundation) закрита: трекінг кліків, партнерська аналітика, lead-мітки, звіт по попиту, partner dashboard; 10 тестів Phase 8 зелені. Регіональна аналітика, monetization hooks і drill-down UI винесені в DECISIONS_PENDING як Phase 8 extension. У Фазі 5 ще доводимо реальні feed/API торгових мереж, паралельно готуємо старт Фази 9."
+        status_phase: "Фази 0–4, 6, 7, 8 (foundation) завершені ✅; Фази 5 і 9 в роботі",
+        status_desc: "Повністю завершені фази 0–4, 6, 7 і 8 (foundation). Фаза 8 закрита як foundation: трекінг кліків, партнерська аналітика, lead-мітки, звіт по попиту, partner dashboard; 10 тестів Phase 8 зелені. Phase 8 extension винесено в DECISIONS_PENDING (регіональна аналітика, monetization hooks, drill-down UI). Фаза 9 розпочата: підключено slowapi rate limiting (upload 10/h, compare materials/services 30/h, auth token 20/h), readiness probe перевіряє DB connection і повертає ok/degraded, оновлено production env baseline (DATABASE_URL/REDIS_URL/SENTRY_DSN). У Фазі 5 ще доводимо реальні feed/API торгових мереж.",
     },
     en: {
         modal_title: "Choose language",
@@ -1452,7 +1452,7 @@
         phase8: "Phase 8 — Reports, leads and analytics",
         phase8_status: "foundation complete: click tracking, partner analytics, lead labels, demand report, dashboard; extension moved to DECISIONS_PENDING",
         phase9: "Phase 9 — Production hardening",
-        phase9_status: "planned",
+        phase9_status: "in progress: minimum hardening baseline (rate limiting, readiness probe, production env baseline)",
         what_is_title: "What is this project",
         what_is_text: "Budget Checker 2.0 is a service that turns an estimate from an incomprehensible document into a clear financial tool. Instead of manually browsing sites, calling stores and arguing with a contractor, the user gets one screen showing: which materials are found, how much they cost in real stores, where there are disputed items, where you can save, and where data is still missing.",
         problem_title: "What problem are we solving",
@@ -1597,8 +1597,8 @@
         done10_text: "— moderation queue with one-click verify/suspend per row, failed import job reprocess, filters and pagination across all sections, audit log, security events stream, unified admin operations screen with polling and source health dashboard for all integrations.",
         done11_title: "Commercial circuit (Phase 8 foundation) — complete",
         done11_text: "— foundation is complete: click tracking on offers, partner analytics, lead labels (estimate/compare), demand report from estimate_lines + compare jobs, a dedicated partner dashboard, and 'Go to store' / 'Contact contractor' buttons in compare results. Regional analytics, monetisation hooks and lead drill-down UI were moved to DECISIONS_PENDING as a Phase 8 extension.",
-        done12_title: "Production hardening",
-        done12_text: "— monitoring, stability, reporting, operational panels and full operation circuit.",
+        done12_title: "Production hardening (Phase 9) — started",
+        done12_text: "— minimum hardening baseline is in place: rate limiting on critical POST endpoints, readiness probe with DB check, and production env baseline (DATABASE_URL/REDIS_URL/SENTRY_DSN). Next: backup/restore, alerting, runbooks, abuse protection.",
         next_steps_title: "What needs to be done next in order",
         next_steps1_title: "Immediate steps",
         next1: "Bring 2 real networks to stable automatic data loading.",
@@ -1609,7 +1609,7 @@
         next5: "Enable paid scenarios: subscriptions, paid reports, lead generation and corporate tariffs.",
         next6: "Return to the Phase 8 extension after production launch: regional analytics, lead drill-down, paid partner scenarios.",
         next7: "Expand analytics, reporting and operational tools.",
-        next8: "Prepare the product for full-fledged production operation.",
+        next8: "Continue Phase 9: backup/restore, alerting, runbooks, abuse protection and performance profiling.",
         advantages_title: "Why we are stronger than analogues",
         adv_who: "Who is on the market",
         adv_what: "What they can do",
@@ -1682,8 +1682,8 @@
         docs3: "security, access and data handling rules",
         status_title: "Current status",
         status_date: "Updated: April 16, 2026",
-        status_phase: "Phases 0–4, 6, 7, 8 (foundation) completed ✅; Phase 5 in progress; Phase 9 next",
-        status_desc: "Phases 0–4, 6, 7 and 8 (foundation) are fully complete. Phase 6 closed: service compare API, contractor import, market anomaly flags, mixed-estimate flow. Phase 7 closed: moderation queue, manual verification, failed job reprocess, audit log, security events, source health dashboard — full backend suite green. Phase 8 (foundation) closed: click tracking, partner analytics, lead labels, demand report, partner dashboard; 10 Phase 8 tests are green. Regional analytics, monetisation hooks and lead drill-down UI were moved to DECISIONS_PENDING as a Phase 8 extension. Phase 5 still needs real retail feed/API rollout while we prepare to start Phase 9."
+        status_phase: "Phases 0–4, 6, 7, 8 (foundation) completed ✅; Phases 5 and 9 in progress",
+        status_desc: "Phases 0–4, 6, 7 and 8 (foundation) are fully complete. Phase 8 foundation is closed: click tracking, partner analytics, lead labels, demand report, partner dashboard; 10 Phase 8 tests are green. The Phase 8 extension is in DECISIONS_PENDING (regional analytics, monetisation hooks, lead drill-down UI). Phase 9 has started: slowapi rate limiting is enabled (upload 10/h, compare materials/services 30/h, auth token 20/h), readiness probe now checks DB connectivity and returns ok/degraded, and production env baseline was updated (DATABASE_URL/REDIS_URL/SENTRY_DSN). Phase 5 still needs real retail feed/API rollout.",
     },
     ru: {
         modal_title: "Выберите язык",
@@ -1709,7 +1709,7 @@
         phase8: "Фаза 8 — Отчёты, лиды и аналитика",
         phase8_status: "foundation завершён: клики, партнёрская аналитика, lead-метки, отчёт по спросу, dashboard; extension вынесен в DECISIONS_PENDING",
         phase9: "Фаза 9 — Подготовка к промышленной эксплуатации",
-        phase9_status: "запланировано",
+        phase9_status: "в процессе: минимальный hardening baseline (rate limiting, readiness probe, production env baseline)",
         what_is_title: "Что это за проект",
         what_is_text: "Budget Checker 2.0 — это сервис, который превращает смету из непонятного документа в понятный финансовый инструмент. Вместо ручного обхода сайтов, звонков в магазины и споров с подрядчиком пользователь получает один экран, где видно: какие материалы найдены, сколько они стоят в реальных магазинах, где есть спорные позиции, где можно сэкономить, а где пока не хватает данных.",
         problem_title: "Какую проблему мы решаем",
@@ -1842,8 +1842,8 @@
         done10_text: "— очередь модерации с верификацией/блокировкой прямо в строке, перезапуск упавших import jobs, фильтры и пагинация, журнал аудита, security-лента, единый экран операций с polling и source health dashboard для всех интеграций.",
         done11_title: "Коммерческий контур (Phase 8 foundation) — завершён",
         done11_text: "— foundation закрыт: трекинг кликов на офферы, партнёрская аналитика, lead-метки (estimate/compare), отчёт по спросу из estimate_lines + compare jobs, отдельная partner dashboard страница и кнопки «Перейти в магазин» / «Связаться с подрядчиком» в результатах сравнения. Региональная аналитика, monetization hooks и drill-down UI вынесены в DECISIONS_PENDING как Phase 8 extension.",
-        done12_title: "Подготовка к промышленной эксплуатации",
-        done12_text: "— мониторинг, стабильность, отчётность, операционные панели и полный контур эксплуатации.",
+        done12_title: "Подготовка к промышленной эксплуатации (Phase 9) — начата",
+        done12_text: "— минимальный hardening baseline уже в работе: rate limiting на критичных POST-эндпоинтах, readiness probe с проверкой БД, production env baseline (DATABASE_URL/REDIS_URL/SENTRY_DSN). Далее: backup/restore, alerting, runbooks, abuse protection.",
         next_steps_title: "Что предстоит сделать дальше по порядку",
         next_steps1_title: "Ближайшие шаги",
         next1: "Довести 2 реальные сети до стабильной автоматической загрузки данных.",
@@ -1854,7 +1854,7 @@
         next5: "Включить платные сценарии: подписки, платные отчёты, лидогенерацию и корпоративные тарифы.",
         next6: "Вернуться к Phase 8 extension после production launch: региональная аналитика, drill-down лидов, платные сценарии для партнёров.",
         next7: "Расширить аналитику, отчётность и операционные инструменты.",
-        next8: "Подготовить продукт к полноценной работе в промышленной среде.",
+        next8: "Продолжить Phase 9: backup/restore, alerting, runbooks, abuse protection и performance profiling.",
         advantages_title: "Почему мы сильнее аналогов",
         adv_who: "Кто на рынке",
         adv_what: "Что умеет",
@@ -1927,8 +1927,8 @@
         docs3: "правила безопасности, доступа и работы с данными",
         status_title: "Текущий статус",
         status_date: "Актуально на: 16 апреля 2026",
-        status_phase: "Фазы 0–4, 6, 7, 8 (foundation) завершены ✅; Фаза 5 в работе; Фаза 9 — следующая",
-        status_desc: "Полностью завершены фазы 0–4, 6, 7 и 8 (foundation). Фаза 6 закрыта: API сравнения услуг, импорт подрядчиков, рыночные флаги аномалий, смешанная смета. Фаза 7 закрыта: очередь модерации, ручная верификация, перезапуск jobs, журнал аудита, события безопасности, source health dashboard — полный backend suite зелёный. Фаза 8 (foundation) закрыта: трекинг кликов, партнёрская аналитика, lead-метки, отчёт по спросу, partner dashboard; 10 тестов Phase 8 зелёные. Региональная аналитика, monetization hooks и drill-down UI вынесены в DECISIONS_PENDING как Phase 8 extension. В Фазе 5 ещё доводим реальные feed/API торговых сетей, параллельно готовим старт Фазы 9.",
+        status_phase: "Фазы 0–4, 6, 7, 8 (foundation) завершены ✅; Фазы 5 и 9 в работе",
+        status_desc: "Полностью завершены фазы 0–4, 6, 7 и 8 (foundation). Фаза 8 foundation закрыта: трекинг кликов, партнёрская аналитика, lead-метки, отчёт по спросу, partner dashboard; 10 тестов Phase 8 зелёные. Phase 8 extension вынесен в DECISIONS_PENDING (региональная аналитика, monetization hooks, drill-down UI). Фаза 9 начата: подключён slowapi rate limiting (upload 10/h, compare materials/services 30/h, auth token 20/h), readiness probe проверяет DB connection и возвращает ok/degraded, обновлён production env baseline (DATABASE_URL/REDIS_URL/SENTRY_DSN). В Фазе 5 ещё доводим реальные feed/API торговых сетей.",
         page_title: "Budget Checker 2.0 — Инвестиционная презентация",
         switch_uk: "🇺🇦 UA",
         switch_en: "🇬🇧 EN",
