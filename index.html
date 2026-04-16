@@ -515,25 +515,76 @@
             border-top: 1px solid #e2e8f0;
         }
 
+        .progress-overview {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            margin: 18px 0 16px;
+        }
+
+        .progress-card {
+            background: rgba(255, 253, 249, 0.94);
+            border: 1px solid #e3ddd2;
+            border-radius: 18px;
+            padding: 18px;
+            box-shadow: 0 14px 32px rgba(20, 33, 61, 0.05);
+        }
+
+        .progress-card-primary {
+            background: linear-gradient(135deg, #1f3052 0%, #2d5878 55%, #b46a3a 100%);
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .progress-card-value {
+            font-size: 28px;
+            line-height: 1.05;
+            font-weight: 700;
+            color: #1f3052;
+            margin-bottom: 8px;
+        }
+
+        .progress-card-primary .progress-card-value,
+        .progress-card-primary .progress-card-label {
+            color: #ffffff;
+        }
+
+        .progress-card-label {
+            font-size: 13px;
+            line-height: 1.5;
+            color: #475569;
+        }
+
+        .progress-intro {
+            max-width: 980px;
+            font-size: 15px;
+            color: #475569;
+            margin: 0 0 18px;
+        }
+
         .phases {
             display: grid;
-            gap: 8px;
+            gap: 14px;
             margin: 20px 0;
         }
 
         .phase-row {
             display: grid;
-            grid-template-columns: 240px 1fr;
+            grid-template-columns: 260px 1fr;
             align-items: start;
-            gap: 12px;
+            gap: 16px;
+            background: rgba(255, 253, 249, 0.94);
+            border: 1px solid #e3ddd2;
+            border-radius: 18px;
+            padding: 16px 18px;
+            box-shadow: 0 14px 32px rgba(20, 33, 61, 0.05);
         }
 
         .phase-label {
-            font-size: 13px;
-            color: #475569;
-            font-weight: 600;
+            font-size: 14px;
+            color: #1f3052;
+            font-weight: 700;
             line-height: 1.45;
-            padding-top: 6px;
+            padding-top: 2px;
         }
 
         .phase-content {
@@ -541,21 +592,22 @@
         }
 
         .phase-bar-track {
-            height: 28px;
+            height: 30px;
             background: #ece3d7;
-            border-radius: 10px;
+            border-radius: 999px;
             overflow: hidden;
         }
 
         .phase-fill {
             height: 100%;
-            display: flex;
+            min-width: 84px;
+            display: inline-flex;
             align-items: center;
-            padding: 0 10px;
+            padding: 0 12px;
             font-size: 12px;
             font-weight: 700;
             white-space: nowrap;
-            border-radius: 10px;
+            border-radius: 999px;
         }
 
         .phase-percent {
@@ -565,9 +617,9 @@
         }
 
         .phase-status {
-            margin-top: 8px;
+            margin-top: 10px;
             font-size: 13px;
-            line-height: 1.5;
+            line-height: 1.6;
             color: #475569;
             word-break: break-word;
         }
@@ -614,28 +666,48 @@
                 font-size: 28px;
             }
             
+            .progress-overview {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .progress-card {
+                padding: 16px;
+            }
+
+            .progress-card-value {
+                font-size: 24px;
+            }
+
+            .progress-intro {
+                font-size: 14px;
+                margin-bottom: 16px;
+            }
+
             .phase-row {
                 grid-template-columns: 1fr;
-                gap: 8px;
+                gap: 10px;
+                padding: 14px;
             }
             
             .phase-label {
-                font-size: 12px;
+                font-size: 13px;
                 padding-top: 0;
             }
             
             .phase-bar-track {
-                height: 26px;
+                height: 28px;
             }
             
             .phase-fill {
+                min-width: 76px;
                 font-size: 11px;
                 padding: 0 8px;
             }
 
             .phase-status {
                 font-size: 12px;
-                margin-top: 6px;
+                margin-top: 8px;
             }
             
             .card {
@@ -763,6 +835,21 @@
         </section>
 
         <h2 data-i18n="progress_title">Прогрес розробки</h2>
+        <div class="progress-overview">
+            <div class="progress-card progress-card-primary">
+                <div class="progress-card-value" data-i18n="progress_overview_done_value">8 з 10 фаз</div>
+                <div class="progress-card-label" data-i18n="progress_overview_done_label">вже завершено</div>
+            </div>
+            <div class="progress-card">
+                <div class="progress-card-value" data-i18n="progress_overview_active_value">2 фази</div>
+                <div class="progress-card-label" data-i18n="progress_overview_active_label">залишаються в активній роботі</div>
+            </div>
+            <div class="progress-card">
+                <div class="progress-card-value" data-i18n="progress_overview_total_value">90%</div>
+                <div class="progress-card-label" data-i18n="progress_overview_total_label">загальної дорожньої карти вже реалізовано</div>
+            </div>
+        </div>
+        <p class="progress-intro" data-i18n="progress_intro">Проєкт уже вийшов зі стадії ідеї: основне ядро продукту зібрано, а в активній роботі залишаються дві найпрактичніші зони росту — інтеграції з мережами та підготовка до стабільного промислового запуску.</p>
         <div class="phases">
             <div class="phase-row">
                 <span class="phase-label" data-i18n="phase0">Фаза 0 — Продуктовий контракт</span>
@@ -803,6 +890,7 @@
                 <span class="phase-label" data-i18n="phase5">Фаза 5 — Інтеграції з торговими мережами</span>
                 <div class="phase-content">
                     <div class="phase-bar-track"><div class="phase-fill phase-active" style="width:80%"><span class="phase-percent">🔄 80%</span></div></div>
+                    <div class="phase-status" data-i18n="phase5_status">в роботі: підключення реальних джерел даних, автоматичне оновлення пропозицій і доведення синхронізації до стабільної роботи</div>
                 </div>
             </div>
             <div class="phase-row">
@@ -1249,6 +1337,13 @@
         hero_subhead: "Платформа для перевірки будівельних кошторисів, порівняння цін на матеріали та на наступному етапі — порівняння вартості робіт.<br>Головна ідея проста: людина завантажує кошторис, а система показує, скільки це реально коштує на ринку і де вона переплачує.",
         hero_summary: "Це проєкт не про \"ще один каталог товарів\", а про більш цінне завдання: допомогти людині, підряднику або закупівельнику швидко зрозуміти реальну вартість ремонту чи будівництва. Для користувача це економія та прозорість. Для магазинів і підрядників — потік цільових клієнтів. Для інвестора — платформа з кількома джерелами доходу та зрозумілою точкою зростання.",
         progress_title: "Прогрес розробки",
+        progress_overview_done_value: "8 з 10 фаз",
+        progress_overview_done_label: "вже завершено",
+        progress_overview_active_value: "2 фази",
+        progress_overview_active_label: "залишаються в активній роботі",
+        progress_overview_total_value: "90%",
+        progress_overview_total_label: "загальної дорожньої карти вже реалізовано",
+        progress_intro: "Проєкт уже вийшов зі стадії ідеї: основне ядро продукту зібрано, а в активній роботі залишаються дві найпрактичніші зони росту — інтеграції з мережами та підготовка до стабільного промислового запуску.",
         phase0: "Фаза 0 — Продуктовий контракт",
         phase0_status: "завершено",
         phase1: "Фаза 1 — Технічний фундамент",
@@ -1260,6 +1355,7 @@
         phase4: "Фаза 4 — Зіставлення та порівняння матеріалів",
         phase4_status: "базова версія готова",
         phase5: "Фаза 5 — Інтеграції з торговими мережами",
+        phase5_status: "в роботі: підключення реальних джерел даних, автоматичне оновлення пропозицій і доведення синхронізації до стабільної роботи",
         phase6: "Фаза 6 — Каталог послуг і порівняння робіт",
         phase6_status: "завершено: API порівняння, імпорт, інтерфейс, ринкові прапорці, спільний сценарій оцінки",
         phase7: "Фаза 7 — Повна панель адміністратора",
@@ -1494,6 +1590,13 @@
         hero_subhead: "Platform for checking construction estimates, comparing prices for materials and next stage — comparing the cost of work.<br>The main idea is simple: a person uploads an estimate, and the system shows how much it really costs on the market and where they are overpaying.",
         hero_summary: "This project is not about 'another product catalog', but about a more valuable task: to help a person, contractor or procurement specialist quickly understand the real cost of renovation or construction. For the user, it's savings and transparency. For stores and contractors — a flow of targeted customers. For the investor — a platform with multiple sources of income and a clear growth point.",
         progress_title: "Development Progress",
+        progress_overview_done_value: "8 of 10 phases",
+        progress_overview_done_label: "already completed",
+        progress_overview_active_value: "2 phases",
+        progress_overview_active_label: "remain in active work",
+        progress_overview_total_value: "90%",
+        progress_overview_total_label: "of the overall roadmap is already delivered",
+        progress_intro: "The project is already past the idea stage: the product core is built, and the two active growth areas are the most practical ones — retail network integrations and preparation for a stable production launch.",
         phase0: "Phase 0 — Product Contract",
         phase0_status: "completed",
         phase1: "Phase 1 — Technical Foundation",
@@ -1505,6 +1608,7 @@
         phase4: "Phase 4 — Matching and compare materials",
         phase4_status: "baseline ready",
         phase5: "Phase 5 — Retail network integrations",
+        phase5_status: "in progress: connecting real data sources, automating offer updates, and bringing synchronization to stable operation",
         phase6: "Phase 6 — Service catalog and work comparison",
         phase6_status: "completed: compare API, import, UI, market flags, mixed-estimate flow",
         phase7: "Phase 7 — Full admin panel",
@@ -1751,6 +1855,13 @@
         hero_subhead: "Платформа для проверки строительных смет, сравнения цен на материалы и в следующем этапе — сравнения стоимости работ.<br>Главная идея проста: человек загружает смету, а система показывает, сколько это реально стоит на рынке и где он переплачивает.",
         hero_summary: "Это проект не про \"ещё один каталог товаров\", а про более дорогую и полезную задачу: помочь человеку, подрядчику или закупщику быстро понять реальную стоимость ремонта или стройки. Для пользователя это экономия и прозрачность. Для магазинов и подрядчиков — поток целевых клиентов. Для инвестора — платформа с несколькими источниками дохода и понятной точкой роста.",
         progress_title: "Прогресс разработки",
+        progress_overview_done_value: "8 из 10 фаз",
+        progress_overview_done_label: "уже завершены",
+        progress_overview_active_value: "2 фазы",
+        progress_overview_active_label: "остаются в активной работе",
+        progress_overview_total_value: "90%",
+        progress_overview_total_label: "общей дорожной карты уже реализовано",
+        progress_intro: "Проект уже вышел из стадии идеи: основное ядро продукта собрано, а в активной работе остаются две самые практичные зоны роста — интеграции с сетями и подготовка к стабильному промышленному запуску.",
         phase0: "Фаза 0 — Продуктовый контракт",
         phase0_status: "завершена",
         phase1: "Фаза 1 — Технический фундамент",
@@ -1762,6 +1873,7 @@
         phase4: "Фаза 4 — Сопоставление и сравнение материалов",
         phase4_status: "базовая версия готова",
         phase5: "Фаза 5 — Интеграции с торговыми сетями",
+        phase5_status: "в работе: подключение реальных источников данных, автоматическое обновление предложений и доведение синхронизации до стабильной работы",
         phase6: "Фаза 6 — Каталог услуг и сравнение работ",
         phase6_status: "завершена: API сравнения, импорт, интерфейс, рыночные флаги, общий сценарий оценки",
         phase7: "Фаза 7 — Полная панель администратора",
