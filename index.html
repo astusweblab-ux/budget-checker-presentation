@@ -1234,6 +1234,7 @@
             <p><span class="badge badge-green" data-i18n="badge_done">ГОТОВО</span> <strong data-i18n="done13_title">Юридичні документи, тарифна сторінка і публічний контур</strong> <span data-i18n="done13_text">— додано три юридичних документи (Користувацька угода, Політика конфіденційності, Правила для бізнесу) з рендером на окремих сторінках; при реєстрації — обов'язкові чекбокси прийняття угоди + окремий для merchant/contractor; backend фіксує факт прийняття в БД (legal_consents) з IP та user-agent; публічна сторінка /pricing з тарифами для всіх ролей і FAQ; футер з посиланнями на юридичні документи, підтримку та тарифи на всіх сторінках.</span></p>
             <p><span class="badge badge-green" data-i18n="badge_done">ГОТОВО</span> <strong data-i18n="done14_title">Повна локалізація (uk/ru/en) та мобільна оптимізація</strong> <span data-i18n="done14_text">— всі сторінки переведені на три мови: результати перевірки, кабінети, адмін-панель (включно з усіма 7 розділами), публічні сторінки, футер; переключення мови зберігається між сесіями; мобільний drawer-menu з навігацією та перемикачем мови; мінімальна висота touch-елементів 44px; font-size ≥ 16px на inputs (iOS no-zoom); адаптивні grid-layouts.</span></p>
             <p><span class="badge badge-green" data-i18n="badge_done">ГОТОВО</span> <strong data-i18n="done15_title">PWA — Progressive Web App</strong> <span data-i18n="done15_text">— manifest.json з назвою, описом, іконками та shortcut на /check-estimate; service worker із network-first для API та cache-first для статики; офлайн-fallback для головних сторінок; реєстрація SW через next/script afterInteractive; Cache-Control: no-cache для sw.js; реальні PNG-іконки 72–512px з логотипу проєкту. Встановлюється як нативний застосунок на Android та iOS.</span></p>
+            <p><span class="badge badge-green" data-i18n="badge_done">ГОТОВО</span> <strong data-i18n="done16_title">LiqPay білінг і сторінка оформлення</strong> <span data-i18n="done16_text">— інтеграція LiqPay протестована в пісочниці (sandbox) і підтверджена успішним платежем; сторінка /checkout формує підписаний payload і відправляє його до LiqPay; після оплати — автоматичний редирект до кабінету з банером успіху; endpoint GET /billing/my-orders повертає останні замовлення; у кабінеті користувача — секція «Тарифний план» із кольоровими статусами; виправлено маршрутизацію після реєстрації: merchant/contractor одразу потрапляють у свій кабінет, а не на загальну сторінку.</span></p>
         </div>
 
         <h2 data-i18n="next_steps_title">Що потрібно зробити далі по порядку</h2>
@@ -1352,8 +1353,8 @@
             </div>
             <div>
                 <h3 style="margin-bottom: 8px;" data-i18n="status_title">Поточний статус</h3>
-                <p data-i18n="status_date">Актуально на: 16 квітня 2026</p>
-                <p data-i18n="status_phase">Технічно продукт готовий до запуску ✅</p>
+                <p data-i18n="status_date">Актуально на: 17 квітня 2026</p>
+                <p data-i18n="status_phase">Готовий до першого комерційного пілоту ✅</p>
                 <p style="margin-top: 10px;"><a href="https://budcheck.pp.ua/" target="_blank" rel="noopener" data-i18n="status_pilot_link">▶ Переглянути пілот: budcheck.pp.ua</a></p>
                 <p data-i18n="status_desc">Наступні кроки вже не про код, а про бізнес-операції: домовитись про доступ до реальних фідів Епіцентру та Нової Лінії й підключити їх через готові адаптери; оформити стандартний Pull Request у main та провести фінальний review перед production-деплоєм; підготувати production-інфраструктуру (PostgreSQL, Redis, SMTP, S3) за .env.example; провести онбординг щонайменше одного магазину, верифікацію в адмінці та перший реальний імпорт каталогу.</p>
             </div>
@@ -1550,6 +1551,8 @@
         done14_text: "— всі сторінки переведені на три мови: результати перевірки, кабінети, адмін-панель (усі 7 розділів), публічні сторінки, футер; мова зберігається між сесіями; мобільний drawer-menu; touch-елементи 44px; font-size ≥ 16px на inputs; адаптивні grid-layouts.",
         done15_title: "PWA — Progressive Web App",
         done15_text: "— manifest.json з іконками та shortcut; service worker із network-first для API та cache-first для статики; офлайн-fallback; реєстрація SW через next/script; реальні PNG-іконки 72–512px з логотипу. Встановлюється як нативний застосунок.",
+        done16_title: "LiqPay білінг і сторінка оформлення",
+        done16_text: "— інтеграція LiqPay протестована в пісочниці і підтверджена реальним тестовим платежем; сторінка /checkout формує підписаний payload і відправляє до LiqPay; після оплати — редирект до кабінету з банером успіху; GET /billing/my-orders повертає останні замовлення; секція «Тарифний план» у кабінеті; виправлена маршрутизація після реєстрації: merchant/contractor одразу в свій кабінет.",
         next_steps_title: "Що потрібно зробити далі по порядку",
         next_steps1_title: "Найближчі кроки",
         next1: "Довести 2 реальні мережі до стабільного автоматичного завантаження даних.",
@@ -1635,8 +1638,8 @@
         cta_pilot_btn: "Переглянути пілот проєкту",
         cta_pilot_note: "budcheck.pp.ua — живий робочий продукт",
         status_pilot_link: "▶ Переглянути пілот: budcheck.pp.ua",
-        status_date: "Актуально на: 16 квітня 2026",
-        status_phase: "Технічно продукт готовий до запуску ✅",
+        status_date: "Актуально на: 17 квітня 2026",
+        status_phase: "Готовий до першого комерційного пілоту ✅",
         status_desc: "Наступні кроки вже не про код, а про бізнес-операції: домовитись про доступ до реальних фідів Епіцентру та Нової Лінії й підключити їх через готові адаптери; оформити стандартний Pull Request у main та провести фінальний review перед production-деплоєм; підготувати production-інфраструктуру (PostgreSQL, Redis, SMTP, S3) за .env.example; провести онбординг щонайменше одного магазину, верифікацію в адмінці та перший реальний імпорт каталогу.",
     },
     en: {
@@ -1824,6 +1827,8 @@
         done14_text: "— all pages translated into three languages: estimate results, dashboards, admin panel (all 7 sections), public pages, footer; language saved across sessions; mobile drawer-menu; touch targets 44px; font-size ≥ 16px on inputs; adaptive grid layouts.",
         done15_title: "PWA — Progressive Web App",
         done15_text: "— manifest.json with icons and /check-estimate shortcut; service worker with network-first for API and cache-first for static assets; offline fallback; SW registration via next/script; real PNG icons 72–512px from the project logo. Installable as a native app.",
+        done16_title: "LiqPay billing and checkout page",
+        done16_text: "— LiqPay integration tested in sandbox with a confirmed successful payment; /checkout page builds a signed payload and submits to LiqPay; after payment — redirect to dashboard with success banner; GET /billing/my-orders returns recent orders; plan section in user account cabinet; fixed role routing after registration: merchant/contractor land directly in their own dashboard.",
         next_steps_title: "What needs to be done next in order",
         next_steps1_title: "Immediate steps",
         next1: "Bring 2 real networks to stable automatic data loading.",
@@ -1909,8 +1914,8 @@
         cta_pilot_btn: "View the pilot project",
         cta_pilot_note: "budcheck.pp.ua — live working product",
         status_pilot_link: "▶ View pilot: budcheck.pp.ua",
-        status_date: "Updated: April 16, 2026",
-        status_phase: "The product is technically ready for launch ✅",
+        status_date: "Updated: April 17, 2026",
+        status_phase: "Ready for the first commercial pilot ✅",
         status_desc: "The next steps are no longer core coding tasks, but business operations: secure access to real Epicentr and Nova Liniya feeds and connect them through existing adapters; open a standard PR to main and complete a final review before production deploy; prepare production infrastructure (PostgreSQL, Redis, SMTP, S3) using .env.example; onboard at least one real store, verify it in admin, and run the first real catalog import.",
     },
     ru: {
@@ -2086,6 +2091,8 @@
         done14_text: "— все страницы переведены на три языка: результаты проверки, кабинеты, админ-панель (все 7 разделов), публичные страницы, футер; язык сохраняется между сессиями; мобильное drawer-меню; touch-элементы 44px; font-size ≥ 16px на inputs; адаптивные grid-раскладки.",
         done15_title: "PWA — Progressive Web App",
         done15_text: "— manifest.json с иконками и shortcut на /check-estimate; service worker с network-first для API и cache-first для статики; офлайн-fallback; регистрация SW через next/script; реальные PNG-иконки 72–512px из логотипа проекта. Устанавливается как нативное приложение.",
+        done16_title: "LiqPay биллинг и страница оформления",
+        done16_text: "— интеграция LiqPay протестирована в песочнице и подтверждена реальным тестовым платежом; страница /checkout формирует подписанный payload и отправляет в LiqPay; после оплаты — редирект в кабинет с баннером успеха; GET /billing/my-orders возвращает последние заказы; секция «Тарифный план» в кабинете пользователя; исправлена маршрутизация после регистрации: merchant/contractor сразу попадают в свой кабинет.",
         next_steps_title: "Что предстоит сделать дальше по порядку",
         next_steps1_title: "Ближайшие шаги",
         next1: "Довести 2 реальные сети до стабильной автоматической загрузки данных.",
@@ -2171,8 +2178,8 @@
         cta_pilot_btn: "Посмотреть пилот проекта",
         cta_pilot_note: "budcheck.pp.ua — живой рабочий продукт",
         status_pilot_link: "▶ Посмотреть пилот: budcheck.pp.ua",
-        status_date: "Актуально на: 16 апреля 2026",
-        status_phase: "Технически продукт готов к запуску ✅",
+        status_date: "Актуально на: 17 апреля 2026",
+        status_phase: "Готов к первому коммерческому пилоту ✅",
         status_desc: "Следующие шаги уже не про код, а про бизнес и операционку: связаться с Эпицентром и Новой Линией, получить доступ к реальным фидам и подключить их через готовые адаптеры; оформить стандартный Pull Request в main и провести финальный review перед production-деплоем; подготовить production-инфраструктуру (PostgreSQL, Redis, SMTP, S3) по .env.example; провести онбординг хотя бы одного магазина, верификацию в админке и первый реальный импорт каталога.",
         page_title: "Budget Checker 2.0 — Инвестиционная презентация",
         switch_uk: "🇺🇦 UA",
