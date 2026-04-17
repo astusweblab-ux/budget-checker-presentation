@@ -855,7 +855,7 @@
     <div class="container">
 
         <section class="hero">
-            <div class="hero-note" data-i18n="hero_note">Поточна стадія: від робочого продукту до комерційного запуску</div>
+            <div class="hero-note" data-i18n="hero_note">Продукт готовий до першого публічного запуску</div>
             <h1>Budget Checker 2.0</h1>
             <div class="subhead" data-i18n="hero_subhead">
                 Платформа для перевірки будівельних кошторисів, порівняння цін на матеріали та на наступному етапі — порівняння вартості робіт.
@@ -1232,6 +1232,8 @@
             <p><span class="badge badge-green" data-i18n="badge_done">ГОТОВО</span> <strong data-i18n="done11_title">Комерційний контур (базовий етап Фази 8)</strong> <span data-i18n="done11_text">— базовий етап завершено: відстеження кліків по пропозиціях, партнерська аналітика, позначки лідів для сценаріїв перевірки та порівняння, звіт за попитом на основі рядків кошторисів і завдань порівняння, окрема партнерська панель та кнопки «Перейти в магазин» і «Зв'язатись з підрядником» у результатах порівняння. Регіональну аналітику, додаткові інструменти монетизації та деталізований інтерфейс винесено на окреме рішення.</span></p>
             <p><span class="badge badge-green" data-i18n="badge_done">ГОТОВО</span> <strong data-i18n="done12_title">Підготовка до промислової експлуатації (Фаза 9) — завершено</strong> <span data-i18n="done12_text">— завершено базову підготовку до стабільного запуску: обмеження частоти запитів у критичних точках, перевірка готовності системи, контроль підключення до бази даних, перелік вимог до запуску та інструкції на випадок типових збоїв.</span></p>
             <p><span class="badge badge-green" data-i18n="badge_done">ГОТОВО</span> <strong data-i18n="done13_title">Юридичні документи, тарифна сторінка і публічний контур</strong> <span data-i18n="done13_text">— додано три юридичних документи (Користувацька угода, Політика конфіденційності, Правила для бізнесу) з рендером на окремих сторінках; при реєстрації — обов'язкові чекбокси прийняття угоди + окремий для merchant/contractor; backend фіксує факт прийняття в БД (legal_consents) з IP та user-agent; публічна сторінка /pricing з тарифами для всіх ролей і FAQ; футер з посиланнями на юридичні документи, підтримку та тарифи на всіх сторінках.</span></p>
+            <p><span class="badge badge-green" data-i18n="badge_done">ГОТОВО</span> <strong data-i18n="done14_title">Повна локалізація (uk/ru/en) та мобільна оптимізація</strong> <span data-i18n="done14_text">— всі сторінки переведені на три мови: результати перевірки, кабінети, адмін-панель (включно з усіма 7 розділами), публічні сторінки, футер; переключення мови зберігається між сесіями; мобільний drawer-menu з навігацією та перемикачем мови; мінімальна висота touch-елементів 44px; font-size ≥ 16px на inputs (iOS no-zoom); адаптивні grid-layouts.</span></p>
+            <p><span class="badge badge-green" data-i18n="badge_done">ГОТОВО</span> <strong data-i18n="done15_title">PWA — Progressive Web App</strong> <span data-i18n="done15_text">— manifest.json з назвою, описом, іконками та shortcut на /check-estimate; service worker із network-first для API та cache-first для статики; офлайн-fallback для головних сторінок; реєстрація SW через next/script afterInteractive; Cache-Control: no-cache для sw.js; реальні PNG-іконки 72–512px з логотипу проєкту. Встановлюється як нативний застосунок на Android та iOS.</span></p>
         </div>
 
         <h2 data-i18n="next_steps_title">Що потрібно зробити далі по порядку</h2>
@@ -1377,7 +1379,7 @@
         badge_next_stage: "НАСТУПНИЙ ЕТАП",
         stat2_value: "50-200 тис. грн",
         stat4_value: "2 мережі",
-        hero_note: "Поточна стадія: від робочого продукту до комерційного запуску",
+        hero_note: "Продукт готовий до першого публічного запуску",
         hero_subhead: "Платформа для перевірки будівельних кошторисів, порівняння цін на матеріали та на наступному етапі — порівняння вартості робіт.<br>Головна ідея проста: людина завантажує кошторис, а система показує, скільки це реально коштує на ринку і де вона переплачує.",
         hero_summary: "Це проєкт не про \"ще один каталог товарів\", а про більш цінне завдання: допомогти людині, підряднику або закупівельнику швидко зрозуміти реальну вартість ремонту чи будівництва. Для користувача це економія та прозорість. Для магазинів і підрядників — потік цільових клієнтів. Для інвестора — платформа з кількома джерелами доходу та зрозумілою точкою зростання.",
         progress_title: "Прогрес розробки",
@@ -1544,6 +1546,10 @@
         done12_text: "— завершено базову підготовку до стабільного запуску: обмеження частоти запитів у критичних точках, перевірка готовності системи, контроль підключення до бази даних, перелік вимог до запуску та інструкції на випадок типових збоїв.",
         done13_title: "Юридичні документи, тарифна сторінка і публічний контур",
         done13_text: "— додано три юридичних документи з рендером на окремих сторінках; при реєстрації — обов'язкові чекбокси прийняття угоди; backend фіксує факт прийняття в БД з IP та user-agent; публічна сторінка /pricing з тарифами і FAQ; футер з посиланнями на всіх сторінках.",
+        done14_title: "Повна локалізація (uk/ru/en) та мобільна оптимізація",
+        done14_text: "— всі сторінки переведені на три мови: результати перевірки, кабінети, адмін-панель (усі 7 розділів), публічні сторінки, футер; мова зберігається між сесіями; мобільний drawer-menu; touch-елементи 44px; font-size ≥ 16px на inputs; адаптивні grid-layouts.",
+        done15_title: "PWA — Progressive Web App",
+        done15_text: "— manifest.json з іконками та shortcut; service worker із network-first для API та cache-first для статики; офлайн-fallback; реєстрація SW через next/script; реальні PNG-іконки 72–512px з логотипу. Встановлюється як нативний застосунок.",
         next_steps_title: "Що потрібно зробити далі по порядку",
         next_steps1_title: "Найближчі кроки",
         next1: "Довести 2 реальні мережі до стабільного автоматичного завантаження даних.",
@@ -1635,7 +1641,7 @@
     },
     en: {
         modal_title: "Choose language",
-        hero_note: "Current stage: from working product to commercial launch",
+        hero_note: "Product is ready for the first public launch",
         hero_subhead: "Platform for checking construction estimates, comparing prices for materials and next stage — comparing the cost of work.<br>The main idea is simple: a person uploads an estimate, and the system shows how much it really costs on the market and where they are overpaying.",
         hero_summary: "This project is not about 'another product catalog', but about a more valuable task: to help a person, contractor or procurement specialist quickly understand the real cost of renovation or construction. For the user, it's savings and transparency. For stores and contractors — a flow of targeted customers. For the investor — a platform with multiple sources of income and a clear growth point.",
         progress_title: "Development Progress",
@@ -1814,6 +1820,10 @@
         done12_text: "— minimum production hardening is closed: rate limiting on critical endpoints, readiness probe with DB connectivity check, production checklist in .env.example, and incident runbooks for key failure scenarios.",
         done13_title: "Legal documents, pricing page and public layer",
         done13_text: "— three legal documents added with dedicated pages; mandatory consent checkboxes on registration; backend records acceptance in DB (legal_consents) with IP and user-agent; public /pricing page with plans and FAQ; footer with legal and support links on all pages.",
+        done14_title: "Full localization (uk/ru/en) and mobile optimization",
+        done14_text: "— all pages translated into three languages: estimate results, dashboards, admin panel (all 7 sections), public pages, footer; language saved across sessions; mobile drawer-menu; touch targets 44px; font-size ≥ 16px on inputs; adaptive grid layouts.",
+        done15_title: "PWA — Progressive Web App",
+        done15_text: "— manifest.json with icons and /check-estimate shortcut; service worker with network-first for API and cache-first for static assets; offline fallback; SW registration via next/script; real PNG icons 72–512px from the project logo. Installable as a native app.",
         next_steps_title: "What needs to be done next in order",
         next_steps1_title: "Immediate steps",
         next1: "Bring 2 real networks to stable automatic data loading.",
@@ -1905,7 +1915,7 @@
     },
     ru: {
         modal_title: "Выберите язык",
-        hero_note: "Текущая стадия: от рабочего продукта к коммерческому запуску",
+        hero_note: "Продукт готов к первому публичному запуску",
         hero_subhead: "Платформа для проверки строительных смет, сравнения цен на материалы и в следующем этапе — сравнения стоимости работ.<br>Главная идея проста: человек загружает смету, а система показывает, сколько это реально стоит на рынке и где он переплачивает.",
         hero_summary: "Это проект не про \"ещё один каталог товаров\", а про более дорогую и полезную задачу: помочь человеку, подрядчику или закупщику быстро понять реальную стоимость ремонта или стройки. Для пользователя это экономия и прозрачность. Для магазинов и подрядчиков — поток целевых клиентов. Для инвестора — платформа с несколькими источниками дохода и понятной точкой роста.",
         progress_title: "Прогресс разработки",
@@ -2072,6 +2082,10 @@
         done12_text: "— завершена базовая подготовка к стабильному запуску: ограничение частоты запросов в критичных точках, проверка готовности системы, контроль подключения к базе данных, перечень требований к запуску и инструкции на случай типовых сбоев.",
         done13_title: "Юридические документы, страница тарифов и публичный контур",
         done13_text: "— добавлены три юридических документа с отдельными страницами; обязательные чекбоксы принятия при регистрации; backend фиксирует принятие в БД с IP и user-agent; публичная страница /pricing с тарифами и FAQ; футер со ссылками на всех страницах.",
+        done14_title: "Полная локализация (uk/ru/en) и мобильная оптимизация",
+        done14_text: "— все страницы переведены на три языка: результаты проверки, кабинеты, админ-панель (все 7 разделов), публичные страницы, футер; язык сохраняется между сессиями; мобильное drawer-меню; touch-элементы 44px; font-size ≥ 16px на inputs; адаптивные grid-раскладки.",
+        done15_title: "PWA — Progressive Web App",
+        done15_text: "— manifest.json с иконками и shortcut на /check-estimate; service worker с network-first для API и cache-first для статики; офлайн-fallback; регистрация SW через next/script; реальные PNG-иконки 72–512px из логотипа проекта. Устанавливается как нативное приложение.",
         next_steps_title: "Что предстоит сделать дальше по порядку",
         next_steps1_title: "Ближайшие шаги",
         next1: "Довести 2 реальные сети до стабильной автоматической загрузки данных.",
