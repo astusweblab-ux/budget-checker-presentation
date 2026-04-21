@@ -21,7 +21,2191 @@
 <style>
         * {
             margin: 0;
+            padding: 0;<!DOCTYPE html>
+
+<html lang="uk">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" name="viewport"/>
+<title>Budget Checker 2.0 — Інвестиційна презентація</title>
+<meta content="Budget Checker 2.0 — платформа для перевірки кошторисів, порівняння цін на матеріали та послуги, з зрозумілою бізнес-моделлю та планом зростання." name="description"/>
+<meta content="website" property="og:type"/>
+<meta content="Budget Checker 2.0" property="og:site_name"/>
+<meta content="Budget Checker 2.0 — інвестиційна презентація" property="og:title"/>
+<meta content="Що це за проєкт, як він працює, кому потрібен, як заробляє та що вже зроблено." property="og:description"/>
+<meta content="https://astusweblab-ux.github.io/budget-checker-presentation/" property="og:url"/>
+<meta content="https://astusweblab-ux.github.io/budget-checker-presentation/og-image.png" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Budget Checker 2.0 — інвестиційна презентація" name="twitter:title"/>
+<meta content="Платформа для перевірки кошторисів, порівняння цін та прозорого вибору матеріалів і послуг." name="twitter:description"/>
+<meta content="https://astusweblab-ux.github.io/budget-checker-presentation/og-image.png" name="twitter:image"/>
+<style>
+        * {
+            margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(44, 125, 160, 0.08), transparent 28%),
+                radial-gradient(circle at top right, rgba(180, 106, 58, 0.08), transparent 24%),
+                linear-gradient(180deg, #f7f4ee 0%, #f4efe6 100%);
+            color: #1a1a2e;
+            line-height: 1.6;
+        }
+
+        /* Language switcher button in corner */
+        .lang-switcher {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+            background: linear-gradient(135deg, #1f3052 0%, #2d5878 55%, #b46a3a 100%);
+            border-radius: 50px;
+            padding: 8px 16px;
+            display: flex;
+            gap: 6px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        .lang-switcher:hover {
+            transform: scale(1.05);
+        }
+        .lang-switcher span {
+            color: white;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 30px;
+            transition: background 0.2s;
+        }
+        .lang-switcher span:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        .lang-switcher .active-lang {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Modal styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.hidden {
+            display: none;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1f3052 0%, #2d5878 55%, #b46a3a 100%);
+            border-radius: 30px;
+            padding: 40px 24px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 0.4s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-content h2 {
+            color: #ffffff;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            display: inline-block;
+            margin-bottom: 28px;
+            font-size: 24px;
+        }
+
+        .language-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 12px 24px;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            font-family: inherit;
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .lang-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Main content - initially hidden */
+        .main-content {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .main-content.visible {
+            opacity: 1;
+        }
+
+        .container {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 30px 20px 60px;
+        }
+
+        h1 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 28px;
+            font-weight: 700;
+            margin: 40px 0 18px;
+            padding-bottom: 8px;
+            border-bottom: 3px solid #2c7da0;
+            display: inline-block;
+            letter-spacing: -0.02em;
+        }
+
+        h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #2c7da0;
+        }
+
+        p {
+            color: #334155;
+            font-size: 16px;
+        }
+
+        .subhead {
+            font-size: 17px;
+            color: #475569;
+            margin-bottom: 20px;
+            max-width: 880px;
+            line-height: 1.6;
+        }
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: 24px 20px;
+            border-radius: 24px;
+            background: linear-gradient(135deg, #1f3052 0%, #2d5878 55%, #b46a3a 100%);
+            box-shadow: 0 30px 70px rgba(20, 33, 61, 0.16);
+            margin-bottom: 8px;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            right: -60px;
+            bottom: -80px;
+            width: 200px;
+            height: 200px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+            filter: blur(10px);
+        }
+
+        .hero h1 {
+            color: #ffffff;
+            max-width: 900px;
+            font-size: 36px;
+        }
+
+        .hero-note {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.12);
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+
+        .hero .subhead {
+            color: rgba(255, 255, 255, 0.82);
+            font-size: 16px;
+        }
+
+        .hero-summary {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 18px;
+            padding: 18px;
+            margin-top: 20px;
+            backdrop-filter: blur(8px);
+        }
+
+        .hero-summary p {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.88);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 24px 0;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 24px 0;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .card {
+            background: rgba(255, 253, 249, 0.9);
+            border-radius: 18px;
+            padding: 20px;
+            border: 1px solid #e3ddd2;
+            box-shadow: 0 14px 32px rgba(20, 33, 61, 0.05);
+        }
+
+        .card-dark {
+            background: linear-gradient(180deg, #263552 0%, #1a2439 100%);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .card-dark h3 {
+            color: #7dd3fc;
+        }
+
+        .card-dark p,
+        .card-dark li {
+            color: #dbeafe;
+        }
+
+        .card-accent {
+            background: linear-gradient(180deg, #fff8f3 0%, #fff3eb 100%);
+            border: 1px solid #f0d7c8;
+        }
+
+        .card-soft {
+            background: linear-gradient(180deg, #f5fafc 0%, #eef5f8 100%);
+        }
+
+        .stat {
+            font-size: 34px;
+            font-weight: 700;
+            color: #2c7da0;
+            margin-bottom: 6px;
+            line-height: 1.05;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #4a5568;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-right: 8px;
+        }
+
+        .badge-green {
+            background: #e6f7e6;
+            color: #2e7d32;
+        }
+
+        .badge-yellow {
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        .badge-blue {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .status-list p {
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .steps {
+            display: grid;
+            gap: 16px;
+            margin-top: 10px;
+        }
+
+        .step {
+            background: rgba(255, 253, 249, 0.9);
+            border: 1px solid #e3ddd2;
+            border-radius: 16px;
+            padding: 18px;
+            box-shadow: 0 10px 22px rgba(20, 33, 61, 0.04);
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 999px;
+            background: #2c7da0;
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            padding-left: 20px;
+            color: #334155;
+        }
+
+        li {
+            font-size: 14px;
+        }
+        li + li {
+            margin-top: 6px;
+        }
+
+        /* Исправленный стиль для таблиц */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 16px;
+            border: 1px solid #e2ddd3;
+            background: rgba(255, 253, 249, 0.92);
+            box-shadow: 0 12px 28px rgba(20, 33, 61, 0.04);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        th,
+        td {
+            padding: 12px 12px;
+            text-align: left;
+            border-bottom: 1px solid #ebe3d9;
+            vertical-align: top;
+            color: #334155;
+            font-size: 14px;
+        }
+
+        th {
+            background: #f5efe6;
+            font-weight: 700;
+            color: #1e293b;
+            white-space: nowrap;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Специальный стиль для финансовой таблицы */
+        .financial-table th,
+        .financial-table td {
+            text-align: right;
+        }
+        .financial-table th:first-child,
+        .financial-table td:first-child {
+            text-align: left;
+            font-weight: 600;
+        }
+        .financial-table tr:last-child td {
+            background: #fef9e6;
+            font-weight: 700;
+            border-top: 2px solid #e2ddd3;
+            border-bottom: none;
+        }
+
+        .section-text {
+            max-width: 980px;
+            color: #475569;
+            font-size: 16px;
+        }
+
+        .text-muted {
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        .footer-box {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 16px;
+        }
+
+        .footer-box > div {
+            flex: 1 1 280px;
+            background: rgba(255, 253, 249, 0.92);
+            border: 1px solid #e3ddd2;
+            border-radius: 18px;
+            padding: 18px;
+            box-shadow: 0 12px 28px rgba(20, 33, 61, 0.04);
+        }
+
+        a {
+            color: #2c7da0;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(44, 125, 160, 0.22);
+            font-size: 14px;
+        }
+
+        a:hover {
+            border-bottom-color: rgba(44, 125, 160, 0.58);
+        }
+
+        hr {
+            margin: 40px 0;
+            border: none;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .progress-overview {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            margin: 18px 0 16px;
+        }
+
+        .progress-card {
+            background: rgba(255, 253, 249, 0.94);
+            border: 1px solid #e3ddd2;
+            border-radius: 18px;
+            padding: 18px;
+            box-shadow: 0 14px 32px rgba(20, 33, 61, 0.05);
+        }
+
+        .progress-card-primary {
+            background: linear-gradient(135deg, #1f3052 0%, #2d5878 55%, #b46a3a 100%);
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .progress-card-value {
+            font-size: 28px;
+            line-height: 1.05;
+            font-weight: 700;
+            color: #1f3052;
+            margin-bottom: 8px;
+        }
+
+        .progress-card-primary .progress-card-value,
+        .progress-card-primary .progress-card-label {
+            color: #ffffff;
+        }
+
+        .progress-card-label {
+            font-size: 13px;
+            line-height: 1.5;
+            color: #475569;
+        }
+
+        .progress-intro {
+            max-width: 980px;
+            font-size: 15px;
+            color: #475569;
+            margin: 0 0 18px;
+        }
+
+        .phases {
+            display: grid;
+            gap: 14px;
+            margin: 20px 0;
+        }
+
+        .phase-row {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            align-items: start;
+            gap: 16px;
+            background: rgba(255, 253, 249, 0.94);
+            border: 1px solid #e3ddd2;
+            border-radius: 18px;
+            padding: 16px 18px;
+            box-shadow: 0 14px 32px rgba(20, 33, 61, 0.05);
+        }
+
+        .phase-label {
+            font-size: 14px;
+            color: #1f3052;
+            font-weight: 700;
+            line-height: 1.45;
+            padding-top: 2px;
+        }
+
+        .phase-content {
+            min-width: 0;
+        }
+
+        .phase-bar-track {
+            height: 30px;
+            background: #ece3d7;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .phase-fill {
+            height: 100%;
+            min-width: 84px;
+            display: inline-flex;
+            align-items: center;
+            padding: 0 12px;
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+            border-radius: 999px;
+        }
+
+        .phase-percent {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .phase-status {
+            margin-top: 10px;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #475569;
+            word-break: break-word;
+        }
+
+        .phase-done   { background: #238636; color: #ffffff; }
+        .phase-active { background: #1f6feb; color: #ffffff; }
+        .phase-planned {
+            background: #ece3d7;
+            color: #6b7280;
+            width: 100% !important;
+        }
+
+        .cta-pilot {
+            margin-top: 24px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .cta-pilot a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #ffffff;
+            color: #1f3052;
+            font-weight: 700;
+            font-size: 15px;
+            padding: 12px 24px;
+            border-radius: 999px;
+            border: none;
+            text-decoration: none;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.18);
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        .cta-pilot a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 26px rgba(0,0,0,0.22);
+            border-bottom: none;
+        }
+
+        .cta-pilot-note {
+            font-size: 13px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* Мобильная адаптация */
+        @media (max-width: 900px) {
+            .grid-2,
+            .grid-3,
+            .grid-4 {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            
+            .container {
+                padding: 20px 16px 50px;
+            }
+            
+            h1 {
+                font-size: 32px;
+            }
+            
+            .hero h1 {
+                font-size: 28px;
+            }
+            
+            h2 {
+                font-size: 24px;
+                margin: 32px 0 14px;
+            }
+            
+            h3 {
+                font-size: 18px;
+            }
+            
+            .stat {
+                font-size: 28px;
+            }
+            
+            .progress-overview {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .progress-card {
+                padding: 16px;
+            }
+
+            .progress-card-value {
+                font-size: 24px;
+            }
+
+            .progress-intro {
+                font-size: 14px;
+                margin-bottom: 16px;
+            }
+
+            .phase-row {
+                grid-template-columns: 1fr;
+                gap: 10px;
+                padding: 14px;
+            }
+            
+            .phase-label {
+                font-size: 13px;
+                padding-top: 0;
+            }
+            
+            .phase-bar-track {
+                height: 28px;
+            }
+            
+            .phase-fill {
+                min-width: 76px;
+                font-size: 11px;
+                padding: 0 8px;
+            }
+
+            .phase-status {
+                font-size: 12px;
+                margin-top: 8px;
+            }
+            
+            .card {
+                padding: 16px;
+            }
+            
+            .step {
+                padding: 14px;
+            }
+            
+            .footer-box > div {
+                padding: 16px;
+            }
+            
+            .lang-switcher {
+                bottom: 15px;
+                right: 15px;
+                padding: 6px 12px;
+            }
+            
+            .lang-switcher span {
+                font-size: 11px;
+                padding: 3px 6px;
+            }
+
+            th, td {
+                padding: 8px 8px;
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 16px 12px 40px;
+            }
+            
+            h1 {
+                font-size: 28px;
+            }
+            
+            .hero h1 {
+                font-size: 24px;
+            }
+            
+            h2 {
+                font-size: 22px;
+            }
+            
+            .hero {
+                padding: 18px 14px;
+            }
+            
+            .hero-summary {
+                padding: 14px;
+            }
+            
+            .modal-content {
+                padding: 28px 20px;
+            }
+            
+            .modal-content h2 {
+                font-size: 20px;
+                margin-bottom: 20px;
+            }
+            
+            .lang-btn {
+                padding: 10px 18px;
+                font-size: 16px;
+            }
+            
+            th, td {
+                padding: 6px 6px;
+                font-size: 11px;
+            }
+            
+            .status-list p {
+                font-size: 12px;
+            }
+            
+            .badge {
+                font-size: 10px;
+                padding: 3px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Language switcher in corner -->
+<div class="lang-switcher" id="langSwitcher">
+<span data-i18n="switch_uk" data-lang="uk">🇺🇦 UA</span>
+<span data-i18n="switch_en" data-lang="en">🇬🇧 EN</span>
+<span data-i18n="switch_ru" data-lang="ru">🇷🇺 RU</span>
+</div>
+<!-- Modal for language selection -->
+<div class="modal" id="languageModal">
+<div class="modal-content">
+<h2 data-i18n="modal_title" id="modalTitle">Оберіть мову</h2>
+<div class="language-buttons">
+<button class="lang-btn" data-i18n="modal_btn_uk" data-lang="uk">🇺🇦 Українська</button>
+<button class="lang-btn" data-i18n="modal_btn_en" data-lang="en">🇬🇧 English</button>
+<button class="lang-btn" data-i18n="modal_btn_ru" data-lang="ru">🇷🇺 Русский</button>
+</div>
+</div>
+</div>
+<!-- Main content wrapper -->
+<div class="main-content" id="mainContent">
+<div class="container">
+<section class="hero">
+<div class="hero-note" data-i18n="hero_note">Продукт готовий до першого комерційного пілоту</div>
+<h1>Budget Checker 2.0</h1>
+<div class="subhead" data-i18n="hero_subhead">Платформа для перевірки будівельних кошторисів, порівняння цін на матеріали та на наступному етапі — порівняння вартості робіт.<br/>Головна ідея проста: людина завантажує кошторис, а система показує, скільки це реально коштує на ринку і де вона переплачує.</div>
+<div class="hero-summary">
+<p data-i18n="hero_summary">Це проєкт не про "ще один каталог товарів", а про більш цінне завдання: допомогти людині, підряднику або закупівельнику швидко зрозуміти реальну вартість ремонту чи будівництва. Для користувача це економія та прозорість. Для магазинів і підрядників — потік цільових клієнтів. Для інвестора — платформа з кількома джерелами доходу та зрозумілою точкою зростання.</p>
+</div>
+<div class="cta-pilot">
+<a href="https://budcheck.com.ua/" rel="noopener" target="_blank">
+                    ▶ <span data-i18n="cta_pilot_btn">Переглянути пілот проєкту</span>
+</a>
+<span class="cta-pilot-note" data-i18n="cta_pilot_note">budcheck.com.ua — живий робочий продукт</span>
+</div>
+</section>
+<h2 data-i18n="progress_title">Стадія проєкту</h2>
+<div class="progress-overview">
+<div class="progress-card progress-card-primary">
+<div class="progress-card-value" data-i18n="progress_overview_done_value">9 з 10 фаз</div>
+<div class="progress-card-label" data-i18n="progress_overview_done_label">вже завершено</div>
+</div>
+<div class="progress-card">
+<div class="progress-card-value" data-i18n="progress_overview_active_value">1 фаза</div>
+<div class="progress-card-label" data-i18n="progress_overview_active_label">ще потребує доведення до кінця</div>
+</div>
+<div class="progress-card">
+<div class="progress-card-value" data-i18n="progress_overview_total_value">90%</div>
+<div class="progress-card-label" data-i18n="progress_overview_total_label">загальної дорожньої карти вже реалізовано</div>
+</div>
+</div>
+<p class="progress-intro" data-i18n="progress_intro">Проєкт уже не на рівні ідеї: сервіс працює, основний сценарій уже є, а головне завдання зараз — підключити великі мережі та перевести продукт у стабільні продажі.</p>
+<div class="phases">
+<div class="phase-row">
+<span class="phase-label" data-i18n="phase0">Фаза 0 — Концепція та модель продукту</span>
+<div class="phase-content">
+<div class="phase-bar-track"><div class="phase-fill phase-done" style="width:100%"><span class="phase-percent">✅ 100%</span></div></div>
+<div class="phase-status" data-i18n="phase0_status">завершено</div>
+</div>
+</div>
+<div class="phase-row">
+<span class="phase-label" data-i18n="phase1">Фаза 1 — Робоча основа продукту</span>
+<div class="phase-content">
+<div class="phase-bar-track"><div class="phase-fill phase-done" style="width:100%"><span class="phase-percent">✅ 100%</span></div></div>
+<div class="phase-status" data-i18n="phase1_status">завершено</div>
+</div>
+</div>
+<div class="phase-row">
+<span class="phase-label" data-i18n="phase2">Фаза 2 — Вхід користувачів і кабінети</span>
+<div class="phase-content">
+<div class="phase-bar-track"><div class="phase-fill phase-done" style="width:100%"><span class="phase-percent">✅ 100%</span></div></div>
+<div class="phase-status" data-i18n="phase2_status">завершено</div>
+</div>
+</div>
+<div class="phase-row">
+<span class="phase-label" data-i18n="phase3">Фаза 3 — База товарних пропозицій</span>
+<div class="phase-content">
+<div class="phase-bar-track"><div class="phase-fill phase-done" style="width:100%"><span class="phase-percent">✅ 100%</span></div></div>
+<div class="phase-status" data-i18n="phase3_status">завершено</div>
+</div>
+</div>
+<div class="phase-row">
+<span class="phase-label" data-i18n="phase4">Фаза 4 — Перевірка та порівняння матеріалів</span>
+<div class="phase-content">
+<div class="phase-bar-track"><div class="phase-fill phase-done" style="width:100%"><span class="phase-percent">✅ 100%</span></div></div>
+<div class="phase-status" data-i18n="phase4_status">готово для першого пілоту</div>
+</div>
+</div>
+<div class="phase-row">
+<span class="phase-label" data-i18n="phase5">Фаза 5 — Підключення великих торгових мереж</span>
+<div class="phase-content">
+<div class="phase-bar-track"><div class="phase-fill phase-active" style="width:80%"><span class="phase-percent">🔄 80%</span></div></div>
+<div class="phase-status" data-i18n="phase5_status">в роботі: отримання реальних даних від партнерів і доведення автоматичного оновлення до стабільного режиму</div>
+</div>
+</div>
+<div class="phase-row">
+<span class="phase-label" data-i18n="phase6">Фаза 6 — Порівняння вартості робіт</span>
+<div class="phase-content">
+<div class="phase-bar-track"><div class="phase-fill phase-done" style="width:100%"><span class="phase-percent">✅ 100%</span></div></div>
+<div class="phase-status" data-i18n="phase6_status">завершено: підрядники можуть показувати свої ціни, а користувач — порівнювати роботи разом із матеріалами</div>
+</div>
+</div>
+<div class="phase-row">
+<span class="phase-label" data-i18n="phase7">Фаза 7 — Керування платформою</span>
+<div class="phase-content">
+<div class="phase-bar-track"><div class="phase-fill phase-done" style="width:100%"><span class="phase-percent">✅ 100%</span></div></div>
+<div class="phase-status" data-i18n="phase7_status">завершено: є інструменти для перевірки партнерів, контролю даних і щоденного керування сервісом</div>
+</div>
+</div>
+<div class="phase-row">
+<span class="phase-label" data-i18n="phase8">Фаза 8 — Аналітика та комерційні інструменти</span>
+<div class="phase-content">
+<div class="phase-bar-track"><div class="phase-fill phase-done" style="width:100%"><span class="phase-percent">✅ 100%</span></div></div>
+<div class="phase-status" data-i18n="phase8_status">базовий етап завершено: видно інтерес користувачів, переходи до партнерів і перші точки майбутньої монетизації</div>
+</div>
+</div>
+<div class="phase-row">
+<span class="phase-label" data-i18n="phase9">Фаза 9 — Стабільний запуск</span>
+<div class="phase-content">
+<div class="phase-bar-track"><div class="phase-fill phase-done" style="width:100%"><span class="phase-percent">✅ 100%</span></div></div>
+<div class="phase-status" data-i18n="phase9_status">завершено: сервіс підготовлено до надійної роботи та контрольованого комерційного старту</div>
+</div>
+</div>
+</div>
+<h2 data-i18n="what_is_title">Що це за проєкт</h2>
+<p class="section-text" data-i18n="what_is_text">Budget Checker 2.0 — це сервіс, який перетворює кошторис із незрозумілого документа на зрозумілий фінансовий інструмент. Замість ручного обходу сайтів, дзвінків у магазини та суперечок із підрядником користувач отримує один екран, де видно: які матеріали знайдено, скільки вони коштують у реальних магазинах, де є спірні позиції, де можна заощадити, а де поки бракує даних.</p>
+<div class="grid-2">
+<div class="card">
+<h3 data-i18n="problem_title">Яку проблему ми вирішуємо</h3>
+<ul>
+<li data-i18n="problem1">Люди не розуміють, чи завищений кошторис підрядника.</li>
+<li data-i18n="problem2">Перевірка вручну займає години, а іноді й дні.</li>
+<li data-i18n="problem3">Немає зручного інструменту, який перевіряє не один товар, а весь кошторис цілком.</li>
+<li data-i18n="problem4">Магазини втрачають покупців, тому що їхні пропозиції не потрапляють у момент реального вибору.</li>
+<li data-i18n="problem5">Підрядники втрачають довіру клієнта, навіть коли їхня ціна чесна, бо її нічим підтвердити.</li>
+</ul>
+</div>
+<div class="card card-dark">
+<h3 data-i18n="solution_title">Як виглядає рішення</h3>
+<ul>
+<li data-i18n="solution1">Користувач завантажує кошторис файлом, вставляє список рядків або збирає корзину вручну.</li>
+<li data-i18n="solution2">Система розбирає рядки та шукає відповідні пропозиції на ринку.</li>
+<li data-i18n="solution3">По кожній позиції показується зрозумілий результат: знайдено, не знайдено або потребує уточнення.</li>
+<li data-i18n="solution4">Якщо рядок спірний, користувач може виправити його і одразу перерахувати результат.</li>
+<li data-i18n="solution5">Магазини отримують не просто показ, а цільовий трафік із реального кошторису, де вже є намір купити.</li>
+</ul>
+</div>
+</div>
+<div class="grid-3">
+<div class="card card-accent">
+<h3 data-i18n="diff_title">Чим проєкт відрізняється</h3>
+<p data-i18n="diff_text">Більшість сервісів порівнюють одну картку товару. Ми порівнюємо весь список матеріалів і в майбутньому — ще й вартість робіт. Це значно корисніший сценарій і для людини, і для бізнесу.</p>
+</div>
+<div class="card card-soft">
+<h3 data-i18n="painkiller_title">Чому це "знеболювальне"</h3>
+<p data-i18n="painkiller_text">Помилка в кошторисі коштує дорого. Навіть невелика переплата на десятках позицій швидко перетворюється на великі гроші. Тому користувач приходить сюди не "подивитися", а прийняти рішення.</p>
+</div>
+<div class="card">
+<h3 data-i18n="platform_title">Чому це платформа</h3>
+<p data-i18n="platform_text">Чим більше в системі магазинів, прайсів і користувачів, тим корисніший продукт для всіх сторін ринку. Це створює накопичувальний ефект і посилює цінність проєкту з часом.</p>
+</div>
+</div>
+<h2 data-i18n="how_it_works_title">Як це працює простою мовою</h2>
+<p class="section-text" data-i18n="how_it_works_sub">Для інвестора тут важливе головне: сервіс уже працює, а наступні вкладення йдуть у дані, партнерства, продажі та масштабування.</p>
+<div class="steps">
+<div class="step">
+<div class="step-number">1</div>
+<h3 data-i18n="step1_title">Людина приносить кошторис або список матеріалів</h3>
+<p data-i18n="step1_text">Користувач завантажує кошторис, вставляє список позицій або збирає його вручну. Далі обирає місто, щоб бачити релевантні пропозиції саме для свого регіону.</p>
+</div>
+<div class="step">
+<div class="step-number">2</div>
+<h3 data-i18n="step2_title">Сервіс розбирає рядки та шукає збіги</h3>
+<p data-i18n="step2_text">Система намагається зрозуміти, що малося на увазі в кожному рядку кошторису. Якщо збіг упевнений, він показується одразу. Якщо рядок неоднозначний, сервіс чесно позначає його як спірний, а не робить вигляд, що "все зрозумів".</p>
+</div>
+<div class="step">
+<div class="step-number">3</div>
+<h3 data-i18n="step3_title">Підтягуються реальні пропозиції магазинів</h3>
+<p data-i18n="step3_text">Уже зараз магазини можуть додавати свої пропозиції через кабінет. Наступний крок — підключити великі мережі, щоб ціни й наявність оновлювалися автоматично.</p>
+</div>
+<div class="step">
+<div class="step-number">4</div>
+<h3 data-i18n="step4_title">Користувач отримує зрозумілий підсумок</h3>
+<p data-i18n="step4_text">На виході видно: які позиції знайдено, скільки вони коштують, де є ризик переплати, що потрібно уточнити та які є альтернативи. Це не просто список товарів, а реальна допомога в прийнятті фінансового рішення.</p>
+</div>
+<div class="step">
+<div class="step-number">5</div>
+<h3 data-i18n="step5_title">Бізнес отримує цільовий попит</h3>
+<p data-i18n="step5_text">Магазини отримують покупця в найцінніший момент — коли він уже рахує бюджет і готовий вибирати. Підрядники отримують майданчик, де можна чесно показати свою ціну і виграти довіру.</p>
+</div>
+</div>
+<h2 data-i18n="who_needs_title">Кому це потрібно</h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr>
+<th data-i18n="table_who">Кому</th>
+<th data-i18n="table_problem">Яка в нього проблема</th>
+<th data-i18n="table_value">Що дає Budget Checker</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong data-i18n="user_individuals">Приватні особи</strong></td>
+<td data-i18n="individuals_problem">Не знають реальних цін, переплачують, не довіряють кошторису підрядника</td>
+<td data-i18n="individuals_value">Перевірка кошторису за хвилини, розуміння де економія та які позиції спірні</td>
+</tr>
+<tr>
+<td><strong data-i18n="user_contractors">Підрядники</strong></td>
+<td data-i18n="contractors_problem">Клієнти сумніваються в кошторисі та вважають ціну завищеною</td>
+<td data-i18n="contractors_value">У майбутньому — зрозуміле підтвердження вартості робіт і просування через платформу</td>
+</tr>
+<tr>
+<td><strong data-i18n="user_developers">Забудовники та закупівля</strong></td>
+<td data-i18n="developers_problem">Ручний збір пропозицій займає багато часу та ресурсів</td>
+<td data-i18n="developers_value">Автоматизація порівняння матеріалів і потім послуг, прозорість по рядках і постачальниках</td>
+</tr>
+<tr>
+<td><strong data-i18n="user_stores">Магазини будматеріалів</strong></td>
+<td data-i18n="stores_problem">Важко отримувати клієнтів саме в момент прийняття рішення про покупку</td>
+<td data-i18n="stores_value">Канал цільового трафіку та лідів із готових кошторисів і списків закупівлі</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 data-i18n="market_title">Ринок і чому можливість реальна</h2>
+<div class="grid-4">
+<div class="card">
+<div class="stat">800 000+</div>
+<div class="stat-label" data-i18n="stat1">ремонтів і будівництв в Україні на рік, за робочою оцінкою</div>
+</div>
+<div class="card">
+<div class="stat" data-i18n="stat2_value">50-200 тис. грн</div>
+<div class="stat-label" data-i18n="stat2">середній бюджет лише на матеріали для ремонту</div>
+</div>
+<div class="card">
+<div class="stat">15-30%</div>
+<div class="stat-label" data-i18n="stat3">потенційна економія на погано перевіреному кошторисі</div>
+</div>
+<div class="card">
+<div class="stat" data-i18n="stat4_value">2 мережі</div>
+<div class="stat-label" data-i18n="stat4">достатньо на старті, щоб дати ринку перший реальний сигнал корисності</div>
+</div>
+</div>
+<div class="grid-2">
+<div class="card">
+<h3 data-i18n="market_ready_title">Чому ринок готовий</h3>
+<ul>
+<li data-i18n="market_ready1">Проблема зрозуміла і масова: кожен ремонт пов'язаний з кошторисом, списком матеріалів і невизначеністю в ціні.</li>
+<li data-i18n="market_ready2">Люди вже звикли шукати ціни онлайн, але поки не мають зручного інструменту для роботи з усім кошторисом одразу.</li>
+<li data-i18n="market_ready3">Бізнесу теж вигідно бути присутнім там, де рішення про покупку вже майже прийнято.</li>
+<li data-i18n="market_ready4">Навіть невелика підтверджена економія робить продукт цінним і для B2C, і для B2B.</li>
+</ul>
+</div>
+<div class="card">
+<h3 data-i18n="investor_interest_title">Чому проєкт цікавий інвестору</h3>
+<ul>
+<li data-i18n="investor1">Робочий продукт уже зібрано, тому інвестиції йдуть у зростання, а не в спробу зрозуміти, що саме потрібно ринку.</li>
+<li data-i18n="investor2">У проєкту кілька шляхів монетизації, а не одне джерело доходу.</li>
+<li data-i18n="investor3">Чим більше даних і партнерів підключено, тим сильніший продукт і тим вища його ринкова цінність.</li>
+<li data-i18n="investor4">Наступний етап розвитку зрозумілий: закрити інтеграції, запустити платні сценарії та нарощувати виручку.</li>
+</ul>
+</div>
+</div>
+<h2 data-i18n="invest_now_title">Чому інвестувати зараз</h2>
+<p class="section-text" data-i18n="invest_now_text">Для інвестора зараз хороший момент входу, тому що проєкт уже пройшов найризикованіший етап порожнього старту. Сервіс працює, перший сценарій уже показує користь, а наступний капітал потрібен на зрозумілі точки росту: дані, партнерства, продажі та вихід у повторювану виручку.</p>
+<div class="grid-3">
+<div class="card">
+<h3 data-i18n="reason1_title">1. Ризик продукту вже знижено</h3>
+<p data-i18n="reason1_text">Сервіс уже приймає кошторис, обробляє його та показує результат. Це означає, що гроші вкладаються не в теорію, а в посилення того, що вже працює.</p>
+</div>
+<div class="card">
+<h3 data-i18n="reason2_title">2. Точка зростання зрозуміла</h3>
+<p data-i18n="reason2_text">Наступний крок не розмитий: потрібні реальні мережеві інтеграції, зростання покриття даними, перші платні партнери та запуск бізнес-контурів. Це керований, а не абстрактний етап.</p>
+</div>
+<div class="card">
+<h3 data-i18n="reason3_title">3. Цінність зростає накопичувально</h3>
+<p data-i18n="reason3_text">Кожен новий магазин, філія, прайс і користувач посилюють всю систему одразу. Це робить проєкт сильнішим з часом і підвищує його вартість як платформи, а не як разової функції.</p>
+</div>
+</div>
+<h2 data-i18n="business_model_title">Бізнес-модель</h2>
+<p class="section-text" data-i18n="business_model_text">Budget Checker можна монетизувати одразу за кількома напрямками. Це важливо, тому що проєкт не залежить від одного джерела доходу і може зростати поетапно.</p>
+<div class="grid-2">
+<div class="card">
+<h3 data-i18n="bm_stores_title">1. Магазини та торгові мережі</h3>
+<p data-i18n="bm_stores_text">Платна підписка за підключення філій та розміщення актуального каталогу плюс плата за переходи та ліди. Магазин платить не за "гарне місце на сайті", а за потрапляння в реальний кошторис покупця.</p>
+</div>
+<div class="card">
+<h3 data-i18n="bm_contractors_title">2. Підрядники</h3>
+<p data-i18n="bm_contractors_text">Платні кабінети, аналітика по ринку, розміщення прайс-листів і просування в порівнянні послуг. Це напрямок розкривається після етапу порівняння робіт.</p>
+</div>
+<div class="card">
+<h3 data-i18n="bm_users_title">3. Користувачі</h3>
+<p data-i18n="bm_users_text">Базова перевірка може залишатися безкоштовною, а розширені звіти, історія порівнянь, додаткові інструменти та корпоративні сценарії стають платними.</p>
+</div>
+<div class="card">
+<h3 data-i18n="bm_b2b_title">4. B2B і закупівля</h3>
+<p data-i18n="bm_b2b_text">Корпоративні тарифи для девелоперів, тендерних відділів, закупівельників і компаній, яким потрібно швидко та прозоро порівнювати пропозиції за великими списками матеріалів.</p>
+</div>
+</div>
+<h2 data-i18n="financial_plan_title">Робочий фінансовий план</h2>
+<div class="table-wrapper">
+<table class="financial-table">
+<thead>
+<tr>
+<th data-i18n="fp_indicator">Показник</th>
+<th data-i18n="fp_year1">Рік 1 після комерційного запуску</th>
+<th data-i18n="fp_year2">Рік 2</th>
+<th data-i18n="fp_year3">Рік 3</th>
+</tr>
+</thead>
+<tbody>
+<tr><td data-i18n="fp_paid_branches">Платні філії магазинів</td><td>40</td><td>120</td><td>250</td></tr>
+<tr><td data-i18n="fp_avg_branch">Середній чек за одну філію</td><td data-i18n="fp_avg_branch_y1">6 000 грн/міс</td><td data-i18n="fp_avg_branch_y2">7 000 грн/міс</td><td data-i18n="fp_avg_branch_y3">8 000 грн/міс</td></tr>
+<tr><td data-i18n="fp_paid_contractors">Платні підрядники</td><td>100</td><td>250</td><td>500</td></tr>
+<tr><td data-i18n="fp_avg_contractor">Середній чек підрядника</td><td data-i18n="fp_avg_contractor_y1">1 500 грн/міс</td><td data-i18n="fp_avg_contractor_y2">1 800 грн/міс</td><td data-i18n="fp_avg_contractor_y3">2 200 грн/міс</td></tr>
+<tr><td data-i18n="fp_paid_leads">Платні переходи та ліди</td><td data-i18n="fp_paid_leads_y1">20 000/міс по 2 грн</td><td data-i18n="fp_paid_leads_y2">60 000/міс по 2.5 грн</td><td data-i18n="fp_paid_leads_y3">150 000/міс по 3 грн</td></tr>
+<tr><td data-i18n="fp_premium">Платні звіти та преміум-доступ</td><td data-i18n="fp_premium_y1">1 000/міс по 99 грн</td><td data-i18n="fp_premium_y2">3 000/міс по 129 грн</td><td data-i18n="fp_premium_y3">7 000/міс по 149 грн</td></tr>
+<tr><td><strong data-i18n="fp_total">Оціночний річний дохід</strong></td><td><strong data-i18n="fp_total_y1">~6.3 млн грн</strong></td><td><strong data-i18n="fp_total_y2">~21.9 млн грн</strong></td><td><strong data-i18n="fp_total_y3">~55.1 млн грн</strong></td></tr>
+</tbody>
+</table>
+</div>
+<p class="text-muted" data-i18n="fp_note">Це робоча модель для розуміння масштабу бізнесу. Вона не обіцяє ринок "на папері", а показує зрозумілу логіку зростання за кількома каналами доходу.</p>
+<h2 data-i18n="done_title">Що вже зроблено (поточний статус)</h2>
+<div class="card status-list">
+<p><span class="badge badge-green" data-i18n="badge_done">ГОТОВО</span> <strong data-i18n="done1_title">Чітко зафіксовано, що саме ми будуємо</strong> <span data-i18n="done1_text">— є зрозуміла логіка продукту, послідовність розвитку та правила комерційного запуску.</span></p>
+<p><span class="badge badge-green" data-i18n="badge_done">ГОТОВО</span> <strong data-i18n="done2_title">Створено робочий продукт</strong> <span data-i18n="done2_text">— сервіс уже можна запустити, перевірити й показати партнерам та користувачам.</span></p>
+<p><span class="badge badge-green" data-i18n="badge_done">ГОТОВО</span> <strong data-i18n="done3_title">Акаунти та ролі</strong> <span data-i18n="done3_text">— є реєстрація, вхід, підтвердження email, розподіл ролей і кабінети організацій.</span></p>
+<p><span class="badge badge-green" data-i18n="badge_done">ГОТОВО</span> <strong data-i18n="done4_title">Основа для магазинів</strong> <span data-i18n="done4_text">— організація може створити магазин і філії, а адміністратор може їх верифікувати.</span></p>
+<p><span class="badge badge-green" data-i18n="badge_done">ГОТОВО</span> <strong data-i18n="done5_title">Завантаження каталогів магазинів</strong> <span data-i18n="done5_text">— магазини вже можуть завантажувати свої пропозиції, а система показує, які позиції треба перевірити вручну, якщо в них є ризик помилки.</span></p>
+<p><span class="badge badge-green" data-i18n="badge_done">ГОТОВО</span> <strong data-i18n="done6_title">Порівняння матеріалів</strong> <span data-i18n="done6_text">— користувач уже може перевірити кошторис, побачити знайдені позиції, спірні місця та можливу економію.</span></p>
+<p><span class="badge badge-green" data-i18n="badge_done">ГОТОВО</span> <strong data-i18n="done7_title">Перший живий користувацький сценарій</strong> <span data-i18n="done7_text">— є жива сторінка перевірки кошторису, партнерський кабінет і окрема зона керування сервісом.</span></p>
+<p><span class="badge badge-yellow" data-i18n="badge_in_progress">В РОБОТІ</span> <strong data-i18n="done8_title">Автоматичні інтеграції</strong> <span data-i18n="done8_text">— підготовлено основу для роботи з Епіцентром та Новою Лінією. Наступний крок — отримати реальні дані й перевести оновлення в стабільний режим.</span></p>
+<p><span class="badge badge-green" data-i18n="badge_done">ГОТОВО</span> <strong data-i18n="done9_title">Порівняння вартості робіт</strong> <span data-i18n="done9_text">— сервіс уже вміє показувати не лише матеріали, а й роботи, щоб людина бачила повнішу картину бюджету на одному екрані.</span></p>
+<p><span class="badge badge-green" data-i18n="badge_done">ГОТОВО</span> <strong data-i18n="done10_title">Панель керування платформою</strong> <span data-i18n="done10_text">— команда може перевіряти партнерів, контролювати якість даних, бачити проблемні місця та швидко реагувати на збої.</span></p>
+<p><span class="badge badge-green" data-i18n="badge_done">ГОТОВО</span> <strong data-i18n="done11_title">Комерційний контур (базовий етап Фази 8) — завершено</strong> <span data-i18n="done11_text">— уже видно переходи до партнерів, інтерес користувачів і базу для перших платних сценаріїв.</span></p>
+<p><span class="badge badge-green" data-i18n="badge_done">ГОТОВО</span> <strong data-i18n="done12_title">Підготовка до стабільного запуску</strong> <span data-i18n="done12_text">— зібрано базові правила надійної роботи сервісу перед комерційним стартом.</span></p>
+<p><span class="badge badge-green" data-i18n="badge_done">ГОТОВО</span> <strong data-i18n="done13_title">Юридична частина і тарифи</strong> <span data-i18n="done13_text">— підготовлено юридичні документи, тарифну сторінку та публічні правила роботи з сервісом.</span></p>
+<p><span class="badge badge-green" data-i18n="badge_done">ГОТОВО</span> <strong data-i18n="done14_title">Три мови і зручність на телефоні</strong> <span data-i18n="done14_text">— сервіс доступний українською, російською та англійською, а також зручно працює на мобільних пристроях.</span></p>
+<p><span class="badge badge-green" data-i18n="badge_done">ГОТОВО</span> <strong data-i18n="done15_title">Сайт можна встановити як застосунок</strong> <span data-i18n="done15_text">— сервіс відкривається не лише в браузері, а й як зручний застосунок на телефоні.</span></p>
+<p><span class="badge badge-green" data-i18n="badge_done">ГОТОВО</span> <strong data-i18n="done16_title">Підготовлено оплату тарифів</strong> <span data-i18n="done16_text">— checkout і webhook LiqPay реалізовано та протестовано в sandbox; production-ключі й реальний платіж залишаються наступним кроком.</span></p>
+</div>
+<h2 data-i18n="next_steps_title">Що потрібно зробити далі по порядку</h2>
+<div class="grid-2">
+<div class="card">
+<h3 data-i18n="next_steps1_title">Найближчі кроки</h3>
+<ul>
+<li data-i18n="next1">Довести 2 реальні мережі до стабільного автоматичного завантаження даних.</li>
+<li data-i18n="next2">Підвищити якість даних і регулярність оновлення пропозицій, а також посилити ручну перевірку ризикованих позицій.</li>
+<li data-i18n="next3">Запустити перші комерційні пілоти з магазинами та B2B-клієнтами.</li>
+<li data-i18n="next4">Довести підключення великих мереж до стабільної щоденної роботи.</li>
+</ul>
+</div>
+<div class="card">
+<h3 data-i18n="next_steps2_title">Наступний великий етап</h3>
+<ul>
+<li data-i18n="next5">Увімкнути платні сценарії: підписки, платні звіти, лідогенерацію та корпоративні тарифи.</li>
+<li data-i18n="next6">Після комерційного запуску розширити аналітику, роботу з лідами та платні сценарії для партнерів.</li>
+<li data-i18n="next7">Розширити аналітику, звітність та операційні інструменти.</li>
+<li data-i18n="next8">Підтримувати операційну дисципліну: резервні копії, контроль збоїв і швидке реагування на проблеми.</li>
+</ul>
+</div>
+</div>
+<h2 data-i18n="advantages_title">Чому ми сильніші за аналоги</h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th data-i18n="adv_who">Хто на ринку</th><th data-i18n="adv_what">Що вміє</th><th data-i18n="adv_weak">Де слабке місце</th><th data-i18n="adv_strong">Чим сильніший Budget Checker</th></tr>
+</thead>
+<tbody>
+<tr><td><strong data-i18n="adv1_title">Сервіси порівняння цін</strong></td><td data-i18n="adv1_what">Порівнюють один конкретний товар</td><td data-i18n="adv1_weak">Не вміють працювати з кошторисом цілком</td><td data-i18n="adv1_strong">Ми працюємо одразу з усім списком матеріалів, а не з однією карткою товару</td></tr>
+<tr><td><strong data-i18n="adv2_title">Маркетплейси та каталоги</strong></td><td data-i18n="adv2_what">Показують асортимент</td><td data-i18n="adv2_weak">Не вирішують завдання "скільки коштує весь кошторис"</td><td data-i18n="adv2_strong">Ми допомагаємо прийняти рішення по всьому бюджету, а не просто вибрати товар</td></tr>
+<tr><td><strong data-i18n="adv3_title">Кошторисні програми</strong></td><td data-i18n="adv3_what">Хороші для розрахунків і документів</td><td data-i18n="adv3_weak">Зазвичай не показують живі ринкові ціни магазинів</td><td data-i18n="adv3_strong">Ми з'єднуємо кошторис, ринок, порівняння та зрозуміле пояснення результату</td></tr>
+<tr><td><strong data-i18n="adv4_title">Ручний Excel і пошук по сайтах</strong></td><td data-i18n="adv4_what">Звичні всім</td><td data-i18n="adv4_weak">Повільно, багато помилок, немає прозорості та повторюваності</td><td data-i18n="adv4_strong">Ми економимо час, знижуємо помилки та робимо процес масштабованим</td></tr>
+</tbody>
+</table>
+</div>
+<h2 data-i18n="next_funding_title">Що потрібно для наступного етапу</h2>
+<div class="grid-2">
+<div class="card">
+<h3 data-i18n="money_where_title">Куди йдуть гроші</h3>
+<ul>
+<li data-i18n="money1">Підключення та доведення до стабільної роботи 2 реальних мережевих інтеграцій.</li>
+<li data-i18n="money2">Підвищення якості даних і регулярності їх оновлення.</li>
+<li data-i18n="money3">Онбординг магазинів, перші платні партнери та B2B-пілоти.</li>
+<li data-i18n="money4">Розширення покриття по роботах, сервісах і партнерських сценаріях.</li>
+</ul>
+</div>
+<div class="card">
+<h3 data-i18n="investment_request_title">Інвестиційний запит</h3>
+<p data-i18n="investment_text">Робочий орієнтир наступного етапу — 1.2-1.8 млн грн. Ці гроші потрібні не на "пошук ідеї", а на прискорення виходу до комерційної стадії: дані, партнери, продукт, продажі та операційна стійкість.</p>
+<p class="text-muted" data-i18n="investment_note" style="margin-top: 12px;">Головна логіка вкладень: ядро вже зібрано, а наступний капітал переводить проєкт із робочого продукту в платний ринок із реальними клієнтами та повторюваною виручкою.</p>
+</div>
+</div>
+<h2 data-i18n="investment_use_title">Як будуть використовуватися інвестиції</h2>
+<p class="section-text" data-i18n="investment_use_text">Гроші наступного етапу йдуть не на косметичні доопрацювання. Вони спрямовуються в ті блоки, які напряму наближають сервіс до комерційного запуску, зростання виручки та зниження операційних ризиків.</p>
+<div class="grid-4">
+<div class="card"><div class="stat">35%</div><div class="stat-label" data-i18n="use1_label">інтеграції та якість даних</div><p class="text-muted" data-i18n="use1_text" style="margin-top: 12px;">Підключення мереж, автоматичне оновлення пропозицій, контроль якості та стабільність даних.</p></div>
+<div class="card"><div class="stat">25%</div><div class="stat-label" data-i18n="use2_label">розвиток продукту</div><p class="text-muted" data-i18n="use2_text" style="margin-top: 12px;">Покращення користувацького досвіду, розвиток порівняння матеріалів і підготовка блоку порівняння робіт.</p></div>
+<div class="card"><div class="stat">20%</div><div class="stat-label" data-i18n="use3_label">продажі та пілоти</div><p class="text-muted" data-i18n="use3_text" style="margin-top: 12px;">Онбординг магазинів, перші B2B-партнери, пілотні впровадження та перевірка комерційної моделі.</p></div>
+<div class="card"><div class="stat">20%</div><div class="stat-label" data-i18n="use4_label">інфраструктура та стійкість</div><p class="text-muted" data-i18n="use4_text" style="margin-top: 12px;">Моніторинг, стабільність, безпека, операційні панелі та підготовка до повноцінної роботи в промисловому середовищі.</p></div>
+</div>
+<div class="grid-2">
+<div class="card">
+<h3 data-i18n="investor_gains_title">Що інвестор отримує на виході цього етапу</h3>
+<ul>
+<li data-i18n="gain1">Робочий продукт із 2 стабільними мережевими джерелами даних.</li>
+<li data-i18n="gain2">Перші платні партнерські сценарії для магазинів і B2B-клієнтів.</li>
+<li data-i18n="gain3">Зрозумілу базу для масштабування на ринок послуг і підрядників.</li>
+<li data-i18n="gain4">Сильніше підготовлений актив із меншим ризиком на етапі масштабування.</li>
+</ul>
+</div>
+<div class="card">
+<h3 data-i18n="next_milestones_title">Найближчі віхи після інвестицій</h3>
+<ul>
+<li data-i18n="milestone1">Закрити інтеграції Епіцентру та Нової Лінії до стабільної роботи.</li>
+<li data-i18n="milestone2">Запустити перші комерційні пілоти з магазинами.</li>
+<li data-i18n="milestone3">Підготувати та відкрити платний контур для бізнесу.</li>
+<li data-i18n="milestone4">Перейти до наступної фази — ринку послуг і порівняння вартості робіт.</li>
+</ul>
+</div>
+</div>
+<h2 data-i18n="risks_title">Ключові ризики та як ми їх знижуємо</h2>
+<div class="table-wrapper">
+<table>
+<thead><tr><th data-i18n="risk_name">Ризик</th><th data-i18n="risk_why">Чому він важливий</th><th data-i18n="risk_how">Як ми його знижуємо</th></tr></thead>
+<tbody>
+<tr><td data-i18n="risk1_name">Мережі не дають доступ до даних</td><td data-i18n="risk1_why">Без реальних пропозицій якість порівняння обмежена</td><td data-i18n="risk1_how">Рухаємося за пріоритетом: спочатку пряме автоматичне отримання даних, потім резервні способи завантаження через кабінет і запасні сценарії</td></tr>
+<tr><td data-i18n="risk2_name">Низька якість розпізнавання рядків</td><td data-i18n="risk2_why">Якщо система помиляється, користувач швидко втрачає довіру</td><td data-i18n="risk2_how">Спірні рядки явно позначаються, пояснюються і можуть виправлятися вручну</td></tr>
+<tr><td data-i18n="risk3_name">Повільне зростання B2B-напрямку</td><td data-i18n="risk3_why">Потрібно довести цінність магазинам і підрядникам</td><td data-i18n="risk3_how">Спочатку продається найзрозуміліша цінність: перевірка кошторису та потік цільового попиту</td></tr>
+<tr><td data-i18n="risk4_name">Тиск з боку конкурентів</td><td data-i18n="risk4_why">Великі майданчики можуть спробувати повторити ідею</td><td data-i18n="risk4_how">Наша перевага — робота з кошторисом цілком, накопичення даних, історій зіставлень та інтеграцій</td></tr>
+</tbody>
+</table>
+</div>
+<hr/>
+<div class="footer-box">
+<div>
+<h3 data-i18n="docs_title" style="margin-bottom: 8px;">Ключові документи</h3>
+<p><a href="./MASTER_TZ.md">MASTER_TZ.md</a> — <span data-i18n="docs1">головний документ про те, що будується і як має працювати продукт</span>.</p>
+<p><a href="./ROADMAP.md">ROADMAP.md</a> — <span data-i18n="docs2">поетапний план запуску та зростання</span>.</p>
+<p><a href="./SECURITY_BASELINE.md">SECURITY_BASELINE.md</a> — <span data-i18n="docs3">правила безпеки та надійної роботи сервісу</span>.</p>
+<p><a href="./runbooks/READY_MONITOR_TASK_SCHEDULER.md">runbooks/READY_MONITOR_TASK_SCHEDULER.md</a> — <span data-i18n="docs4">runbook для автоматичного моніторингу готовності сервісу (Task Scheduler)</span>.</p>
+<p><a href="./REAL_COMPLETION_CHECKLIST.md">REAL_COMPLETION_CHECKLIST.md</a> — <span data-i18n="docs5">чеклист до реального комерційного завершення</span>.</p>
+</div>
+<div>
+<h3 data-i18n="status_title" style="margin-bottom: 8px;">Поточний статус</h3>
+<p data-i18n="status_date">Актуально на: 21 квітня 2026</p>
+<p data-i18n="status_phase">Кодова база готова до першого комерційного пілоту; реальне завершення залежить від production-ключів, фідів і першого партнера ✅</p>
+<p style="margin-top: 10px;"><a data-i18n="status_pilot_link" href="https://budcheck.com.ua/" rel="noopener" target="_blank">▶ Переглянути пілот: budcheck.com.ua</a></p>
+<p data-i18n="status_desc">Додано повні мовні URL /uk, /ru, /en, локалізовані SEO metadata, sitemap з hreflang, legal-тексти трьома мовами, backend API i18n та мобільні polish-виправлення. До повного завершення залишаються: реальні фіди Epicentr/Nova Liniya, LiqPay production, Turnstile production, перший партнер і фінальний production smoke.</p>
+</div>
+</div>
+</div>
+</div>
+<script>
+    // Повний словник перекладів для всіх трьох мов
+    const translations = {
+    uk: {
+        page_title: "Budget Checker 2.0 — Інвестиційна презентація",
+        modal_title: "Оберіть мову",
+        switch_uk: "🇺🇦 UA",
+        switch_en: "🇬🇧 EN",
+        switch_ru: "🇷🇺 RU",
+        modal_btn_uk: "🇺🇦 Українська",
+        modal_btn_en: "🇬🇧 English",
+        modal_btn_ru: "🇷🇺 Русский",
+        badge_done: "ГОТОВО",
+        badge_in_progress: "В РОБОТІ",
+        badge_next_stage: "НАСТУПНИЙ ЕТАП",
+        stat2_value: "50-200 тис. грн",
+        stat4_value: "2 мережі",
+        hero_note: "Продукт готовий до першого комерційного пілоту",
+        hero_subhead: "Платформа для перевірки будівельних кошторисів, порівняння цін на матеріали та на наступному етапі — порівняння вартості робіт.<br>Головна ідея проста: людина завантажує кошторис, а система показує, скільки це реально коштує на ринку і де вона переплачує.",
+        hero_summary: "Це проєкт не про \"ще один каталог товарів\", а про більш цінне завдання: допомогти людині, підряднику або закупівельнику швидко зрозуміти реальну вартість ремонту чи будівництва. Для користувача це економія та прозорість. Для магазинів і підрядників — потік цільових клієнтів. Для інвестора — платформа з кількома джерелами доходу та зрозумілою точкою зростання.",
+        progress_title: "Стадія проєкту",
+        progress_overview_done_value: "9 з 10 фаз",
+        progress_overview_done_label: "вже завершено",
+        progress_overview_active_value: "1 фаза",
+        progress_overview_active_label: "ще потребує доведення до кінця",
+        progress_overview_total_value: "90%",
+        progress_overview_total_label: "загальної дорожньої карти вже реалізовано",
+        progress_intro: "Проєкт уже не на рівні ідеї: сервіс працює, основний сценарій уже є, а головне завдання зараз — підключити великі мережі та перевести продукт у стабільні продажі.",
+        phase0: "Фаза 0 — Концепція та модель продукту",
+        phase0_status: "завершено",
+        phase1: "Фаза 1 — Робоча основа продукту",
+        phase1_status: "завершено",
+        phase2: "Фаза 2 — Вхід користувачів і кабінети",
+        phase2_status: "завершено",
+        phase3: "Фаза 3 — База товарних пропозицій",
+        phase3_status: "завершено",
+        phase4: "Фаза 4 — Перевірка та порівняння матеріалів",
+        phase4_status: "готово для першого пілоту",
+        phase5: "Фаза 5 — Підключення великих торгових мереж",
+        phase5_status: "в роботі: отримання реальних даних від партнерів і доведення автоматичного оновлення до стабільного режиму",
+        phase6: "Фаза 6 — Порівняння вартості робіт",
+        phase6_status: "завершено: підрядники можуть показувати свої ціни, а користувач — порівнювати роботи разом із матеріалами",
+        phase7: "Фаза 7 — Керування платформою",
+        phase7_status: "завершено: є інструменти для перевірки партнерів, контролю даних і щоденного керування сервісом",
+        phase8: "Фаза 8 — Аналітика та комерційні інструменти",
+        phase8_status: "базовий етап завершено: видно інтерес користувачів, переходи до партнерів і перші точки майбутньої монетизації",
+        phase9: "Фаза 9 — Стабільний запуск",
+        phase9_status: "завершено: сервіс підготовлено до надійної роботи та контрольованого комерційного старту",
+        what_is_title: "Що це за проєкт",
+        what_is_text: "Budget Checker 2.0 — це сервіс, який перетворює кошторис із незрозумілого документа на зрозумілий фінансовий інструмент. Замість ручного обходу сайтів, дзвінків у магазини та суперечок із підрядником користувач отримує один екран, де видно: які матеріали знайдено, скільки вони коштують у реальних магазинах, де є спірні позиції, де можна заощадити, а де поки бракує даних.",
+        problem_title: "Яку проблему ми вирішуємо",
+        problem1: "Люди не розуміють, чи завищений кошторис підрядника.",
+        problem2: "Перевірка вручну займає години, а іноді й дні.",
+        problem3: "Немає зручного інструменту, який перевіряє не один товар, а весь кошторис цілком.",
+        problem4: "Магазини втрачають покупців, тому що їхні пропозиції не потрапляють у момент реального вибору.",
+        problem5: "Підрядники втрачають довіру клієнта, навіть коли їхня ціна чесна, бо її нічим підтвердити.",
+        solution_title: "Як виглядає рішення",
+        solution1: "Користувач завантажує кошторис файлом, вставляє список рядків або збирає корзину вручну.",
+        solution2: "Система розбирає рядки та шукає відповідні пропозиції на ринку.",
+        solution3: "По кожній позиції показується зрозумілий результат: знайдено, не знайдено або потребує уточнення.",
+        solution4: "Якщо рядок спірний, користувач може виправити його і одразу перерахувати результат.",
+        solution5: "Магазини отримують не просто показ, а цільовий трафік із реального кошторису, де вже є намір купити.",
+        diff_title: "Чим проєкт відрізняється",
+        diff_text: "Більшість сервісів порівнюють одну картку товару. Ми порівнюємо весь список матеріалів і в майбутньому — ще й вартість робіт. Це значно корисніший сценарій і для людини, і для бізнесу.",
+        painkiller_title: "Чому це \"знеболювальне\"",
+        painkiller_text: "Помилка в кошторисі коштує дорого. Навіть невелика переплата на десятках позицій швидко перетворюється на великі гроші. Тому користувач приходить сюди не \"подивитися\", а прийняти рішення.",
+        platform_title: "Чому це платформа",
+        platform_text: "Чим більше в системі магазинів, прайсів і користувачів, тим корисніший продукт для всіх сторін ринку. Це створює накопичувальний ефект і посилює цінність проєкту з часом.",
+        how_it_works_title: "Як це працює простою мовою",
+        how_it_works_sub: "Для інвестора тут важливе головне: сервіс уже працює, а наступні вкладення йдуть у дані, партнерства, продажі та масштабування.",
+        step1_title: "Людина приносить кошторис або список матеріалів",
+        step1_text: "Користувач завантажує кошторис, вставляє список позицій або збирає його вручну. Далі обирає місто, щоб бачити релевантні пропозиції саме для свого регіону.",
+        step2_title: "Сервіс розбирає рядки та шукає збіги",
+        step2_text: "Система намагається зрозуміти, що малося на увазі в кожному рядку кошторису. Якщо збіг упевнений, він показується одразу. Якщо рядок неоднозначний, сервіс чесно позначає його як спірний, а не робить вигляд, що \"все зрозумів\".",
+        step3_title: "Підтягуються реальні пропозиції магазинів",
+        step3_text: "Уже зараз магазини можуть додавати свої пропозиції через кабінет. Наступний крок — підключити великі мережі, щоб ціни й наявність оновлювалися автоматично.",
+        step4_title: "Користувач отримує зрозумілий підсумок",
+        step4_text: "На виході видно: які позиції знайдено, скільки вони коштують, де є ризик переплати, що потрібно уточнити та які є альтернативи. Це не просто список товарів, а реальна допомога в прийнятті фінансового рішення.",
+        step5_title: "Бізнес отримує цільовий попит",
+        step5_text: "Магазини отримують покупця в найцінніший момент — коли він уже рахує бюджет і готовий вибирати. Підрядники отримують майданчик, де можна чесно показати свою ціну і виграти довіру.",
+        who_needs_title: "Кому це потрібно",
+        table_who: "Кому",
+        table_problem: "Яка в нього проблема",
+        table_value: "Що дає Budget Checker",
+        user_individuals: "Приватні особи",
+        individuals_problem: "Не знають реальних цін, переплачують, не довіряють кошторису підрядника",
+        individuals_value: "Перевірка кошторису за хвилини, розуміння де економія та які позиції спірні",
+        user_contractors: "Підрядники",
+        contractors_problem: "Клієнти сумніваються в кошторисі та вважають ціну завищеною",
+        contractors_value: "У майбутньому — зрозуміле підтвердження вартості робіт і просування через платформу",
+        user_developers: "Забудовники та закупівля",
+        developers_problem: "Ручний збір пропозицій займає багато часу та ресурсів",
+        developers_value: "Автоматизація порівняння матеріалів і потім послуг, прозорість по рядках і постачальниках",
+        user_stores: "Магазини будматеріалів",
+        stores_problem: "Важко отримувати клієнтів саме в момент прийняття рішення про покупку",
+        stores_value: "Канал цільового трафіку та лідів із готових кошторисів і списків закупівлі",
+        market_title: "Ринок і чому можливість реальна",
+        stat1: "ремонтів і будівництв в Україні на рік, за робочою оцінкою",
+        stat2: "середній бюджет лише на матеріали для ремонту",
+        stat3: "потенційна економія на погано перевіреному кошторисі",
+        stat4: "достатньо на старті, щоб дати ринку перший реальний сигнал корисності",
+        market_ready_title: "Чому ринок готовий",
+        market_ready1: "Проблема зрозуміла і масова: кожен ремонт пов'язаний з кошторисом, списком матеріалів і невизначеністю в ціні.",
+        market_ready2: "Люди вже звикли шукати ціни онлайн, але поки не мають зручного інструменту для роботи з усім кошторисом одразу.",
+        market_ready3: "Бізнесу теж вигідно бути присутнім там, де рішення про покупку вже майже прийнято.",
+        market_ready4: "Навіть невелика підтверджена економія робить продукт цінним і для B2C, і для B2B.",
+        investor_interest_title: "Чому проєкт цікавий інвестору",
+        investor1: "Робочий продукт уже зібрано, тому інвестиції йдуть у зростання, а не в спробу зрозуміти, що саме потрібно ринку.",
+        investor2: "У проєкту кілька шляхів монетизації, а не одне джерело доходу.",
+        investor3: "Чим більше даних і партнерів підключено, тим сильніший продукт і тим вища його ринкова цінність.",
+        investor4: "Наступний етап розвитку зрозумілий: закрити інтеграції, запустити платні сценарії та нарощувати виручку.",
+        invest_now_title: "Чому інвестувати зараз",
+        invest_now_text: "Для інвестора зараз хороший момент входу, тому що проєкт уже пройшов найризикованіший етап порожнього старту. Сервіс працює, перший сценарій уже показує користь, а наступний капітал потрібен на зрозумілі точки росту: дані, партнерства, продажі та вихід у повторювану виручку.",
+        reason1_title: "1. Ризик продукту вже знижено",
+        reason1_text: "Сервіс уже приймає кошторис, обробляє його та показує результат. Це означає, що гроші вкладаються не в теорію, а в посилення того, що вже працює.",
+        reason2_title: "2. Точка зростання зрозуміла",
+        reason2_text: "Наступний крок не розмитий: потрібні реальні мережеві інтеграції, зростання покриття даними, перші платні партнери та запуск бізнес-контурів. Це керований, а не абстрактний етап.",
+        reason3_title: "3. Цінність зростає накопичувально",
+        reason3_text: "Кожен новий магазин, філія, прайс і користувач посилюють всю систему одразу. Це робить проєкт сильнішим з часом і підвищує його вартість як платформи, а не як разової функції.",
+        business_model_title: "Бізнес-модель",
+        business_model_text: "Budget Checker можна монетизувати одразу за кількома напрямками. Це важливо, тому що проєкт не залежить від одного джерела доходу і може зростати поетапно.",
+        bm_stores_title: "1. Магазини та торгові мережі",
+        bm_stores_text: "Платна підписка за підключення філій та розміщення актуального каталогу плюс плата за переходи та ліди. Магазин платить не за \"гарне місце на сайті\", а за потрапляння в реальний кошторис покупця.",
+        bm_contractors_title: "2. Підрядники",
+        bm_contractors_text: "Платні кабінети, аналітика по ринку, розміщення прайс-листів і просування в порівнянні послуг. Це напрямок розкривається після етапу порівняння робіт.",
+        bm_users_title: "3. Користувачі",
+        bm_users_text: "Базова перевірка може залишатися безкоштовною, а розширені звіти, історія порівнянь, додаткові інструменти та корпоративні сценарії стають платними.",
+        bm_b2b_title: "4. B2B і закупівля",
+        bm_b2b_text: "Корпоративні тарифи для девелоперів, тендерних відділів, закупівельників і компаній, яким потрібно швидко та прозоро порівнювати пропозиції за великими списками матеріалів.",
+        financial_plan_title: "Робочий фінансовий план",
+        fp_indicator: "Показник",
+        fp_year1: "Рік 1 після комерційного запуску",
+        fp_year2: "Рік 2",
+        fp_year3: "Рік 3",
+        fp_paid_branches: "Платні філії магазинів",
+        fp_avg_branch: "Середній чек за одну філію",
+        fp_paid_contractors: "Платні підрядники",
+        fp_avg_contractor: "Середній чек підрядника",
+        fp_paid_leads: "Платні переходи та ліди",
+        fp_premium: "Платні звіти та преміум-доступ",
+        fp_total: "Оціночний річний дохід",
+        fp_avg_branch_y1: "6 000 грн/міс",
+        fp_avg_branch_y2: "7 000 грн/міс",
+        fp_avg_branch_y3: "8 000 грн/міс",
+        fp_avg_contractor_y1: "1 500 грн/міс",
+        fp_avg_contractor_y2: "1 800 грн/міс",
+        fp_avg_contractor_y3: "2 200 грн/міс",
+        fp_paid_leads_y1: "20 000/міс по 2 грн",
+        fp_paid_leads_y2: "60 000/міс по 2.5 грн",
+        fp_paid_leads_y3: "150 000/міс по 3 грн",
+        fp_premium_y1: "1 000/міс по 99 грн",
+        fp_premium_y2: "3 000/міс по 129 грн",
+        fp_premium_y3: "7 000/міс по 149 грн",
+        fp_total_y1: "~6.3 млн грн",
+        fp_total_y2: "~21.9 млн грн",
+        fp_total_y3: "~55.1 млн грн",
+        fp_note: "Це робоча модель для розуміння масштабу бізнесу. Вона не обіцяє ринок \"на папері\", а показує зрозумілу логіку зростання за кількома каналами доходу.",
+        done_title: "Що вже зроблено (поточний статус)",
+        done1_title: "Чітко зафіксовано, що саме ми будуємо",
+        done1_text: "— є зрозуміла логіка продукту, послідовність розвитку та правила комерційного запуску.",
+        done2_title: "Створено робочий продукт",
+        done2_text: "— сервіс уже можна запустити, перевірити й показати партнерам та користувачам.",
+        done3_title: "Акаунти та ролі",
+        done3_text: "— є реєстрація, вхід, підтвердження email, розподіл ролей і кабінети організацій.",
+        done4_title: "Основа для магазинів",
+        done4_text: "— організація може створити магазин і філії, а адміністратор може їх верифікувати.",
+        done5_title: "Завантаження каталогів магазинів",
+        done5_text: "— магазини вже можуть завантажувати свої пропозиції, а система показує, які позиції треба перевірити вручну, якщо в них є ризик помилки.",
+        done6_title: "Порівняння матеріалів",
+        done6_text: "— користувач уже може перевірити кошторис, побачити знайдені позиції, спірні місця та можливу економію.",
+        done7_title: "Перший живий користувацький сценарій",
+        done7_text: "— є жива сторінка перевірки кошторису, партнерський кабінет і окрема зона керування сервісом.",
+        done8_title: "Автоматичні інтеграції",
+        done8_text: "— підготовлено основу для роботи з Епіцентром та Новою Лінією. Наступний крок — отримати реальні дані й перевести оновлення в стабільний режим.",
+        done9_title: "Порівняння вартості робіт",
+        done9_text: "— сервіс уже вміє показувати не лише матеріали, а й роботи, щоб людина бачила повнішу картину бюджету на одному екрані.",
+        done10_title: "Панель керування платформою",
+        done10_text: "— команда може перевіряти партнерів, контролювати якість даних, бачити проблемні місця та швидко реагувати на збої.",
+        done11_title: "Комерційний контур (базовий етап Фази 8) — завершено",
+        done11_text: "— уже видно переходи до партнерів, інтерес користувачів і базу для перших платних сценаріїв.",
+        done12_title: "Підготовка до стабільного запуску",
+        done12_text: "— зібрано базові правила надійної роботи сервісу перед комерційним стартом.",
+        done13_title: "Юридична частина і тарифи",
+        done13_text: "— підготовлено юридичні документи, тарифну сторінку та публічні правила роботи з сервісом.",
+        done14_title: "Три мови і зручність на телефоні",
+        done14_text: "— сервіс доступний українською, російською та англійською, а також зручно працює на мобільних пристроях.",
+        done15_title: "Сайт можна встановити як застосунок",
+        done15_text: "— сервіс відкривається не лише в браузері, а й як зручний застосунок на телефоні.",
+        done16_title: "Підготовлено оплату тарифів",
+        done16_text: "— checkout і webhook LiqPay реалізовано та протестовано в sandbox; production-ключі й реальний платіж залишаються наступним кроком.",
+        next_steps_title: "Що потрібно зробити далі по порядку",
+        next_steps1_title: "Найближчі кроки",
+        next1: "Довести 2 реальні мережі до стабільного автоматичного завантаження даних.",
+        next2: "Підвищити якість даних і регулярність оновлення пропозицій, а також посилити ручну перевірку ризикованих позицій.",
+        next3: "Запустити перші комерційні пілоти з магазинами та B2B-клієнтами.",
+        next4: "Довести підключення великих мереж до стабільної щоденної роботи.",
+        next_steps2_title: "Наступний великий етап",
+        next5: "Увімкнути платні сценарії: підписки, платні звіти, лідогенерацію та корпоративні тарифи.",
+        next6: "Після комерційного запуску розширити аналітику, роботу з лідами та платні сценарії для партнерів.",
+        next7: "Розширити аналітику, звітність та операційні інструменти.",
+        next8: "Підтримувати операційну дисципліну: резервні копії, контроль збоїв і швидке реагування на проблеми.",
+        advantages_title: "Чому ми сильніші за аналоги",
+        adv_who: "Хто на ринку",
+        adv_what: "Що вміє",
+        adv_weak: "Де слабке місце",
+        adv_strong: "Чим сильніший Budget Checker",
+        adv1_title: "Сервіси порівняння цін",
+        adv1_what: "Порівнюють один конкретний товар",
+        adv1_weak: "Не вміють працювати з кошторисом цілком",
+        adv1_strong: "Ми працюємо одразу з усім списком матеріалів, а не з однією карткою товару",
+        adv2_title: "Маркетплейси та каталоги",
+        adv2_what: "Показують асортимент",
+        adv2_weak: "Не вирішують завдання \"скільки коштує весь кошторис\"",
+        adv2_strong: "Ми допомагаємо прийняти рішення по всьому бюджету, а не просто вибрати товар",
+        adv3_title: "Кошторисні програми",
+        adv3_what: "Хороші для розрахунків і документів",
+        adv3_weak: "Зазвичай не показують живі ринкові ціни магазинів",
+        adv3_strong: "Ми з'єднуємо кошторис, ринок, порівняння та зрозуміле пояснення результату",
+        adv4_title: "Ручний Excel і пошук по сайтах",
+        adv4_what: "Звичні всім",
+        adv4_weak: "Повільно, багато помилок, немає прозорості та повторюваності",
+        adv4_strong: "Ми економимо час, знижуємо помилки та робимо процес масштабованим",
+        next_funding_title: "Що потрібно для наступного етапу",
+        money_where_title: "Куди йдуть гроші",
+        money1: "Підключення та доведення до стабільної роботи 2 реальних мережевих інтеграцій.",
+        money2: "Підвищення якості даних і регулярності їх оновлення.",
+        money3: "Онбординг магазинів, перші платні партнери та B2B-пілоти.",
+        money4: "Розширення покриття по роботах, сервісах і партнерських сценаріях.",
+        investment_request_title: "Інвестиційний запит",
+        investment_text: "Робочий орієнтир наступного етапу — 1.2-1.8 млн грн. Ці гроші потрібні не на \"пошук ідеї\", а на прискорення виходу до комерційної стадії: дані, партнери, продукт, продажі та операційна стійкість.",
+        investment_note: "Головна логіка вкладень: ядро вже зібрано, а наступний капітал переводить проєкт із робочого продукту в платний ринок із реальними клієнтами та повторюваною виручкою.",
+        investment_use_title: "Як будуть використовуватися інвестиції",
+        investment_use_text: "Гроші наступного етапу йдуть не на косметичні доопрацювання. Вони спрямовуються в ті блоки, які напряму наближають сервіс до комерційного запуску, зростання виручки та зниження операційних ризиків.",
+        use1_label: "інтеграції та якість даних",
+        use1_text: "Підключення мереж, автоматичне оновлення пропозицій, контроль якості та стабільність даних.",
+        use2_label: "розвиток продукту",
+        use2_text: "Покращення користувацького досвіду, розвиток порівняння матеріалів і підготовка блоку порівняння робіт.",
+        use3_label: "продажі та пілоти",
+        use3_text: "Онбординг магазинів, перші B2B-партнери, пілотні впровадження та перевірка комерційної моделі.",
+        use4_label: "інфраструктура та стійкість",
+        use4_text: "Моніторинг, стабільність, безпека, операційні панелі та підготовка до повноцінної роботи в промисловому середовищі.",
+        investor_gains_title: "Що інвестор отримує на виході цього етапу",
+        gain1: "Робочий продукт із 2 стабільними мережевими джерелами даних.",
+        gain2: "Перші платні партнерські сценарії для магазинів і B2B-клієнтів.",
+        gain3: "Зрозумілу базу для масштабування на ринок послуг і підрядників.",
+        gain4: "Сильніше підготовлений актив із меншим ризиком на етапі масштабування.",
+        next_milestones_title: "Найближчі віхи після інвестицій",
+        milestone1: "Закрити інтеграції Епіцентру та Нової Лінії до стабільної роботи.",
+        milestone2: "Запустити перші комерційні пілоти з магазинами.",
+        milestone3: "Підготувати та відкрити платний контур для бізнесу.",
+        milestone4: "Перейти до наступної фази — ринку послуг і порівняння вартості робіт.",
+        risks_title: "Ключові ризики та як ми їх знижуємо",
+        risk_name: "Ризик",
+        risk_why: "Чому він важливий",
+        risk_how: "Як ми його знижуємо",
+        risk1_name: "Мережі не дають доступ до даних",
+        risk1_why: "Без реальних пропозицій якість порівняння обмежена",
+        risk1_how: "Рухаємося за пріоритетом: спочатку пряме автоматичне отримання даних, потім резервні способи завантаження через кабінет і запасні сценарії",
+        risk2_name: "Низька якість розпізнавання рядків",
+        risk2_why: "Якщо система помиляється, користувач швидко втрачає довіру",
+        risk2_how: "Спірні рядки явно позначаються, пояснюються і можуть виправлятися вручну",
+        risk3_name: "Повільне зростання B2B-напрямку",
+        risk3_why: "Потрібно довести цінність магазинам і підрядникам",
+        risk3_how: "Спочатку продається найзрозуміліша цінність: перевірка кошторису та потік цільового попиту",
+        risk4_name: "Тиск з боку конкурентів",
+        risk4_why: "Великі майданчики можуть спробувати повторити ідею",
+        risk4_how: "Наша перевага — робота з кошторисом цілком, накопичення даних, історій зіставлень та інтеграцій",
+        docs_title: "Ключові документи",
+        docs1: "головний документ про те, що будується і як має працювати продукт",
+        docs2: "поетапний план запуску та зростання",
+        docs3: "правила безпеки та надійної роботи сервісу",
+        docs4: "runbook для автоматичного моніторингу готовності сервісу (Task Scheduler)",
+        docs5: "чеклист до реального комерційного завершення",
+        status_title: "Поточний статус",
+        cta_pilot_btn: "Переглянути пілот проєкту",
+        cta_pilot_note: "budcheck.com.ua — живий робочий продукт",
+        status_pilot_link: "▶ Переглянути пілот: budcheck.com.ua",
+        status_date: "Актуально на: 21 квітня 2026",
+        status_phase: "Кодова база готова до першого комерційного пілоту; реальне завершення залежить від production-ключів, фідів і першого партнера ✅",
+        status_desc: "Додано повні мовні URL /uk, /ru, /en, локалізовані SEO metadata, sitemap з hreflang, legal-тексти трьома мовами, backend API i18n та мобільні polish-виправлення. До повного завершення залишаються: реальні фіди Epicentr/Nova Liniya, LiqPay production, Turnstile production, перший партнер і фінальний production smoke.",
+    },
+    en: {
+        modal_title: "Choose language",
+        hero_note: "Product is ready for the first commercial pilot",
+        hero_subhead: "Platform for checking construction estimates, comparing prices for materials and next stage — comparing the cost of work.<br>The main idea is simple: a person uploads an estimate, and the system shows how much it really costs on the market and where they are overpaying.",
+        hero_summary: "This project is not about 'another product catalog', but about a more valuable task: to help a person, contractor or procurement specialist quickly understand the real cost of renovation or construction. For the user, it's savings and transparency. For stores and contractors — a flow of targeted customers. For the investor — a platform with multiple sources of income and a clear growth point.",
+        progress_title: "Project Stage",
+        progress_overview_done_value: "9 of 10 phases",
+        progress_overview_done_label: "already completed",
+        progress_overview_active_value: "1 phase",
+        progress_overview_active_label: "still needs final completion",
+        progress_overview_total_value: "90%",
+        progress_overview_total_label: "of the overall roadmap is already delivered",
+        progress_intro: "The project is already beyond the idea stage: the service works, the main user flow is in place, and the key task now is to connect large retail chains and turn the product into stable sales.",
+        phase0: "Phase 0 — Product concept and business model",
+        phase0_status: "completed",
+        phase1: "Phase 1 — Working product foundation",
+        phase1_status: "completed",
+        phase2: "Phase 2 — User access and dashboards",
+        phase2_status: "completed",
+        phase3: "Phase 3 — Product offer base",
+        phase3_status: "completed",
+        phase4: "Phase 4 — Estimate checking and material comparison",
+        phase4_status: "ready for the first pilot",
+        phase5: "Phase 5 — Large retail chain connections",
+        phase5_status: "in progress: securing real partner data and bringing automatic updates to a stable daily mode",
+        phase6: "Phase 6 — Labor cost comparison",
+        phase6_status: "completed: contractors can present their prices and users can compare labor together with materials",
+        phase7: "Phase 7 — Platform operations",
+        phase7_status: "completed: the team has tools to review partners, control data quality and run the service day to day",
+        phase8: "Phase 8 — Analytics and commercial tools",
+        phase8_status: "baseline completed: user interest, partner clicks and first monetization points are already visible",
+        phase9: "Phase 9 — Stable launch",
+        phase9_status: "completed: the service is prepared for reliable work and a controlled commercial start",
+        what_is_title: "What is this project",
+        what_is_text: "Budget Checker 2.0 is a service that turns an estimate from an incomprehensible document into a clear financial tool. Instead of manually browsing sites, calling stores and arguing with a contractor, the user gets one screen showing: which materials are found, how much they cost in real stores, where there are disputed items, where you can save, and where data is still missing.",
+        problem_title: "What problem are we solving",
+        problem1: "People don't understand if the contractor's estimate is inflated.",
+        problem2: "Manual verification takes hours, sometimes days.",
+        problem3: "There is no convenient tool that checks not just one item, but the entire estimate at once.",
+        problem4: "Stores lose customers because their offers don't reach the moment of real choice.",
+        problem5: "Contractors lose client trust even when their price is fair because there's nothing to confirm it.",
+        solution_title: "What the solution looks like",
+        solution1: "The user uploads an estimate file, pastes a list of lines, or manually builds a cart.",
+        solution2: "The system parses the lines and searches for matching market offers.",
+        solution3: "Each position shows a clear result: found, not found, or needs clarification.",
+        solution4: "If a line is disputed, the user can correct it and immediately recalculate the result.",
+        solution5: "Stores get not just a display, but targeted traffic from a real estimate where purchase intent already exists.",
+        diff_title: "How the project differs",
+        diff_text: "Most services compare a single product card. We compare the entire list of materials and in the future — also the cost of work. This is a much more useful scenario for both individuals and businesses.",
+        painkiller_title: "Why this is a painkiller",
+        painkiller_text: "A mistake in an estimate is expensive. Even a small overpayment on dozens of positions quickly turns into big money. So the user comes here not to 'look', but to make a decision.",
+        platform_title: "Why this is a platform",
+        platform_text: "The more stores, price lists and users in the system, the more useful the product is for all market participants. This creates a cumulative effect and strengthens the project's value over time.",
+        how_it_works_title: "How it works in simple terms",
+        how_it_works_sub: "What matters for an investor is simple: the service already works, and the next investment goes into data, partnerships, sales and scale.",
+        step1_title: "A person brings an estimate or list of materials",
+        step1_text: "The user uploads an estimate, pastes a list of items, or builds it manually. Then they choose a city to see relevant offers for their region.",
+        step2_title: "The service parses the lines and looks for matches",
+        step2_text: "The system tries to understand what was meant in each line of the estimate. If the match is confident, it is shown immediately. If the line is ambiguous, the service honestly marks it as disputed, rather than pretending that 'everything is understood'.",
+        step3_title: "Real store offers are pulled in",
+        step3_text: "Stores can already add their offers through their dashboard. The next step is to connect major chains so prices and availability update automatically.",
+        step4_title: "The user gets a clear result",
+        step4_text: "The output shows: which positions are found, how much they cost, where there is a risk of overpayment, what needs clarification and what alternatives exist. This is not just a list of products, but real help in making a financial decision.",
+        step5_title: "Business gets targeted demand",
+        step5_text: "Stores meet the buyer at the most valuable moment — when the budget is already being calculated and a purchase decision is close. Contractors get a place to present fair pricing and build trust.",
+        who_needs_title: "Who needs this",
+        table_who: "Who",
+        table_problem: "What problem do they have",
+        table_value: "What Budget Checker provides",
+        user_individuals: "Individuals",
+        individuals_problem: "Don't know real prices, overpay, don't trust contractor estimates",
+        individuals_value: "Estimate verification in minutes, understanding where savings are and which positions are disputed",
+        user_contractors: "Contractors",
+        contractors_problem: "Clients doubt the estimate and consider the price inflated",
+        contractors_value: "In the future — clear confirmation of work costs and promotion through the platform",
+        user_developers: "Developers and procurement",
+        developers_problem: "Manual collection of offers takes a lot of time and resources",
+        developers_value: "Automation of material comparison and then services, transparency by lines and suppliers",
+        user_stores: "Building material stores",
+        stores_problem: "Difficult to get customers at the moment of purchase decision",
+        stores_value: "Channel of targeted traffic and leads from ready estimates and purchase lists",
+        market_title: "Market and why the opportunity is real",
+        stat1: "renovations and constructions in Ukraine per year, based on working estimate",
+        stat2: "average budget for materials only for renovation",
+        stat3: "potential savings on poorly verified estimate",
+        stat4: "enough at the start to give the market the first real signal of usefulness",
+        market_ready_title: "Why the market is ready",
+        market_ready1: "The problem is clear and massive: every renovation is associated with an estimate, list of materials and price uncertainty.",
+        market_ready2: "People are already used to searching for prices online, but do not yet have a convenient tool for working with an entire estimate at once.",
+        market_ready3: "Businesses also benefit from being present where the purchase decision has almost been made.",
+        market_ready4: "Even small confirmed savings make the product valuable for both B2C and B2B.",
+        investor_interest_title: "Why the project is interesting to an investor",
+        investor1: "A working product already exists, so investment goes into growth rather than trying to figure out what the market needs.",
+        investor2: "The project has multiple monetization paths, not just one source of income.",
+        investor3: "The more data and partners connected, the stronger the product and the higher its market value.",
+        investor4: "The next stage of development is clear: close integrations, launch paid scenarios and increase revenue.",
+        invest_now_title: "Why invest now",
+        invest_now_text: "This is a strong entry point for an investor because the project has already passed the riskiest empty-start phase. The service works, the first scenario already shows value, and the next capital goes into clear growth points: data, partnerships, sales and recurring revenue.",
+        reason1_title: "1. Product risk is already reduced",
+        reason1_text: "The service already accepts an estimate, processes it and shows a result. That means capital is being put into something that works, not into theory.",
+        reason2_title: "2. Growth point is clear",
+        reason2_text: "The next step is not vague: real network integrations, data coverage growth, first paid partners and launch of business circuits are needed. This is a manageable, not abstract, stage.",
+        reason3_title: "3. Value grows cumulatively",
+        reason3_text: "Each new store, branch, price list and user strengthens the entire system at once. This makes the project stronger over time and increases its value as a platform, not as a one-time function.",
+        business_model_title: "Business model",
+        business_model_text: "Budget Checker can be monetized immediately in several directions. This is important because the project does not depend on a single source of income and can grow gradually.",
+        bm_stores_title: "1. Stores and retail chains",
+        bm_stores_text: "Paid subscription for connecting branches and placing an up-to-date catalog plus payment for clicks and leads. The store pays not for a 'beautiful place on the site', but for getting into the buyer's real estimate.",
+        bm_contractors_title: "2. Contractors",
+        bm_contractors_text: "Paid offices, market analytics, placement of price lists and promotion in service comparison. This direction is revealed after the work comparison stage.",
+        bm_users_title: "3. Users",
+        bm_users_text: "Basic verification can remain free, while expanded reports, comparison history, additional tools and corporate scenarios become paid.",
+        bm_b2b_title: "4. B2B and procurement",
+        bm_b2b_text: "Corporate tariffs for developers, tender departments, procurement specialists and companies that need to quickly and transparently compare offers for large lists of materials.",
+        page_title: "Budget Checker 2.0 — Investment Presentation",
+        switch_uk: "🇺🇦 UA",
+        switch_en: "🇬🇧 EN",
+        switch_ru: "🇷🇺 RU",
+        modal_btn_uk: "🇺🇦 Ukrainian",
+        modal_btn_en: "🇬🇧 English",
+        modal_btn_ru: "🇷🇺 Russian",
+        badge_done: "DONE",
+        badge_in_progress: "IN PROGRESS",
+        badge_next_stage: "NEXT STAGE",
+        stat2_value: "50-200k UAH",
+        stat4_value: "2 retail chains",
+        financial_plan_title: "Working financial plan",
+        fp_indicator: "Indicator",
+        fp_year1: "Year 1 after commercial launch",
+        fp_year2: "Year 2",
+        fp_year3: "Year 3",
+        fp_paid_branches: "Paid store branches",
+        fp_avg_branch: "Average check per branch",
+        fp_paid_contractors: "Paid contractors",
+        fp_avg_contractor: "Average contractor check",
+        fp_paid_leads: "Paid clicks and leads",
+        fp_premium: "Paid reports and premium access",
+        fp_total: "Estimated annual revenue",
+        fp_avg_branch_y1: "6,000 UAH/month",
+        fp_avg_branch_y2: "7,000 UAH/month",
+        fp_avg_branch_y3: "8,000 UAH/month",
+        fp_avg_contractor_y1: "1,500 UAH/month",
+        fp_avg_contractor_y2: "1,800 UAH/month",
+        fp_avg_contractor_y3: "2,200 UAH/month",
+        fp_paid_leads_y1: "20,000/month at 2 UAH",
+        fp_paid_leads_y2: "60,000/month at 2.5 UAH",
+        fp_paid_leads_y3: "150,000/month at 3 UAH",
+        fp_premium_y1: "1,000/month at 99 UAH",
+        fp_premium_y2: "3,000/month at 129 UAH",
+        fp_premium_y3: "7,000/month at 149 UAH",
+        fp_total_y1: "~6.3 million UAH",
+        fp_total_y2: "~21.9 million UAH",
+        fp_total_y3: "~55.1 million UAH",
+        fp_note: "This is a working model for understanding the scale of the business. It does not promise a market 'on paper', but shows a clear logic of growth across several income channels.",
+        done_title: "What has already been done (current status)",
+        done1_title: "We have clearly fixed what exactly we are building",
+        done1_text: "— the product logic, growth sequence and rules for commercial launch are already defined.",
+        done2_title: "A working product has been built",
+        done2_text: "— the service can already be launched, tested and shown to partners and users.",
+        done3_title: "Accounts and roles",
+        done3_text: "— registration, login, email confirmation, role separation and organization offices exist.",
+        done4_title: "Foundation for stores",
+        done4_text: "— an organization can create a store and branches, and an administrator can verify them.",
+        done5_title: "Store catalog upload",
+        done5_text: "— stores can already upload their offers, and the system highlights positions that may need manual review.",
+        done6_title: "Material comparison",
+        done6_text: "— users can already check an estimate, see matched items, disputed lines and potential savings.",
+        done7_title: "First live user scenario",
+        done7_text: "— there is a live estimate-check page, a partner dashboard and a separate control area for the service.",
+        done8_title: "Automatic integrations",
+        done8_text: "— the base for working with Epicentr and Nova Liniya is prepared. The next step is getting real data and moving updates into stable operation.",
+        done9_title: "Labor cost comparison",
+        done9_text: "— the service can already show not only materials, but also labor, so a user sees a fuller budget picture on one screen.",
+        done10_title: "Platform control panel",
+        done10_text: "— the team can review partners, control data quality, spot problem areas and respond quickly to issues.",
+        done11_title: "Commercial circuit (Phase 8 foundation) — complete",
+        done11_text: "— partner clicks, user interest and the base for first paid scenarios are already visible.",
+        done12_title: "Preparation for a stable launch",
+        done12_text: "— the core rules for reliable service operation before commercial launch are already in place.",
+        done13_title: "Legal layer and pricing",
+        done13_text: "— legal documents, the pricing page and public operating rules are prepared.",
+        done14_title: "Three languages and mobile-friendly experience",
+        done14_text: "— the service is available in Ukrainian, Russian and English and works comfortably on mobile devices.",
+        done15_title: "The site can be installed like an app",
+        done15_text: "— the service can be used not only in a browser, but also as a convenient mobile app.",
+        done16_title: "Plan payments are prepared",
+        done16_text: "— LiqPay checkout and webhook are implemented and tested in sandbox; production keys and a real payment remain the next step.",
+        next_steps_title: "What needs to be done next in order",
+        next_steps1_title: "Immediate steps",
+        next1: "Bring 2 real networks to stable automatic data loading.",
+        next2: "Improve data quality and update regularity, while strengthening manual review for risky positions.",
+        next3: "Launch first commercial pilots with stores and B2B clients.",
+        next4: "Bring large-chain connections to stable day-to-day operation.",
+        next_steps2_title: "Next big stage",
+        next5: "Enable paid scenarios: subscriptions, paid reports, lead generation and corporate tariffs.",
+        next6: "After commercial launch, expand analytics, lead management and paid partner scenarios.",
+        next7: "Expand analytics, reporting and operational tools.",
+        next8: "Maintain operational discipline: backups, incident control and quick response to problems.",
+        advantages_title: "Why we are stronger than analogues",
+        adv_who: "Who is on the market",
+        adv_what: "What they can do",
+        adv_weak: "Where is the weak point",
+        adv_strong: "How Budget Checker is stronger",
+        adv1_title: "Price comparison services",
+        adv1_what: "Compare one specific product",
+        adv1_weak: "Cannot work with an entire estimate",
+        adv1_strong: "We work with the entire list of materials at once, not with a single product card",
+        adv2_title: "Marketplaces and catalogs",
+        adv2_what: "Show assortment",
+        adv2_weak: "Do not solve the problem of 'how much does the whole estimate cost'",
+        adv2_strong: "We help make a decision on the entire budget, not just choose a product",
+        adv3_title: "Estimate programs",
+        adv3_what: "Good for calculations and documents",
+        adv3_weak: "Usually do not show live market prices of stores",
+        adv3_strong: "We connect estimate, market, comparison and clear explanation of the result",
+        adv4_title: "Manual Excel and website search",
+        adv4_what: "Familiar to everyone",
+        adv4_weak: "Slow, many errors, no transparency and repeatability",
+        adv4_strong: "We save time, reduce errors and make the process scalable",
+        next_funding_title: "What is needed for the next stage",
+        money_where_title: "Where the money goes",
+        money1: "Connecting and bringing 2 real network integrations to stable operation.",
+        money2: "Improving data quality and the regularity of updates.",
+        money3: "Store onboarding, first paid partners and B2B pilots.",
+        money4: "Expanding coverage for labor, services and partner scenarios.",
+        investment_request_title: "Investment request",
+        investment_text: "Working target for the next stage — 1.2-1.8 million UAH. This money is needed not to 'search for an idea', but to accelerate the exit to the commercial stage: data, partners, product, sales and operational sustainability.",
+        investment_note: "The main logic of investments: the core is already assembled, and the next capital transfers the project from a working product to a paid market with real customers and recurring revenue.",
+        investment_use_title: "How investments will be used",
+        investment_use_text: "The next-stage capital is not for cosmetic improvements. It is directed into the blocks that most directly move the service toward commercial launch, revenue growth and lower operating risk.",
+        use1_label: "integrations and data quality",
+        use1_text: "Connecting networks, automatic offer updates, quality control and data stability.",
+        use2_label: "product development",
+        use2_text: "Improving user experience, developing material comparison and preparing the work comparison block.",
+        use3_label: "sales and pilots",
+        use3_text: "Store onboarding, first B2B partners, pilot implementations and testing of the commercial model.",
+        use4_label: "infrastructure and sustainability",
+        use4_text: "Monitoring, stability, security, operational panels and preparation for full-fledged production operation.",
+        investor_gains_title: "What the investor gets at the output of this stage",
+        gain1: "Working product with 2 stable network data sources.",
+        gain2: "First paid partner scenarios for stores and B2B clients.",
+        gain3: "Clear base for scaling to the service and contractor market.",
+        gain4: "A stronger asset with lower scaling risk.",
+        next_milestones_title: "Immediate milestones after investments",
+        milestone1: "Close Epicentr and Nova Liniya integrations to stable operation.",
+        milestone2: "Launch first commercial pilots with stores.",
+        milestone3: "Prepare and open a paid circuit for business.",
+        milestone4: "Move to the next phase — service market and work cost comparison.",
+        risks_title: "Key risks and how we mitigate them",
+        risk_name: "Risk",
+        risk_why: "Why it matters",
+        risk_how: "How we mitigate it",
+        risk1_name: "Networks do not provide data access",
+        risk1_why: "Without real offers, comparison quality is limited",
+        risk1_how: "We prioritize: direct feed/API, then backup upload methods through the office and fallback strategies",
+        risk2_name: "Low line recognition quality",
+        risk2_why: "If the system makes mistakes, the user quickly loses trust",
+        risk2_how: "Disputed lines are clearly marked, explained and can be corrected manually",
+        risk3_name: "Slow B2B direction growth",
+        risk3_why: "Need to prove value to stores and contractors",
+        risk3_how: "First, the most understandable value is sold: estimate verification and targeted demand flow",
+        risk4_name: "Pressure from competitors",
+        risk4_why: "Large platforms may try to repeat the idea",
+        risk4_how: "Our advantage is working with the entire estimate, data accumulation, match histories and integrations",
+        docs_title: "Key documents",
+        docs1: "main document about what is being built and how the product should work",
+        docs2: "step-by-step launch and growth plan",
+        docs3: "security and reliability rules for the service",
+        docs4: "runbook for automatic service readiness monitoring (Task Scheduler)",
+        docs5: "checklist for real commercial completion",
+        status_title: "Current status",
+        cta_pilot_btn: "View the pilot project",
+        cta_pilot_note: "budcheck.com.ua — live working product",
+        status_pilot_link: "▶ View pilot: budcheck.com.ua",
+        status_date: "Updated: April 21, 2026",
+        status_phase: "The codebase is ready for the first commercial pilot; real completion depends on production keys, feeds and the first partner ✅",
+        status_desc: "Full language URLs /uk, /ru and /en are now in place, with localized SEO metadata, hreflang sitemap, three-language legal content, backend API i18n and mobile polish fixes. Remaining before full completion: real Epicentr/Nova Liniya feeds, LiqPay production, Turnstile production, the first partner and final production smoke.",
+    },
+    ru: {
+        modal_title: "Выберите язык",
+        hero_note: "Продукт готов к первому коммерческому пилоту",
+        hero_subhead: "Платформа для проверки строительных смет, сравнения цен на материалы и в следующем этапе — сравнения стоимости работ.<br>Главная идея проста: человек загружает смету, а система показывает, сколько это реально стоит на рынке и где он переплачивает.",
+        hero_summary: "Это проект не про \"ещё один каталог товаров\", а про более дорогую и полезную задачу: помочь человеку, подрядчику или закупщику быстро понять реальную стоимость ремонта или стройки. Для пользователя это экономия и прозрачность. Для магазинов и подрядчиков — поток целевых клиентов. Для инвестора — платформа с несколькими источниками дохода и понятной точкой роста.",
+        progress_title: "Стадия проекта",
+        progress_overview_done_value: "9 из 10 фаз",
+        progress_overview_done_label: "уже завершены",
+        progress_overview_active_value: "1 фаза",
+        progress_overview_active_label: "ещё требует доведения до конца",
+        progress_overview_total_value: "90%",
+        progress_overview_total_label: "общей дорожной карты уже реализовано",
+        progress_intro: "Проект уже не на уровне идеи: сервис работает, основной сценарий уже есть, а главная задача сейчас — подключить крупные сети и перевести продукт в стабильные продажи.",
+        phase0: "Фаза 0 — Концепция и модель продукта",
+        phase0_status: "завершена",
+        phase1: "Фаза 1 — Рабочая основа продукта",
+        phase1_status: "завершена",
+        phase2: "Фаза 2 — Вход пользователей и кабинеты",
+        phase2_status: "завершена",
+        phase3: "Фаза 3 — База товарных предложений",
+        phase3_status: "завершена",
+        phase4: "Фаза 4 — Проверка и сравнение материалов",
+        phase4_status: "готово для первого пилота",
+        phase5: "Фаза 5 — Подключение крупных торговых сетей",
+        phase5_status: "в работе: получение реальных данных от партнёров и вывод автоматического обновления в стабильный режим",
+        phase6: "Фаза 6 — Сравнение стоимости работ",
+        phase6_status: "завершено: подрядчики могут показывать свои цены, а пользователь — сравнивать работы вместе с материалами",
+        phase7: "Фаза 7 — Управление платформой",
+        phase7_status: "завершено: есть инструменты для проверки партнёров, контроля данных и повседневного управления сервисом",
+        phase8: "Фаза 8 — Аналитика и коммерческие инструменты",
+        phase8_status: "базовый этап завершён: уже видны интерес пользователей, переходы к партнёрам и первые точки будущей монетизации",
+        phase9: "Фаза 9 — Стабильный запуск",
+        phase9_status: "завершено: сервис подготовлен к надёжной работе и контролируемому коммерческому старту",
+        what_is_title: "Что это за проект",
+        what_is_text: "Budget Checker 2.0 — это сервис, который превращает смету из непонятного документа в понятный финансовый инструмент. Вместо ручного обхода сайтов, звонков в магазины и споров с подрядчиком пользователь получает один экран, где видно: какие материалы найдены, сколько они стоят в реальных магазинах, где есть спорные позиции, где можно сэкономить, а где пока не хватает данных.",
+        problem_title: "Какую проблему мы решаем",
+        problem1: "Люди не понимают, завышена смета подрядчика или нет.",
+        problem2: "Проверка вручную занимает часы, а иногда и дни.",
+        problem3: "Нет удобного инструмента, который проверяет не один товар, а всю смету целиком.",
+        problem4: "Магазины теряют покупателей, потому что их предложения не попадают в момент реального выбора.",
+        problem5: "Подрядчики теряют доверие клиента, даже когда их цена честная, потому что её нечем подтвердить.",
+        solution_title: "Как выглядит решение",
+        solution1: "Пользователь загружает смету файлом, вставляет список строк или собирает корзину вручную.",
+        solution2: "Система разбирает строки и ищет подходящие предложения по рынку.",
+        solution3: "По каждой позиции показывается понятный результат: найдено, не найдено или требует уточнения.",
+        solution4: "Если строка спорная, пользователь может исправить её и сразу пересчитать результат.",
+        solution5: "Магазины получают не просто показ, а целевой трафик из реальной сметы, где уже есть намерение купить.",
+        diff_title: "Чем проект отличается",
+        diff_text: "Большинство сервисов сравнивают одну карточку товара. Мы сравниваем весь список материалов и в будущем — ещё и стоимость работ. Это значительно более полезный сценарий и для человека, и для бизнеса.",
+        painkiller_title: "Почему это \"обезболивающее\"",
+        painkiller_text: "Ошибка в смете стоит дорого. Даже небольшая переплата на десятках позиций быстро превращается в большие деньги. Поэтому пользователь приходит сюда не \"посмотреть\", а принять решение.",
+        platform_title: "Почему это платформа",
+        platform_text: "Чем больше в системе магазинов, прайсов и пользователей, тем полезнее продукт для всех сторон рынка. Это создаёт накопительный эффект и усиливает ценность проекта со временем.",
+        how_it_works_title: "Как это работает простым языком",
+        how_it_works_sub: "Для инвестора тут важно главное: сервис уже работает, а следующие вложения идут в данные, партнёрства, продажи и масштабирование.",
+        step1_title: "Человек приносит смету или список материалов",
+        step1_text: "Пользователь загружает смету, вставляет список позиций или собирает его вручную. Затем выбирает город, чтобы видеть релевантные предложения для своего региона.",
+        step2_title: "Сервис разбирает строки и ищет совпадения",
+        step2_text: "Система пытается понять, что имелось в виду в каждой строке сметы. Если совпадение уверенное, оно показывается сразу. Если строка неоднозначная, сервис честно помечает её как спорную, а не делает вид, что \"всё понял\".",
+        step3_title: "Подтягиваются реальные предложения магазинов",
+        step3_text: "Уже сейчас магазины могут добавлять свои предложения через кабинет. Следующий шаг — подключить крупные сети, чтобы цены и наличие обновлялись автоматически.",
+        step4_title: "Пользователь получает понятный итог",
+        step4_text: "На выходе видно: какие позиции найдены, сколько они стоят, где есть риск переплаты, что нужно уточнить и какие есть альтернативы. Это не просто список товаров, а реальная помощь в принятии финансового решения.",
+        step5_title: "Бизнес получает целевой спрос",
+        step5_text: "Магазины получают покупателя в самый ценный момент — когда он уже считает бюджет и близок к выбору. Подрядчики получают площадку, где можно честно показать цену и усилить доверие.",
+        who_needs_title: "Кому это нужно",
+        table_who: "Кому",
+        table_problem: "Какая у него проблема",
+        table_value: "Что даёт Budget Checker",
+        user_individuals: "Частные лица",
+        individuals_problem: "Не знают реальных цен, переплачивают, не доверяют смете подрядчика",
+        individuals_value: "Проверка сметы за минуты, понимание где экономия и какие позиции спорные",
+        user_contractors: "Подрядчики",
+        contractors_problem: "Клиенты сомневаются в смете и считают цену завышенной",
+        contractors_value: "В будущем — понятное подтверждение стоимости работ и продвижение через платформу",
+        user_developers: "Застройщики и закупка",
+        developers_problem: "Ручной сбор предложений занимает много времени и ресурсов",
+        developers_value: "Автоматизация сравнения материалов и затем услуг, прозрачность по строкам и поставщикам",
+        user_stores: "Магазины стройматериалов",
+        stores_problem: "Трудно получать клиентов именно в момент принятия решения о покупке",
+        stores_value: "Канал целевого трафика и лидов из готовых смет и списков закупки",
+        market_title: "Рынок и почему возможность реальна",
+        stat1: "ремонтов и строек в Украине в год, по рабочей оценке",
+        stat2: "средний бюджет только на материалы для ремонта",
+        stat3: "потенциальная экономия на плохо проверенной смете",
+        stat4: "достаточно на старте, чтобы дать рынку первый реальный сигнал полезности",
+        market_ready_title: "Почему рынок готов",
+        market_ready1: "Проблема понятная и массовая: каждый ремонт связан со сметой, списком материалов и неопределённостью в цене.",
+        market_ready2: "Люди уже привыкли искать цены онлайн, но пока не имеют удобного инструмента для работы со всей сметой сразу.",
+        market_ready3: "Бизнесу тоже выгодно присутствовать там, где решение о покупке уже почти принято.",
+        market_ready4: "Даже небольшая подтверждённая экономия делает продукт ценным и для B2C, и для B2B.",
+        investor_interest_title: "Почему проект интересен инвестору",
+        investor1: "Рабочий продукт уже собран, поэтому инвестиции идут в рост, а не в попытку понять, что именно нужно рынку.",
+        investor2: "У проекта несколько путей монетизации, а не один источник дохода.",
+        investor3: "Чем больше данных и партнёров подключено, тем сильнее продукт и тем выше его рыночная ценность.",
+        investor4: "Следующий этап развития понятен: закрыть интеграции, запустить платные сценарии и наращивать выручку.",
+        invest_now_title: "Почему вложиться сейчас",
+        invest_now_text: "Сейчас хороший момент для входа инвестора, потому что проект уже прошёл самый рискованный этап пустого старта. Сервис работает, первый сценарий уже показывает ценность, а следующий капитал нужен на понятные точки роста: данные, партнёрства, продажи и повторяемую выручку.",
+        reason1_title: "1. Риск продукта уже снижен",
+        reason1_text: "Сервис уже умеет принимать смету, обрабатывать её и показывать результат. Это значит, что деньги вкладываются не в теорию, а в усиление того, что уже работает.",
+        reason2_title: "2. Точка роста понятна",
+        reason2_text: "Следующий шаг не размытый: нужны реальные сетевые интеграции, рост покрытия данными, первые платные партнёры и запуск бизнес-контуров. Это управляемый, а не абстрактный этап.",
+        reason3_title: "3. Ценность растёт накопительно",
+        reason3_text: "Каждый новый магазин, филиал, прайс и пользователь усиливают всю систему сразу. Это делает проект сильнее со временем и повышает его стоимость как платформы, а не как разовой функции.",
+        business_model_title: "Бизнес-модель",
+        business_model_text: "Budget Checker можно монетизировать сразу по нескольким направлениям. Это важно, потому что проект не зависит от одного источника дохода и может расти поэтапно.",
+        bm_stores_title: "1. Магазины и торговые сети",
+        bm_stores_text: "Платная подписка за подключение филиалов и размещение актуального каталога плюс плата за переходы и лиды. Магазин платит не за \"красивое место на сайте\", а за попадание в реальную смету покупателя.",
+        bm_contractors_title: "2. Подрядчики",
+        bm_contractors_text: "Платные кабинеты, аналитика по рынку, размещение прайс-листов и продвижение в сравнении услуг. Это направление раскрывается после этапа сравнения работ.",
+        bm_users_title: "3. Пользователи",
+        bm_users_text: "Базовая проверка может оставаться бесплатной, а расширенные отчёты, история сравнений, дополнительные инструменты и корпоративные сценарии становятся платными.",
+        bm_b2b_title: "4. B2B и закупка",
+        bm_b2b_text: "Корпоративные тарифы для девелоперов, тендерных отделов, закупщиков и компаний, которым нужно быстро и прозрачно сравнивать предложения по большим спискам материалов.",
+        financial_plan_title: "Рабочий финансовый план",
+        fp_indicator: "Показатель",
+        fp_year1: "Год 1 после коммерческого запуска",
+        fp_year2: "Год 2",
+        fp_year3: "Год 3",
+        fp_paid_branches: "Платные филиалы магазинов",
+        fp_avg_branch: "Средний чек за один филиал",
+        fp_paid_contractors: "Платные подрядчики",
+        fp_avg_contractor: "Средний чек подрядчика",
+        fp_paid_leads: "Платные переходы и лиды",
+        fp_premium: "Платные отчёты и премиум-доступ",
+        fp_total: "Оценочный годовой доход",
+        fp_avg_branch_y1: "6 000 грн/мес",
+        fp_avg_branch_y2: "7 000 грн/мес",
+        fp_avg_branch_y3: "8 000 грн/мес",
+        fp_avg_contractor_y1: "1 500 грн/мес",
+        fp_avg_contractor_y2: "1 800 грн/мес",
+        fp_avg_contractor_y3: "2 200 грн/мес",
+        fp_paid_leads_y1: "20 000/мес по 2 грн",
+        fp_paid_leads_y2: "60 000/мес по 2.5 грн",
+        fp_paid_leads_y3: "150 000/мес по 3 грн",
+        fp_premium_y1: "1 000/мес по 99 грн",
+        fp_premium_y2: "3 000/мес по 129 грн",
+        fp_premium_y3: "7 000/мес по 149 грн",
+        fp_total_y1: "~6.3 млн грн",
+        fp_total_y2: "~21.9 млн грн",
+        fp_total_y3: "~55.1 млн грн",
+        fp_note: "Это рабочая модель для понимания масштаба бизнеса. Она не обещает рынок \"на бумаге\", а показывает понятную логику роста по нескольким каналам дохода.",
+        done_title: "Что уже сделано (текущий статус)",
+        done1_title: "Чётко зафиксировано, что именно мы строим",
+        done1_text: "— есть понятная логика продукта, последовательность развития и правила коммерческого запуска.",
+        done2_title: "Создан рабочий продукт",
+        done2_text: "— сервис уже можно запускать, проверять и показывать партнёрам и пользователям.",
+        done3_title: "Аккаунты и роли",
+        done3_text: "— есть регистрация, вход, подтверждение email, разделение ролей и кабинеты организаций.",
+        done4_title: "Основа для магазинов",
+        done4_text: "— организация может создать магазин и филиалы, а администратор может их верифицировать.",
+        done5_title: "Загрузка каталогов магазинов",
+        done5_text: "— магазины уже могут загружать свои предложения, а система показывает, какие позиции нужно проверить вручную, если в них есть риск ошибки.",
+        done6_title: "Сравнение материалов",
+        done6_text: "— пользователь уже может проверить смету, увидеть найденные позиции, спорные места и возможную экономию.",
+        done7_title: "Первый живой пользовательский сценарий",
+        done7_text: "— есть живая страница проверки сметы, партнёрский кабинет и отдельная зона управления сервисом.",
+        done8_title: "Автоматические интеграции",
+        done8_text: "— подготовлена основа для работы с Эпицентром и Новой Линией. Следующий шаг — получить реальные данные и перевести обновления в стабильный режим.",
+        done9_title: "Сравнение стоимости работ",
+        done9_text: "— сервис уже умеет показывать не только материалы, но и работы, чтобы человек видел более полную картину бюджета на одном экране.",
+        done10_title: "Панель управления платформой",
+        done10_text: "— команда может проверять партнёров, контролировать качество данных, видеть проблемные места и быстро реагировать на сбои.",
+        done11_title: "Коммерческий контур (базовый этап Фазы 8) — завершён",
+        done11_text: "— уже видны переходы к партнёрам, интерес пользователей и база для первых платных сценариев.",
+        done12_title: "Подготовка к стабильному запуску",
+        done12_text: "— собраны базовые правила надёжной работы сервиса перед коммерческим стартом.",
+        done13_title: "Юридическая часть и тарифы",
+        done13_text: "— подготовлены юридические документы, тарифная страница и публичные правила работы с сервисом.",
+        done14_title: "Три языка и удобство на телефоне",
+        done14_text: "— сервис доступен на украинском, русском и английском и удобно работает на мобильных устройствах.",
+        done15_title: "Сайт можно установить как приложение",
+        done15_text: "— сервис открывается не только в браузере, но и как удобное приложение на телефоне.",
+        done16_title: "Подготовлена оплата тарифов",
+        done16_text: "— checkout и webhook LiqPay реализованы и протестированы в sandbox; production-ключи и реальный платёж остаются следующим шагом.",
+        next_steps_title: "Что предстоит сделать дальше по порядку",
+        next_steps1_title: "Ближайшие шаги",
+        next1: "Довести 2 реальные сети до стабильной автоматической загрузки данных.",
+        next2: "Повысить качество данных и регулярность обновления предложений, а также усилить ручную проверку рискованных позиций.",
+        next3: "Запустить первые коммерческие пилоты с магазинами и B2B-клиентами.",
+        next4: "Довести подключение крупных сетей до стабильной ежедневной работы.",
+        next_steps2_title: "Следующий большой этап",
+        next5: "Включить платные сценарии: подписки, платные отчёты, лидогенерацию и корпоративные тарифы.",
+        next6: "После коммерческого запуска расширить аналитику, работу с лидами и платные сценарии для партнёров.",
+        next7: "Расширить аналитику, отчётность и операционные инструменты.",
+        next8: "Поддерживать операционную дисциплину: резервные копии, контроль сбоев и быстрое реагирование на проблемы.",
+        advantages_title: "Почему мы сильнее аналогов",
+        adv_who: "Кто на рынке",
+        adv_what: "Что умеет",
+        adv_weak: "Где слабое место",
+        adv_strong: "Чем сильнее Budget Checker",
+        adv1_title: "Сервисы сравнения цен",
+        adv1_what: "Сравнивают один конкретный товар",
+        adv1_weak: "Не умеют работать со сметой целиком",
+        adv1_strong: "Мы работаем сразу со всем списком материалов, а не с одной карточкой товара",
+        adv2_title: "Маркетплейсы и каталоги",
+        adv2_what: "Показывают ассортимент",
+        adv2_weak: "Не решают задачу \"сколько стоит вся смета\"",
+        adv2_strong: "Мы помогаем принять решение по всему бюджету, а не просто выбрать товар",
+        adv3_title: "Сметные программы",
+        adv3_what: "Хороши для расчётов и документов",
+        adv3_weak: "Обычно не показывают живые рыночные цены магазинов",
+        adv3_strong: "Мы соединяем смету, рынок, сравнение и понятное объяснение результата",
+        adv4_title: "Ручной Excel и поиск по сайтам",
+        adv4_what: "Привычны всем",
+        adv4_weak: "Медленно, много ошибок, нет прозрачности и повторяемости",
+        adv4_strong: "Мы экономим время, снижаем ошибки и делаем процесс масштабируемым",
+        next_funding_title: "Что нужно для следующего этапа",
+        money_where_title: "Куда идут деньги",
+        money1: "Подключение и доведение до стабильной работы 2 реальных сетевых интеграций.",
+        money2: "Повышение качества данных и регулярности их обновления.",
+        money3: "Онбординг магазинов, первые платные партнёры и B2B-пилоты.",
+        money4: "Расширение покрытия по работам, услугам и партнёрским сценариям.",
+        investment_request_title: "Инвестиционный запрос",
+        investment_text: "Рабочий ориентир следующего этапа — 1.2-1.8 млн грн. Эти деньги нужны не на \"поиск идеи\", а на ускорение выхода к коммерческой стадии: данные, партнёры, продукт, продажи и операционная устойчивость.",
+        investment_note: "Главная логика вложений: ядро уже собрано, а следующий капитал переводит проект из рабочего продукта в платный рынок с реальными клиентами и повторяемой выручкой.",
+        investment_use_title: "Как будут использоваться инвестиции",
+        investment_use_text: "Деньги следующего этапа идут не на косметические доработки. Они направляются в те блоки, которые напрямую приближают сервис к коммерческому запуску, росту выручки и снижению операционных рисков.",
+        use1_label: "интеграции и качество данных",
+        use1_text: "Подключение сетей, автоматическое обновление предложений, контроль качества и стабильность данных.",
+        use2_label: "развитие продукта",
+        use2_text: "Улучшение пользовательского опыта, развитие сравнения материалов и подготовка блока сравнения работ.",
+        use3_label: "продажи и пилоты",
+        use3_text: "Онбординг магазинов, первые B2B-партнёры, пилотные внедрения и проверка коммерческой модели.",
+        use4_label: "инфраструктура и устойчивость",
+        use4_text: "Мониторинг, стабильность, безопасность, операционные панели и подготовка к полноценной работе в промышленной среде.",
+        investor_gains_title: "Что инвестор получает на выходе этого этапа",
+        gain1: "Рабочий продукт с 2 стабильными сетевыми источниками данных.",
+        gain2: "Первые платные партнёрские сценарии для магазинов и B2B-клиентов.",
+        gain3: "Понятную базу для масштабирования на рынок услуг и подрядчиков.",
+        gain4: "Более сильный актив с меньшим риском на этапе масштабирования.",
+        next_milestones_title: "Ближайшие вехи после инвестиций",
+        milestone1: "Закрыть интеграции Эпицентра и Новой Линии до стабильной работы.",
+        milestone2: "Запустить первые коммерческие пилоты с магазинами.",
+        milestone3: "Подготовить и открыть платный контур для бизнеса.",
+        milestone4: "Перейти к следующей фазе — рынку услуг и сравнению стоимости работ.",
+        risks_title: "Ключевые риски и как мы их снижаем",
+        risk_name: "Риск",
+        risk_why: "Почему он важен",
+        risk_how: "Как мы его снижаем",
+        risk1_name: "Сети не дают доступ к данным",
+        risk1_why: "Без реальных предложений качество сравнения ограничено",
+        risk1_how: "Идём по приоритету: сначала прямое автоматическое получение данных, затем резервные способы загрузки через кабинет и запасные сценарии",
+        risk2_name: "Низкое качество распознавания строк",
+        risk2_why: "Если система ошибается, пользователь быстро теряет доверие",
+        risk2_how: "Спорные строки явно помечаются, объясняются и могут исправляться вручную",
+        risk3_name: "Медленный рост B2B-направления",
+        risk3_why: "Нужно доказать ценность магазинам и подрядчикам",
+        risk3_how: "Сначала продаётся самая понятная ценность: проверка сметы и поток целевого спроса",
+        risk4_name: "Давление со стороны конкурентов",
+        risk4_why: "Крупные площадки могут попытаться повторить идею",
+        risk4_how: "Наше преимущество — работа со сметой целиком, накопление данных, историй сопоставлений и интеграций",
+        docs_title: "Ключевые документы",
+        docs1: "главный документ о том, что строится и как должен работать продукт",
+        docs2: "поэтапный план запуска и роста",
+        docs3: "правила безопасности и надёжной работы сервиса",
+        docs4: "runbook по автоматическому мониторингу готовности сервиса (Task Scheduler)",
+        docs5: "чеклист до реального коммерческого завершения",
+        status_title: "Текущий статус",
+        cta_pilot_btn: "Посмотреть пилот проекта",
+        cta_pilot_note: "budcheck.com.ua — живой рабочий продукт",
+        status_pilot_link: "▶ Посмотреть пилот: budcheck.com.ua",
+        status_date: "Актуально на: 21 апреля 2026",
+        status_phase: "Кодовая база готова к первому коммерческому пилоту; реальное завершение зависит от production-ключей, фидов и первого партнёра ✅",
+        status_desc: "Добавлены полноценные языковые URL /uk, /ru, /en, локализованные SEO metadata, sitemap с hreflang, legal-тексты на трех языках, backend API i18n и мобильные polish-исправления. До полного завершения остаются: реальные фиды Epicentr/Nova Liniya, LiqPay production, Turnstile production, первый партнёр и финальный production smoke.",
+        page_title: "Budget Checker 2.0 — Инвестиционная презентация",
+        switch_uk: "🇺🇦 UA",
+        switch_en: "🇬🇧 EN",
+        switch_ru: "🇷🇺 RU",
+        modal_btn_uk: "🇺🇦 Украинский",
+        modal_btn_en: "🇬🇧 Английский",
+        modal_btn_ru: "🇷🇺 Русский",
+        badge_done: "ГОТОВО",
+        badge_in_progress: "В РАБОТЕ",
+        badge_next_stage: "СЛЕДУЮЩИЙ ЭТАП",
+        stat2_value: "50-200 тыс. грн",
+        stat4_value: "2 сети"
+    }
+};
+
+    let currentLang = null;
+
+    function applyLanguage(lang) {
+        if (!translations[lang]) return;
+        
+        const elements = document.querySelectorAll('[data-i18n]');
+        elements.forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (translations[lang][key]) {
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    el.value = translations[lang][key];
+                } else {
+                    el.innerHTML = translations[lang][key];
+                }
+            }
+        });
+        
+        // Update modal title
+        document.title = translations[lang].page_title || "Budget Checker 2.0";
+        
+        // Update active state in switcher
+        const switcherSpans = document.querySelectorAll('#langSwitcher span');
+        switcherSpans.forEach(span => {
+            if (span.getAttribute('data-lang') === lang) {
+                span.classList.add('active-lang');
+            } else {
+                span.classList.remove('active-lang');
+            }
+        });
+        
+        currentLang = lang;
+        localStorage.setItem('preferred_language', lang);
+    }
+
+    function showContent() {
+        const modal = document.getElementById('languageModal');
+        const content = document.getElementById('mainContent');
+        modal.classList.add('hidden');
+        content.classList.add('visible');
+    }
+
+    function initLanguageSelector() {
+        const langButtons = document.querySelectorAll('.lang-btn');
+        langButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const lang = btn.getAttribute('data-lang');
+                applyLanguage(lang);
+                showContent();
+            });
+        });
+        
+        // Also handle corner switcher clicks
+        const switcherSpans = document.querySelectorAll('#langSwitcher span');
+        switcherSpans.forEach(span => {
+            span.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const lang = span.getAttribute('data-lang');
+                applyLanguage(lang);
+                // No need to show modal again, just update content
+                const modal = document.getElementById('languageModal');
+                const content = document.getElementById('mainContent');
+                if (modal && !modal.classList.contains('hidden')) {
+                    modal.classList.add('hidden');
+                }
+                if (content && !content.classList.contains('visible')) {
+                    content.classList.add('visible');
+                }
+            });
+        });
+    }
+
+    initLanguageSelector();
+</script>
+</body>
+</html>
+
             box-sizing: border-box;
         }
 
