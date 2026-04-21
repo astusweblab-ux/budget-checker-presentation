@@ -15,6 +15,7 @@
 - следующая фаза не начинается, пока не закрыта предыдущая.
 - живой технический статус фиксируется в `docs/IMPLEMENTATION_STATUS.md`;
 - инвесторский статус фиксируется в `docs/PROJECT_PRESENTATION.html`.
+- реальное commercial completion фиксируется отдельно в `docs/REAL_COMPLETION_CHECKLIST.md`, потому что часть фаз зависит не от кода, а от внешних production-доступов, ключей и партнёров.
 
 ## 2. Фаза 0. Зафиксировать продуктовый контракт ✅ завершена
 
@@ -209,7 +210,7 @@
 - минимум по двум источникам получает реальные предложения;
 - спорные матчи явно помечаются.
 
-## 7. Фаза 5. Интеграции торговых сетей 🔄 в процессе
+## 7. Фаза 5. Интеграции торговых сетей 🔄 code-ready / data-pending
 
 ### Цель
 
@@ -234,16 +235,28 @@
 
 ### Deliverables
 
-- 2 production-ready интеграции;
+- адаптеры для 2 production-кандидатов;
+- реальные production-ready интеграции после получения feed/API доступов;
 - метрики актуальности;
 - логи ошибок;
 - quality score источников.
 
 ### Критерий готовности
 
+- code-ready критерий уже закрыт: адаптеры, конфиги, sync foundation, health statuses, reprocess и тесты есть;
+- commercial-ready критерий ещё открыт: нужны реальные feed/API источники Epicentr + Nova Liniya;
 - данные обновляются стабильно;
 - цена, наличие и ссылка проходят валидацию;
 - обновления не зависят от ручного шаманства.
+
+### Осталось до закрытия фазы
+
+- получить реальный Epicentr YML/XML feed;
+- получить реальный Nova Liniya partner API / JSON endpoint;
+- настроить production `feed_url` / `api_url` в `BranchIntegrationConfig`;
+- провести первый production sync;
+- довести оба источника до `healthy`;
+- подтвердить, что реальные предложения появляются в пользовательском результате кошториса.
 
 ## 8. Фаза 6. Каталог услуг и compare работ ✅ завершена
 
@@ -301,7 +314,7 @@
 - пользователь видит сравнение по работам;
 - система считает отклонение от рынка.
 
-## 9. Фаза 7. Полная админка и операционный контур 🔄 в процессе
+## 9. Фаза 7. Полная админка и операционный контур ✅ завершена
 
 ### Цель
 
@@ -320,14 +333,16 @@
 ### Что уже есть
 
 - `GET /admin/moderation-queue` — очередь на верификацию: все pending shops + contractor profiles в одном запросе, сортировка по дате создания;
-- `GET /admin/import-jobs` — список последних N import jobs по всем магазинам с org/shop/branch контекстом и лимитом;
-- `GET /admin/audit-events` — лента security/audit событий с email актора, изменениями before/after и reason;
-- `GET /admin/security-events` — security event review по auth-событиям: failed login / blocked login, IP, user-agent, severity;
+- `GET /admin/import-jobs?status=failed&offset=N` — список последних N import jobs по всем магазинам с фильтром по статусу и offset-пагинацией;
+- `GET /admin/audit-events?target_type=shop&offset=N` — лента security/audit событий с фильтром по типу цели и пагинацией;
+- `GET /admin/security-events?event_type=auth.login_failed&offset=N` — security event review с фильтром по типу события и пагинацией;
 - `PATCH /admin/shops/{id}/verification` + `PATCH /admin/contractor-profiles/{id}/verification` — ручная верификация партнёров с записью в audit;
+- `POST /admin/moderation-queue/{item_type}/{item_id}/action` — одна кнопка verify/suspend прямо из очереди, с записью в audit;
+- `POST /admin/import-jobs/{job_id}/reprocess` — перезапуск failed integration import job;
 - `AuditEvent` модель + `write_audit_event()` — каждое ручное действие в админке фиксируется;
 - `SecurityEvent` модель + запись событий из `auth/service.py` — неуспешные логины и blocked login теперь не прячутся в исключениях, а попадают в отдельную ленту;
 - import quality summary — `GET /admin/import-quality-summary` с integration health counts и recent_problem_jobs;
-- frontend screen `/dashboard/admin/operations` — один ops-экран с polling по moderation queue, import jobs, audit events и security events;
+- frontend screen `/dashboard/admin/operations` — один ops-экран с polling, фильтрами по типу/статусу и prev/next пагинацией по всем четырём секциям;
 - shop branches integration configs management — `GET/PUT /admin/shop-branches/{id}/integrations/{type}`;
 - currency rates management — `GET/POST /admin/currency-rates`.
 
@@ -344,31 +359,50 @@
 - важные процессы не скрыты в логах;
 - ручное вмешательство прозрачно и безопасно.
 
-## 10. Фаза 8. Отчёты, лиды и коммерческий контур ⬜ запланировано
+## 10. Фаза 8. Отчёты, лиды и коммерческий контур ✅ завершена (foundation)
 
 ### Цель
 
 Подключить бизнес-ценность для партнёров.
 
-### Что делаем
+### Что сделали (foundation scope)
 
 - переходы на магазины;
 - переходы к подрядчикам;
 - лид-метки;
 - отчёты по спросу;
-- аналитика по позициям и регионам.
+- базовая партнёрская аналитика и dashboard.
+
+### Что уже есть
+
+- `POST /api/v1/compare/track-click` — запись клика на оффер (offer_id, offer_type, session_token/user_id, estimate_job_id, compare_job_id);
+- `GET /api/v1/partner/{organization_id}/analytics` — аналитика для merchant/contractor: total_clicks, top-5 офферов по кликам за период;
+- `GET /api/v1/partner/{organization_id}/analytics` теперь также возвращает `top_leads` (lead-метки по `estimate_job_id`/`compare_job_id`);
+- `GET /api/v1/partner/{organization_id}/analytics/demand` — top material/service запросов из `estimate_lines` и compare jobs за период;
+- frontend page `/dashboard/partner/[organizationId]/analytics` — partner dashboard с total_clicks, top_offers и demand report;
+- маршрут добавлен в `dev-nav-bar` и `GET /api/v1/dev/routes`;
+- кнопка «Перейти в магазин» в estimate result: вызывает track-click и открывает URL магазина;
+- кнопка «Связаться с подрядчиком» в estimate result и service compare result: вызывает track-click;
+- покрыто 10 тестами для Phase 8; полный backend test suite зелёный.
 
 ### Deliverables
 
 - базовая партнёрская аналитика;
 - трекинг кликов/переходов;
-- первые monetization hooks.
+- отчёты по спросу;
+- partner dashboard.
 
 ### Критерий готовности
 
 - магазины и подрядчики получают понятную ценность от участия.
 
-## 11. Фаза 9. Production hardening ⬜ запланировано
+### DECISIONS_PENDING — Phase 8 extension
+
+- региональная аналитика (по городам/регионам);
+- monetization hooks (платные сценарии);
+- drill-down UI для лидов.
+
+## 11. Фаза 9. Production hardening ✅ завершена
 
 ### Цель
 
@@ -384,6 +418,25 @@
 - incident response runbooks;
 - compliance checks.
 
+### Что уже есть
+
+- подключен `slowapi` foundation:
+  - `POST /api/v1/estimates/upload` — `10/hour` на session/user;
+  - `POST /api/v1/compare/materials` — `30/hour` на session/user;
+  - `POST /api/v1/compare/services` — `30/hour` на session/user;
+  - `POST /api/v1/auth/token` — `20/hour` на IP;
+- расширен readiness probe `GET /api/v1/health/ready`:
+  - проверяет DB connection (`SELECT 1`);
+  - возвращает `status=ok` или `status=degraded` + `details`;
+- добавлены incident runbooks:
+  - `docs/runbooks/INCIDENT_TOKEN_COMPROMISE.md`;
+  - `docs/runbooks/INCIDENT_IMPORT_FAILURE.md`;
+  - `docs/runbooks/INCIDENT_DB_DEGRADED.md`;
+- обновлён `.env.example` для production baseline:
+  - добавлены `DATABASE_URL`, `REDIS_URL`, `SENTRY_DSN`;
+  - добавлено напоминание о ротации `SECRET_KEY`;
+  - добавлен блок `# Production checklist` (`BACKUP_SCHEDULE`, `ALERT_WEBHOOK_URL`, `MAX_UPLOAD_SIZE_MB`).
+
 ### Deliverables
 
 - резервные копии;
@@ -397,7 +450,110 @@
 - система выдерживает нормальную эксплуатацию;
 - команда понимает, как реагировать на сбои.
 
-## 12. Порядок реализации модулей
+## 12. Після фаз 0–9 (реалізовано додатково, 2026-04-17) ✅
+
+Наступні блоки реалізовані понад scope фаз 0–9:
+
+### Публічний IA та landing
+
+- сторінка `/` — лендінг з hero-секцією, CTA, поясненням продукту;
+- `/for-stores` — landing для магазинів;
+- `/for-contractors` — landing для підрядників;
+- `/login` — вхід з JWT-авторизацією;
+- `/register` — реєстрація з обов'язковим підтвердженням email і LegalConsent чекбоксами;
+- `/verify-email?token=` — автоматичне підтвердження email по токену;
+- `/check-estimate` — публічна сторінка перевірки кошторису (alias від `/`).
+
+### Тарифні плани (/pricing)
+
+- публічна сторінка `/pricing` з трьома секціями (Merchant / Contractor / Individual);
+- toggle місяць/рік;
+- FAQ-блок;
+- CTA з кнопкою переходу в `/checkout`.
+
+### Юридичні документи
+
+- legal content лежить у `frontend/content/legal/` і має версії `uk` / `ru` / `en`: `user-agreement`, `privacy-policy`, `business-rules`;
+- рендер на окремих сторінках `/legal/user-agreement`, `/legal/privacy-policy`, `/legal/business-rules` з підтримкою мовних URL `/uk`, `/ru`, `/en`;
+- при реєстрації — обов'язкові чекбокси: базова угода + окремий для merchant/contractor;
+- backend фіксує факт прийняття в `legal_consents` (IP, user_agent, версія документа, дата).
+
+### LiqPay білінг (sandbox протестовано)
+
+- `backend/app/billing/`: `BillingOrder`, `BillingWebhookEvent`, checkout service, webhook validation;
+- `POST /api/v1/billing/liqpay/checkout` — генерація підписаного payload LiqPay;
+- `POST /api/v1/billing/liqpay/webhook` — обробка webhook з валідацією signature;
+- `GET /api/v1/billing/status` — поточний план користувача;
+- `GET /api/v1/billing/my-orders` — остання 20 замовлень;
+- фронтова сторінка `/checkout` формує і відправляє payload;
+- після оплати — redirect до кабінету з банером успіху (`?payment=success`);
+- секція «Тарифний план» у `/dashboard/account` з кольоровими статусами.
+
+### Кабінети користувачів
+
+- `/dashboard/account` — профіль для користувачів без організації (email, статус, тарифний план, DeleteAccountSection);
+- `/dashboard/merchant` — кабінет мерчанта: дані організації, магазин, import stats, checklist, DeleteAccountSection;
+- `/dashboard/contractor` — кабінет підрядника: аналогічно merchant;
+- role-routing: після реєстрації merchant/contractor одразу потрапляють у правильний кабінет.
+
+### Soft-delete акаунту
+
+- `DELETE /api/v1/auth/me` — soft-delete: відзив всіх refresh-токенів, `is_active=False`, анонімізація email, очищення password_hash;
+- `DeleteAccountSection` компонент у merchant/contractor кабінетах.
+
+### Автооновлення JWT токена
+
+- `isTokenExpired(token)` — парсинг JWT exp без бібліотек;
+- при відновленні сесії з localStorage — автоматичний refresh якщо токен прострочений;
+- при невалідному Bearer в estimates — тихий fallback до анонімного режиму.
+
+### Ліміт 3 безкоштовні перевірки для незареєстрованих
+
+- `EstimatesService.upload_estimate()` — місячний ліміт для anonymous session (session_token + user_id IS NULL);
+- налаштовується через `BC_ANONYMOUS_ESTIMATE_CHECKS_PER_MONTH` (default 3);
+- при перевищенні — HTTP 429 з поясненням.
+
+### Локалізація uk/ru/en
+
+- всі сторінки: лендінги, результати перевірки, кабінети, адмін-панель (усі 7 розділів), публічні сторінки, legal, футер;
+- `locale-provider.tsx` — 100+ i18n-ключів, збереження мови між сесіями (localStorage);
+- `admin-menu.tsx`, всі admin pages — усі тексти через `t()`.
+- мовні URL `/uk`, `/ru`, `/en` працюють через middleware rewrite і зберігаються в header/footer/redirect-ах;
+- backend API локалізує JSON-помилки по `Accept-Language`, email verification має `preferred_locale`;
+- SEO metadata, sitemap і `hreflang` генеруються окремо для `uk`, `ru`, `en`.
+
+### PWA (Progressive Web App)
+
+- `public/manifest.json` — Web App Manifest з іконками 72–512px, shortcut на `/check-estimate`, versioned icon URLs для cache busting;
+- `public/sw.js` — service worker `budcheck-v4`: network-first для `/api/v1/*`, navigation і `/_next/image`, cache-first для решти статики, офлайн-fallback;
+- `app/layout.tsx` — реєстрація SW через `next/script afterInteractive`;
+- `next.config.ts` — `Cache-Control: no-cache` для `sw.js`;
+- `public/icons/` — 8 PNG-іконок з логотипу, favicon/apple-touch assets оновлені й версіоновані;
+- встановлюється як нативний застосунок на Android та iOS.
+
+### Мобільна оптимізація
+
+- `app-header.tsx` — hamburger-кнопка (`md:hidden`), мобільний drawer з навігацією, language-switcher, auth-кнопками;
+- `app-footer.tsx` — `flex-col → md:flex-row`, `grid-cols-2` для колонок;
+- мінімальна висота touch-елементів 44px на всіх CTA;
+- `font-size ≥ 16px` на всіх inputs (iOS no-zoom);
+- адаптивні grid-layouts.
+
+### Email
+
+- `BC_EMAIL_FROM_ADDRESS` / `BC_EMAIL_REPLY_TO` — конфігурований From і Reply-To;
+- `SMTPEmailSender` — `_apply_headers()` встановлює From, To і Reply-To (якщо задано) на всі листи;
+- full email flow: send_verification з `{base_url}/verify-email?token=`, send_organization_invite.
+
+### Nginx + deployment
+
+- nginx конфіг: `location /api/` → backend (port 8000), `location /` → Next.js (port 3000);
+- Next.js `rewrites()` — dev-режим проксирує `/api/` на `http://127.0.0.1:8000`;
+- `BC_DEV_RESET_DB=false` — база зберігається між перезапусками.
+- Канонічний домен — `https://budcheck.com.ua`; `www` не використовується.
+- Legacy `budcheck.pp.ua` має віддавати тільки 301 redirect на `https://budcheck.com.ua$request_uri`.
+
+## 13. Порядок реализации модулей
 
 Строгий порядок:
 
