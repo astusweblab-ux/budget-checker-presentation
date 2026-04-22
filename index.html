@@ -39,9 +39,11 @@
 
         /* Language switcher */
         .lang-switcher {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
             width: max-content;
             max-width: calc(100% - 24px);
-            margin: 14px auto 0;
             z-index: 999;
             background: linear-gradient(135deg, #1f3052 0%, #2d5878 55%, #b46a3a 100%);
             border-radius: 50px;
@@ -165,13 +167,11 @@
             width: 100%;
             max-width: 1180px;
             margin: 0 auto;
-            padding: 30px 20px 60px;
+            padding: 30px 20px 110px;
         }
 
         .deck-toolbar {
-            position: sticky;
-            top: 14px;
-            z-index: 50;
+            position: static;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -1348,7 +1348,7 @@
             }
             
             .container {
-                padding: 20px 16px 50px;
+                padding: 20px 16px 100px;
             }
             
             h1 {
@@ -1429,10 +1429,10 @@
             }
             
             .lang-switcher {
-                position: static;
                 width: max-content;
                 max-width: calc(100% - 24px);
-                margin: 12px auto 0;
+                right: 12px;
+                bottom: 12px;
                 justify-content: center;
                 padding: 6px 12px;
             }
