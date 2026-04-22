@@ -3307,13 +3307,8 @@
     initViewControls();
     initCalculator();
     const savedLang = localStorage.getItem('preferred_language');
-    if (savedLang && translations[savedLang]) {
-        applyLanguage(savedLang);
-        showContent();
-    } else {
-        applyLanguage('uk', false);
-        showLanguageModal();
-    }
+    applyLanguage(savedLang && translations[savedLang] ? savedLang : 'uk', false);
+    showLanguageModal();
 </script>
 </body>
 </html>
