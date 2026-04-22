@@ -3194,7 +3194,7 @@
         localStorage.setItem('presentation_view', nextView);
     }
 
-    function applyLanguage(lang) {
+    function applyLanguage(lang, persist = true) {
         if (!translations[lang]) return;
         
         const elements = document.querySelectorAll('[data-i18n]');
@@ -3223,7 +3223,9 @@
         });
         
         currentLang = lang;
-        localStorage.setItem('preferred_language', lang);
+        if (persist) {
+            localStorage.setItem('preferred_language', lang);
+        }
         updateCalculator();
     }
 
@@ -3232,6 +3234,17 @@
         const content = document.getElementById('mainContent');
         modal.classList.add('hidden');
         content.classList.add('visible');
+    }
+
+    function showLanguageModal() {
+        const modal = document.getElementById('languageModal');
+        const content = document.getElementById('mainContent');
+        if (modal) {
+            modal.classList.remove('hidden');
+        }
+        if (content) {
+            content.classList.add('visible');
+        }
     }
 
     function initLanguageSelector() {
@@ -3293,9 +3306,14 @@
     initLanguageSelector();
     initViewControls();
     initCalculator();
-    const savedLang = localStorage.getItem('preferred_language') || 'uk';
-    applyLanguage(savedLang);
-    showContent();
+    const savedLang = localStorage.getItem('preferred_language');
+    if (savedLang && translations[savedLang]) {
+        applyLanguage(savedLang);
+        showContent();
+    } else {
+        applyLanguage('uk', false);
+        showLanguageModal();
+    }
 </script>
 </body>
 </html>
