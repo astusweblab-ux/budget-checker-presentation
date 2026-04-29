@@ -1,4 +1,4 @@
-# Budget Checker 2.0 — Project Presentation
+# Bud Check — Project Presentation
 
 Public presentation page (status + roadmap progress).
 
